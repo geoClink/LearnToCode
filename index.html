@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programming Basics Trainer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1 id="appTitle">Programming Basics Trainer</h1>
+        <p id="appSubtitle">Choose a topic and level, then practice vocab, true/false, and code writing prompts.</p>
+        <p class="study-link-wrap">
+          <a class="study-link" href="study-guide.html">Read Study Guide First</a>
+        </p>
+      </header>
+
+      <section class="card" id="topicCard">
+        <h2>Select Topic</h2>
+        <div class="topic-grid">
+          <button class="topic-btn" data-topic="swift">Swift + SwiftUI</button>
+          <button class="topic-btn" data-topic="web">HTML + CSS + JavaScript</button>
+          <button class="topic-btn" data-topic="react">React</button>
+        </div>
+      </section>
+
+      <section class="card hidden" id="levelCard">
+        <h2>Select Difficulty</h2>
+        <div class="level-grid">
+          <button class="level-btn" data-level="beginner">Beginner</button>
+          <button class="level-btn" data-level="medium">Medium</button>
+          <button class="level-btn" data-level="advanced">Advanced</button>
+        </div>
+      </section>
+
+      <section class="status-bar hidden" id="statusBar">
+        <div id="progressText">Question 1</div>
+        <div id="scoreText">Score: 0</div>
+      </section>
+
+      <section class="card hidden" id="questionCard">
+        <label class="study-toggle" for="studyModeToggle">
+          <input type="checkbox" id="studyModeToggle" />
+          Study mode (show quick tips)
+        </label>
+        <div class="study-tip hidden" id="studyTip"></div>
+        <div class="tag" id="questionType">Vocabulary</div>
+        <h2 id="questionPrompt"></h2>
+        <div id="answerArea"></div>
+        <div class="actions">
+          <button id="submitBtn">Submit</button>
+          <button id="nextBtn" disabled>Next</button>
+        </div>
+        <p id="feedback" class="feedback"></p>
+      </section>
+
+      <section class="card hidden" id="resultsCard">
+        <h2>Session Complete</h2>
+        <p id="finalScore"></p>
+        <button id="restartBtn">Restart</button>
+        <button id="changeLevelBtn">Change Level</button>
+        <button id="changeTopicBtn">Change Topic</button>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

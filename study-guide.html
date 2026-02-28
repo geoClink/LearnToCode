@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programming Study Guide</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app guide-layout">
+      <header class="header card">
+        <h1>Original Study Guide</h1>
+        <p>
+          This guide was written specifically for this project to match the quiz topics.
+          Read a section first, then return to the quiz.
+        </p>
+        <p class="study-link-wrap">
+          <a class="study-link" href="index.html">Back to Quiz</a>
+        </p>
+      </header>
+
+      <section class="guide-grid">
+        <article class="card guide-section">
+          <h2>Swift + SwiftUI</h2>
+
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Value-first thinking:</strong> In Swift, many models are structs (value types), which helps avoid accidental shared mutations.</li>
+            <li><strong>State drives UI:</strong> In SwiftUI, your interface should be a function of data, not a sequence of manual UI updates.</li>
+            <li><strong>Type safety:</strong> Let the compiler help you early by keeping types explicit when learning.</li>
+          </ul>
+
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>let vs var:</strong> Use <em>let</em> for constants and <em>var</em> for values that can change.</li>
+            <li><strong>Text view:</strong> <em>Text("Hello")</em> is a basic SwiftUI view for showing text.</li>
+            <li><strong>Simple output:</strong> You can print values with <em>print(name)</em> in Swift.</li>
+            <li><strong>View composition:</strong> Build screens from small reusable views instead of one large body.</li>
+            <li><strong>Type basics:</strong> Swift commonly uses types like <em>String</em>, <em>Int</em>, and <em>Bool</em> for clear, safe code.</li>
+            <li><strong>Optionals:</strong> A value like <em>String?</em> can be missing (<em>nil</em>), so safely unwrap with <em>if let</em> or <em>guard let</em>.</li>
+            <li><strong>Functions:</strong> Keep functions short and purpose-driven, for example one function per user intent.</li>
+            <li><strong>Naming:</strong> Prefer clear labels like <em>fetchCities()</em> over vague names like <em>doWork()</em>.</li>
+          </ul>
+
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>@State and @ObservedObject:</strong> @State is local to a view; @ObservedObject watches external model changes.</li>
+            <li><strong>Data flow:</strong> Parent views own source-of-truth state and pass data down to children.</li>
+            <li><strong>Layout strategy:</strong> Combine VStack/HStack/ZStack with Spacer and padding for predictable layouts.</li>
+            <li><strong>Derived UI:</strong> Keep UI derived from state rather than manually toggling visual values.</li>
+            <li><strong>@Binding usage:</strong> Pass bindings to child views when they need controlled write access to parent-owned state.</li>
+            <li><strong>View models:</strong> Move non-trivial business logic out of views into dedicated model/view-model types.</li>
+            <li><strong>Computed properties:</strong> Use computed values for display text and filtered arrays to keep <em>body</em> clean.</li>
+            <li><strong>Control flow views:</strong> Use <em>if</em>, <em>switch</em>, and <em>ForEach</em> to express dynamic interfaces declaratively.</li>
+          </ul>
+
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>@Binding architecture:</strong> Use @Binding to expose controlled write-access from child to parent state.</li>
+            <li><strong>Concurrency model:</strong> Use <em>async/await</em>, <em>Task</em>, and <em>@MainActor</em> for responsive UIs and safe updates.</li>
+            <li><strong>Modeling data:</strong> Prefer small structs and protocols (for example <em>Identifiable</em>) for scalable list rendering.</li>
+            <li><strong>Performance thinking:</strong> Keep view bodies lightweight and avoid expensive work during rendering.</li>
+            <li><strong>Networking models:</strong> Use <em>Codable</em> models with async networking to decode API responses safely.</li>
+            <li><strong>Error strategy:</strong> Use <em>do/catch</em> with user-friendly messages and retry pathways.</li>
+            <li><strong>Task cancellation:</strong> Be aware async tasks may cancel when a view disappears; design around cancellation safely.</li>
+            <li><strong>Protocol-oriented design:</strong> Depend on protocols in services to improve testability and maintainability.</li>
+            <li><strong>Testing direction:</strong> Unit test pure logic and model transformations before snapshot/UI tests.</li>
+          </ul>
+
+          <h3>Common Swift/SwiftUI Mistakes</h3>
+          <ul>
+            <li>Mutating state from multiple places without a clear owner.</li>
+            <li>Doing heavy work directly in <em>body</em> instead of precomputing values.</li>
+            <li>Forgetting optional handling and forcing unwraps (<em>!</em>) too early.</li>
+            <li>Overusing global singletons instead of dependency injection.</li>
+          </ul>
+
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Constant:</strong> <em>let city = "Tokyo"</em></li>
+            <li><strong>Variable:</strong> <em>var score = 0</em></li>
+            <li><strong>Optional binding:</strong> <em>if let name = optionalName { ... }</em></li>
+            <li><strong>State:</strong> <em>@State private var count = 0</em></li>
+            <li><strong>Binding:</strong> <em>@Binding var isOn: Bool</em></li>
+            <li><strong>Async call:</strong> <em>let data = try await service.load()</em></li>
+          </ul>
+
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Create a small task app with add/remove actions and local persistence.</li>
+            <li>Build a reusable row component and pass actions with closures.</li>
+            <li>Load data asynchronously, display loading/error states, and retry on failure.</li>
+            <li>Build a city explorer with favorites, search, and grouped sections.</li>
+            <li>Create a settings screen that persists user preferences with sensible defaults.</li>
+            <li>Add accessibility labels and dynamic type support for key controls.</li>
+          </ul>
+
+          <h3>Swift Debugging Workflow</h3>
+          <ul>
+            <li><strong>Compiler first:</strong> Resolve compile errors top-to-bottom; one fix often clears multiple errors below.</li>
+            <li><strong>Print strategically:</strong> Log state changes before and after actions to verify data flow assumptions.</li>
+            <li><strong>Isolate view logic:</strong> Move computed display logic into properties/functions to debug them separately.</li>
+            <li><strong>Reproduce quickly:</strong> Create a minimal failing example in a tiny view before touching full screens.</li>
+          </ul>
+
+          <h3>Swift Progression Path</h3>
+          <ul>
+            <li><strong>Phase 1:</strong> Learn variables, optionals, arrays, loops, and functions.</li>
+            <li><strong>Phase 2:</strong> Build SwiftUI layouts with stacks, modifiers, and reusable components.</li>
+            <li><strong>Phase 3:</strong> Add state management using @State, @Binding, and observable models.</li>
+            <li><strong>Phase 4:</strong> Introduce networking, decoding, loading states, and robust error handling.</li>
+            <li><strong>Phase 5:</strong> Improve architecture, accessibility, and performance with targeted profiling.</li>
+          </ul>
+
+          <h3>Swift Self-Check</h3>
+          <ul>
+            <li>Can you explain the difference between source of truth and derived values in your UI?</li>
+            <li>Can you model a screen state clearly (idle/loading/success/error)?</li>
+            <li>Can you write a small async function and handle failures cleanly?</li>
+            <li>Can you refactor duplicated view code into a reusable component?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section">
+          <h2>HTML + CSS + JavaScript</h2>
+
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Structure, style, behavior:</strong> HTML defines meaning, CSS defines presentation, JavaScript defines interaction.</li>
+            <li><strong>Progressive enhancement:</strong> Start with usable HTML first, then layer styles and interactivity.</li>
+            <li><strong>Debug in layers:</strong> Check markup, then styles, then script behavior instead of guessing.</li>
+          </ul>
+
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>HTML:</strong> Gives your page structure, like headings, paragraphs, and buttons.</li>
+            <li><strong>CSS:</strong> Controls appearance, such as colors, spacing, and layout.</li>
+            <li><strong>Basic markup:</strong> A heading can be written as <em>&lt;h1&gt;Hello Web&lt;/h1&gt;</em>.</li>
+            <li><strong>Separation of concerns:</strong> Keep structure (HTML), styling (CSS), and behavior (JS) logically separated.</li>
+            <li><strong>Semantic elements:</strong> Tags like <em>&lt;header&gt;</em>, <em>&lt;main&gt;</em>, and <em>&lt;footer&gt;</em> improve readability and accessibility.</li>
+            <li><strong>Links and forms:</strong> Learn anchors, labels, inputs, and buttons early—they power most websites.</li>
+            <li><strong>Selector basics:</strong> Class selectors are reusable, IDs should be unique and used intentionally.</li>
+            <li><strong>DevTools habit:</strong> Inspect elements to see computed styles and layout boundaries.</li>
+          </ul>
+
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Block scope:</strong> In JavaScript, <em>let</em> and <em>const</em> are block-scoped and safer than <em>var</em> in many cases.</li>
+            <li><strong>DOM events:</strong> Use <em>addEventListener</em> and keep handlers small, predictable, and testable.</li>
+            <li><strong>CSS box model:</strong> Understand content, padding, border, margin to avoid layout bugs.</li>
+            <li><strong>State sync:</strong> Keep UI state mirrored in JS variables and update the DOM from that state.</li>
+            <li><strong>Array transforms:</strong> Practice <em>map</em>, <em>filter</em>, and <em>find</em> to write cleaner data logic.</li>
+            <li><strong>Component-like patterns:</strong> Build repeatable UI blocks using functions and template strings.</li>
+            <li><strong>Form handling:</strong> Validate input on submit and provide clear inline error messages.</li>
+            <li><strong>Responsive design:</strong> Pair relative units with media queries to support phones and desktops.</li>
+          </ul>
+
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Grid vs Flexbox:</strong> Grid handles two-dimensional systems; Flexbox is ideal for one-dimensional alignment.</li>
+            <li><strong>Async flows:</strong> Use <em>fetch</em> with <em>async/await</em> and always handle errors.</li>
+            <li><strong>DOM performance:</strong> Batch updates and avoid unnecessary reflows in large UIs.</li>
+            <li><strong>Accessibility:</strong> Use semantic HTML, labels, focus states, and keyboard-friendly interactions.</li>
+            <li><strong>Cross-origin basics:</strong> Understand CORS when calling APIs hosted on a different domain.</li>
+            <li><strong>Error resilience:</strong> Build loading, empty, and error states as first-class UI states.</li>
+            <li><strong>Event delegation:</strong> Handle many child events efficiently by listening on a shared parent.</li>
+            <li><strong>Security basics:</strong> Avoid injecting unsanitized user input into the DOM.</li>
+            <li><strong>Performance budget:</strong> Reduce bundle size, defer non-critical scripts, and lazy-load heavy assets.</li>
+          </ul>
+
+          <h3>Common Web Mistakes</h3>
+          <ul>
+            <li>Using non-semantic divs for everything and losing document meaning.</li>
+            <li>Skipping keyboard navigation and visible focus indicators.</li>
+            <li>Mixing data fetching, rendering, and state mutation in one giant function.</li>
+            <li>Hard-coding layout dimensions that break on smaller screens.</li>
+          </ul>
+
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Query element:</strong> <em>document.querySelector('.card')</em></li>
+            <li><strong>Add event:</strong> <em>button.addEventListener('click', handler)</em></li>
+            <li><strong>Toggle class:</strong> <em>node.classList.toggle('active')</em></li>
+            <li><strong>Map array:</strong> <em>items.map((item) =&gt; item.name)</em></li>
+            <li><strong>Fetch JSON:</strong> <em>const data = await response.json()</em></li>
+            <li><strong>Grid layout:</strong> <em>display: grid; grid-template-columns: 1fr 1fr;</em></li>
+          </ul>
+
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a searchable list that filters as users type.</li>
+            <li>Create a responsive dashboard using Grid for macro layout and Flexbox for components.</li>
+            <li>Fetch remote data, show loading/error/success states, and cache results in memory.</li>
+            <li>Create an accessible modal with escape-key close and focus trapping.</li>
+            <li>Build a multi-section form with live validation and summary review.</li>
+            <li>Implement client-side pagination for large datasets.</li>
+          </ul>
+
+          <h3>Web Debugging Workflow</h3>
+          <ul>
+            <li><strong>Inspect DOM:</strong> Confirm the expected elements exist before writing event logic.</li>
+            <li><strong>Trace events:</strong> Log event targets and values to verify handlers fire when expected.</li>
+            <li><strong>Check computed styles:</strong> Use browser tools to identify overrides and layout constraints.</li>
+            <li><strong>Validate data shape:</strong> Confirm API responses and guard against missing fields.</li>
+          </ul>
+
+          <h3>Web Progression Path</h3>
+          <ul>
+            <li><strong>Phase 1:</strong> Build semantic HTML pages with clean heading structure and forms.</li>
+            <li><strong>Phase 2:</strong> Learn layout fundamentals: box model, spacing, Flexbox, and Grid.</li>
+            <li><strong>Phase 3:</strong> Add JavaScript interactivity with DOM selection and event handling.</li>
+            <li><strong>Phase 4:</strong> Handle asynchronous data with loading/error/empty states.</li>
+            <li><strong>Phase 5:</strong> Improve accessibility, performance, and maintainable code organization.</li>
+          </ul>
+
+          <h3>Web Self-Check</h3>
+          <ul>
+            <li>Can your UI be used with keyboard only (no mouse)?</li>
+            <li>Can you explain why a layout should use Grid vs Flexbox in a given case?</li>
+            <li>Can you recover gracefully when API calls fail or return empty data?</li>
+            <li>Can you break large scripts into small reusable functions?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section">
+          <h2>React</h2>
+
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>UI as a function of state:</strong> Prefer deriving output from state instead of manual DOM manipulation.</li>
+            <li><strong>Composable components:</strong> Build small components with clear inputs and outputs.</li>
+            <li><strong>Predictable updates:</strong> Embrace immutable updates so change detection is reliable.</li>
+          </ul>
+
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>JSX:</strong> A syntax extension for writing UI markup in JavaScript.</li>
+            <li><strong>Components:</strong> Reusable UI pieces, usually named with a capital letter.</li>
+            <li><strong>Return UI:</strong> A function component returns JSX, such as an h1 element.</li>
+            <li><strong>One-way data flow:</strong> Parent components pass values down through props.</li>
+            <li><strong>Fragments:</strong> Use React fragments to return multiple siblings without adding extra DOM nodes.</li>
+            <li><strong>Props discipline:</strong> Treat props as read-only inputs and avoid mutating them.</li>
+            <li><strong>Conditional rendering:</strong> Use short-circuit checks and ternaries for simple display logic.</li>
+            <li><strong>Event handlers:</strong> Pass functions to events and avoid invoking them directly during render.</li>
+          </ul>
+
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>useState:</strong> Stores local state and should be updated immutably.</li>
+            <li><strong>useEffect:</strong> Coordinates side effects such as logging, subscriptions, and API requests.</li>
+            <li><strong>Dependencies:</strong> Effect dependency arrays define when effects should rerun.</li>
+            <li><strong>Component boundaries:</strong> Keep components focused and lift state when multiple children need shared data.</li>
+            <li><strong>List rendering:</strong> Provide stable <em>key</em> values so React can track list item identity.</li>
+            <li><strong>Derived state:</strong> Compute values during render when possible instead of storing duplicate state.</li>
+            <li><strong>Controlled inputs:</strong> Bind input values to state for predictable form behavior.</li>
+            <li><strong>Effect cleanup:</strong> Return cleanup functions for subscriptions, intervals, or listeners.</li>
+          </ul>
+
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Memoization:</strong> Use <em>useMemo</em> and <em>useCallback</em> only when they solve real re-render costs.</li>
+            <li><strong>Keys in lists:</strong> Stable keys improve reconciliation and preserve state correctly.</li>
+            <li><strong>Custom hooks:</strong> Extract repeated stateful logic (for example <em>useToggle</em>, <em>useFetch</em>).</li>
+            <li><strong>State architecture:</strong> Know when local state is enough and when context or external state libraries are justified.</li>
+            <li><strong>Context strategy:</strong> Use Context API for shared app-wide values while avoiding unnecessary provider nesting.</li>
+            <li><strong>Render performance:</strong> Profile before optimizing and target expensive branches instead of global memoization.</li>
+            <li><strong>Error boundaries:</strong> Catch rendering failures in subtrees to keep the rest of the app usable.</li>
+            <li><strong>Server interactions:</strong> Distinguish client UI state from server data lifecycle concerns.</li>
+            <li><strong>State machines:</strong> For complex flows, model explicit states and transitions.</li>
+          </ul>
+
+          <h3>Common React Mistakes</h3>
+          <ul>
+            <li>Mutating arrays/objects in state and expecting React to re-render correctly.</li>
+            <li>Using unstable keys (like array index) for reorderable lists.</li>
+            <li>Creating effects for logic that could run directly during render.</li>
+            <li>Passing deeply nested props instead of lifting or using context thoughtfully.</li>
+          </ul>
+
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>State:</strong> <em>const [count, setCount] = useState(0)</em></li>
+            <li><strong>Effect:</strong> <em>useEffect(() =&gt; { ... }, [deps])</em></li>
+            <li><strong>Conditional:</strong> <em>{isOpen ? &lt;Panel /&gt; : null}</em></li>
+            <li><strong>List:</strong> <em>items.map((item) =&gt; &lt;Row key={item.id} /&gt;)</em></li>
+            <li><strong>Memoized value:</strong> <em>useMemo(() =&gt; compute(data), [data])</em></li>
+            <li><strong>Custom hook:</strong> <em>function useToggle() { ... }</em></li>
+          </ul>
+
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a multi-step form with validation and derived error messages.</li>
+            <li>Create a custom data-fetching hook with loading, error, and retry support.</li>
+            <li>Profile re-renders and optimize only the bottlenecks.</li>
+            <li>Build a kanban board with drag ordering and persisted state.</li>
+            <li>Create a reusable modal system using composition and portals.</li>
+            <li>Implement optimistic UI updates for create/update actions.</li>
+          </ul>
+
+          <h3>React Debugging Workflow</h3>
+          <ul>
+            <li><strong>Check props/state first:</strong> Most UI bugs come from data assumptions, not JSX syntax.</li>
+            <li><strong>Watch render triggers:</strong> Log when components render and why dependencies changed.</li>
+            <li><strong>Verify effect intent:</strong> Ensure each effect has one responsibility and correct cleanup.</li>
+            <li><strong>Reduce complexity:</strong> Reproduce bugs in smaller components to isolate state boundaries.</li>
+          </ul>
+
+          <h3>React Progression Path</h3>
+          <ul>
+            <li><strong>Phase 1:</strong> Learn JSX, props, and component composition fundamentals.</li>
+            <li><strong>Phase 2:</strong> Build local interactivity with useState and controlled inputs.</li>
+            <li><strong>Phase 3:</strong> Manage side effects and data fetching with useEffect patterns.</li>
+            <li><strong>Phase 4:</strong> Extract custom hooks and structure shared state with Context where appropriate.</li>
+            <li><strong>Phase 5:</strong> Profile and optimize performance after correctness and readability are solid.</li>
+          </ul>
+
+          <h3>React Self-Check</h3>
+          <ul>
+            <li>Can you explain why a component re-renders in a specific interaction?</li>
+            <li>Can you avoid mutating state and produce immutable updates confidently?</li>
+            <li>Can you decide when logic belongs in render vs useEffect?</li>
+            <li>Can you extract repeated stateful behavior into a clean custom hook?</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
