@@ -2,6 +2,9 @@
 
 A self-guided website for learning Swift and SwiftUI fundamentals, designed to help beginners and intermediate learners build practical coding skills through interactive study guides, quizzes, and code-writing exercises.
 
+## Website
+Visit the live site: [LearnToCode Website](https://geoclink.github.io/LearnToCode/)
+
 ## Features
 - Vocabulary, true/false, and code-writing questions
 - Structured study guides for each topic
