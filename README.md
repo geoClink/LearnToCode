@@ -1,29 +1,38 @@
 # Programming Basics Trainer
 
-A lightweight website to help learners practice Swift/SwiftUI, HTML/CSS/JavaScript, or React with three quiz styles:
+A lightweight website to practice programming fundamentals across multiple languages with mixed question types, unit progression, and saved progress.
 
-- Topic selection: Swift + SwiftUI, HTML + CSS + JavaScript, or React
+Supported languages:
 
-- Beginner level quiz
-- Medium level quiz
-- Advanced level quiz
+- Swift + SwiftUI
+- HTML + CSS + JavaScript
+- React
+- Python
+- TypeScript
+- Java
+- C#
+- SQL
 
-- Vocabulary multiple-choice questions
-- True/False questions
+Question types:
+
+- Vocabulary multiple-choice
+- True/False
+- Output prediction
+- Debug practice
 - Short code-writing prompts
-- Expanded original study guide content for all three language tracks
-- Larger question banks per topic and difficulty level
 
 ## Run
 
 No build step is required.
 
 1. Open `index.html` in a browser.
-2. Answer each question and submit.
-3. View your final score and restart.
+2. Choose a language, then use `topic.html` actions to begin quiz or choose a unit.
+3. Answer each question and submit.
+4. View your score and language progress.
 
 ## Notes
 
-- Code-writing prompts are checked using key syntax fragments.
+- Code-writing/debug prompts are checked using key syntax fragments.
+- Language/unit progress is stored in local storage.
 - Study material in `study-guide.html` is original content written for this project.
 - This project is intentionally simple so it can run without Node.js tooling.

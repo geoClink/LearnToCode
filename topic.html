@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Language Trainer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-brand" href="index.html">LearnToCode</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="site-nav-link" href="index.html">Home</a>
+          <a class="site-nav-link" href="workshop.html">Workshop</a>
+          <a class="site-nav-link" href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app home-layout topic-layout">
+      <header class="card home-hero">
+        <h1 id="topicTitle">Language Study Path</h1>
+        <p id="topicSubtitle">Read a quick summary, open the study guide, then continue into module quizzes.</p>
+      </header>
+
+      <section class="card home-card topic-info-card">
+        <h2>Main Use</h2>
+        <p id="topicMainUse">Select a language to see what it is most commonly used for.</p>
+      </section>
+
+      <section class="card home-card topic-info-card">
+        <h2>Brief History</h2>
+        <p id="topicHistory">Select a language to see a short history timeline.</p>
+      </section>
+
+      <section class="card home-card topic-info-card">
+        <h2>Popular Industries</h2>
+        <ul id="topicIndustries" class="topic-industry-list">
+          <li>Select a language to see where it is commonly used in industry.</li>
+        </ul>
+      </section>
+
+      <section class="card home-card topic-actions-card">
+        <div class="link-row">
+          <a id="reviewGuideLink" class="study-link secondary topic-action-link topic-action-review" href="study-guide.html">Open Study Guide</a>
+          <a id="chooseUnitLink" class="study-link topic-action-link topic-action-test" href="trainer.html">Select Module</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Use the study guide to review purpose and history before starting module quizzes.</p>
+    </footer>
+
+    <script src="js/app/header-progress.js"></script>
+    <script src="js/pages/topic.js"></script>
+
+  </body>
+</html>

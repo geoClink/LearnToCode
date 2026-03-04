@@ -3,67 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Programming Basics Trainer</title>
+    <title>Learn to Code Home</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app">
-      <header class="header">
-        <h1 id="appTitle">Programming Basics Trainer</h1>
-        <p id="appSubtitle">Choose a topic and level, then practice vocab, true/false, and code writing prompts.</p>
-        <p class="study-link-wrap">
-          <a class="study-link" href="study-guide.html">Read Study Guide First</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-brand" href="index.html">LearnToCode</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="site-nav-link active" href="index.html">Home</a>
+          <a class="site-nav-link" href="workshop.html">Workshop</a>
+          <a class="site-nav-link" href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app home-layout">
+      <header class="card home-hero">
+        <h1>Choose a Language to Learn</h1>
+        <p>
+          Pick a language to open its study guide with quick context, study notes, and 14 structured course modules.
         </p>
       </header>
 
-      <section class="card" id="topicCard">
-        <h2>Select Topic</h2>
-        <div class="topic-grid">
-          <button class="topic-btn" data-topic="swift">Swift + SwiftUI</button>
-          <button class="topic-btn" data-topic="web">HTML + CSS + JavaScript</button>
-          <button class="topic-btn" data-topic="react">React</button>
-        </div>
+      <section class="card home-card home-card-accent" id="courseProgressCard">
+        <h2>Language Course Progress</h2>
+        <p id="courseProgressIntro">Track how much of each 14-module language course you have completed.</p>
+        <div class="home-progress-grid" id="homeProgressGrid" aria-live="polite"></div>
       </section>
 
-      <section class="card hidden" id="levelCard">
-        <h2>Select Difficulty</h2>
-        <div class="level-grid">
-          <button class="level-btn" data-level="beginner">Beginner</button>
-          <button class="level-btn" data-level="medium">Medium</button>
-          <button class="level-btn" data-level="advanced">Advanced</button>
-        </div>
+      <section class="card home-card home-card-accent" id="additionalCoursesCard">
+        <h2>Additional Courses</h2>
+        <p id="additionalCoursesIntro">Track Source Control and IDEs with the same module flow and rewards.</p>
+        <div class="home-progress-grid" id="homeAdditionalProgressGrid" aria-live="polite"></div>
       </section>
 
-      <section class="status-bar hidden" id="statusBar">
-        <div id="progressText">Question 1</div>
-        <div id="scoreText">Score: 0</div>
+      <section class="card home-card" id="rewardsSummaryCard">
+        <h2>View Rewards</h2>
+        <p id="rewardsOverview">Earn module badges and full language mastery badges as you pass modules.</p>
+        <ul id="masteryBadgeList" class="rewards-list" aria-live="polite"></ul>
       </section>
 
-      <section class="card hidden" id="questionCard">
-        <label class="study-toggle" for="studyModeToggle">
-          <input type="checkbox" id="studyModeToggle" />
-          Study mode (show quick tips)
-        </label>
-        <div class="study-tip hidden" id="studyTip"></div>
-        <div class="tag" id="questionType">Vocabulary</div>
-        <h2 id="questionPrompt"></h2>
-        <div id="answerArea"></div>
-        <div class="actions">
-          <button id="submitBtn">Submit</button>
-          <button id="nextBtn" disabled>Next</button>
-        </div>
-        <p id="feedback" class="feedback"></p>
-      </section>
-
-      <section class="card hidden" id="resultsCard">
-        <h2>Session Complete</h2>
-        <p id="finalScore"></p>
-        <button id="restartBtn">Restart</button>
-        <button id="changeLevelBtn">Change Level</button>
-        <button id="changeTopicBtn">Change Topic</button>
-      </section>
     </main>
 
-    <script src="app.js"></script>
+    <footer class="site-footer">
+      <p>Built for practical coding practice, focused study guides, and interview readiness.</p>
+    </footer>
+
+    <script src="js/app/header-progress.js"></script>
+    <script src="js/pages/index.js"></script>
+
   </body>
 </html>

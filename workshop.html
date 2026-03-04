@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workshop</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-brand" href="index.html">LearnToCode</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="site-nav-link" href="index.html">Home</a>
+          <a class="site-nav-link active" href="workshop.html">Workshop</a>
+          <a class="site-nav-link" href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app home-layout">
+      <header class="card home-hero">
+        <h1>Workshop</h1>
+        <p>
+          Live project practice + debug-first quiz launches in one place.
+          Pick a language, then jump directly into real-world project reps and debugging sessions.
+        </p>
+      </header>
+
+      <section class="card home-card workshop-card">
+        <h2>Choose Language</h2>
+        <label class="workshop-field" for="workshopLanguageSelect">
+          Language
+          <select id="workshopLanguageSelect" class="blank-input">
+            <option value="bash">Bash / Shell</option>
+            <option value="csharp">C#</option>
+            <option value="cpp">C++</option>
+            <option value="cloudkit">CloudKit</option>
+            <option value="dart">Dart + Flutter</option>
+            <option value="firebase">Firebase</option>
+            <option value="go">Go</option>
+            <option value="web">HTML + CSS + JavaScript</option>
+            <option value="java">Java</option>
+            <option value="kotlin">Kotlin</option>
+            <option value="php">PHP</option>
+            <option value="python">Python</option>
+            <option value="react">React</option>
+            <option value="rust">Rust</option>
+            <option value="sql">SQL</option>
+            <option value="swift" selected>Swift + SwiftUI</option>
+            <option value="typescript">TypeScript</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="card home-card workshop-card">
+        <h2>Projects</h2>
+        <p id="workshopProjectIntro">Choose a project type for the selected language, write your solution, and run an IDE-style project check.</p>
+
+        <section class="project-ide-lab" id="workshopProjectLab" aria-label="Workshop Projects">
+          <div class="project-ide-controls">
+            <label class="project-ide-field" for="workshopProjectType">
+              Project Type
+              <select id="workshopProjectType"></select>
+            </label>
+          </div>
+
+          <label class="project-ide-field" for="workshopProjectGoal">
+            Custom goal (optional)
+            <input id="workshopProjectGoal" type="text" placeholder="Example: Add retries + logging + edge-case handling" />
+          </label>
+
+          <p id="workshopProjectPrompt" class="project-ide-task-prompt">Select a project type to load requirements.</p>
+
+          <label class="project-ide-field" for="workshopProjectEditor">
+            IDE Workspace
+            <textarea id="workshopProjectEditor" spellcheck="false" placeholder="Type your project solution here..."></textarea>
+          </label>
+
+          <div class="project-ide-actions">
+            <button type="button" id="workshopProjectLoadStarter" class="study-link">Load Starter</button>
+            <button type="button" id="workshopProjectRunReview" class="study-link">Run IDE Review</button>
+            <button type="button" id="workshopProjectHint" class="study-link secondary">Get Hint</button>
+            <button type="button" id="workshopProjectReveal" class="study-link secondary">Reveal Reference Solution</button>
+          </div>
+
+          <section id="workshopProjectFeedback" class="project-ide-feedback" aria-live="polite">
+            Choose a project and run review to see a score + missing checks.
+          </section>
+
+          <section id="workshopProjectSupport" class="project-ide-feedback" aria-live="polite">
+            Stuck help: run review first, then use hints. Reference solution unlocks after multiple attempts.
+          </section>
+        </section>
+      </section>
+
+      <section class="card home-card workshop-card">
+        <h2>Debug Quiz Launch</h2>
+        <p id="workshopDebugIntro">Start directly in Workshop Debug Mode with 50 language-specific debug drills.</p>
+        <p class="study-link-wrap link-row">
+          <a id="workshopDebugStart" class="study-link secondary" href="trainer.html?topic=swift&mode=debug&source=workshop">Start 50 Debug Drills</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Workshop now hosts live projects plus dedicated fresh debug drills by language.</p>
+    </footer>
+
+    <script src="js/app/header-progress.js"></script>
+    <script src="js/pages/workshop.js?v=20260303e"></script>
+  </body>
+</html>

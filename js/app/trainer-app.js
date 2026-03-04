@@ -446,6 +446,21 @@ const questionSets = {
     beginner: [],
     medium: [],
     advanced: []
+  },
+  cloudkit: {
+    beginner: [],
+    medium: [],
+    advanced: []
+  },
+  firebase: {
+    beginner: [],
+    medium: [],
+    advanced: []
+  },
+  aiassist: {
+    beginner: [],
+    medium: [],
+    advanced: []
   }
 };
 
@@ -2144,10 +2159,2943 @@ Object.entries(extraQuestionSets).forEach(([topic, levels]) => {
   });
 });
 
-const minimumQuestionsPerLanguage = 140;
-const minimumQuestionsPerStructuredTrack = 100;
+function injectSwiftModuleSpecificQuestions() {
+  const swiftSet = questionSets.swift;
+  if (!swiftSet) {
+    return;
+  }
+
+  const moduleSpecific = [
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "code",
+        prompt: "SwiftUI Module 1 (Swift Core Syntax): Write 2-4 lines declaring `course` as a String constant set to \"SwiftUI\" and print it.",
+        checks: ["let course: string", "\"swiftui\"", "print("],
+        sample: "let course: String = \"SwiftUI\"\nprint(course)"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "code",
+        prompt: "SwiftUI Module 2 (Optionals and Types): Write 3-6 lines that unwrap `nickname: String?` with `if let` and print it.",
+        checks: ["let nickname: string?", "if let", "print("],
+        sample: "let nickname: String? = \"Tay\"\nif let value = nickname {\n  print(value)\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "tf",
+        prompt: "SwiftUI Module 3 (State and Data Flow): True or False: `@Binding` allows a child view to update parent-owned state.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. `@Binding` creates a two-way reference to parent state."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "vocab",
+        prompt: "SwiftUI Module 4 (SwiftUI View Composition): Which layout container stacks views vertically?",
+        options: ["HStack", "ZStack", "VStack", "List"],
+        answer: 2,
+        explanation: "`VStack` arranges child views vertically."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "SwiftUI Module 5 (Debugging Swift Basics): Fix this code so it increments score.",
+        starterCode: "let score = 0\nscore += 1",
+        checks: ["var score = 0", "score += 1"],
+        sample: "var score = 0\nscore += 1"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "debug",
+        prompt: "SwiftUI Module 6 (Debugging SwiftUI State): Fix the button action so it updates count.",
+        starterCode: "@State private var count = 0\nButton(\"Add\") {\n  count + 1\n}",
+        checks: ["count += 1"],
+        sample: "@State private var count = 0\nButton(\"Add\") {\n  count += 1\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "SwiftUI Module 7 (Debug Review and Fixes): Fix the computed property so it compiles.",
+        starterCode: "var title: String {\n  return \"Ready\"",
+        checks: ["var title: string {", "return \"ready\"", "}"],
+        sample: "var title: String {\n  return \"Ready\"\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "SwiftUI Module 8 (Output Tracing in Swift): What is printed? `let x = 3; let y = x * 2; print(y)`",
+        options: ["3", "5", "6", "x"],
+        answer: 2,
+        explanation: "`y` evaluates to 6."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "SwiftUI Module 9 (Output Tracing in SwiftUI): If `isOn` is true, what does `Text(isOn ? \"On\" : \"Off\")` display?",
+        options: ["Off", "On", "true", "Nothing"],
+        answer: 1,
+        explanation: "The ternary true branch displays \"On\"."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "vocab",
+        prompt: "SwiftUI Module 10 (Swift + SwiftUI Mastery): Which approach best fits SwiftUI architecture?",
+        options: ["Manual UI mutation everywhere", "Derive UI from state", "Use global mutable singletons for all state", "Avoid type checks"],
+        answer: 1,
+        explanation: "SwiftUI is declarative: UI should derive from state."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "vocab",
+        prompt: "SwiftUI Module 11 (Swift Testing Fundamentals): Which framework is commonly used for unit tests in Swift?",
+        options: ["XCTest", "UIKit", "Combine", "SwiftUI"],
+        answer: 0,
+        explanation: "XCTest is the standard Swift testing framework."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "tf",
+        prompt: "SwiftUI Module 12 (Swift Refactoring and Quality): True or False: Refactoring improves code structure without changing expected behavior.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Refactoring targets internal quality while preserving behavior."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "vocab",
+        prompt: "SwiftUI Module 13 (Swift Performance and Reliability): Which Swift feature isolates mutable shared state to reduce data races?",
+        options: ["actor", "extension", "protocol", "enum"],
+        answer: 0,
+        explanation: "Actors isolate mutable state across concurrency boundaries."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "output",
+        prompt: "SwiftUI Module 14 (Swift Real-World Scenarios): What does this return? `func display(_ name: String?) -> String { name ?? \"Guest\" }` when input is nil.",
+        options: ["nil", "Guest", "name", "Error"],
+        answer: 1,
+        explanation: "Nil-coalescing returns \"Guest\" for nil input."
+      }
+    },
+    // MODULE 1 EXPANSION: Swift Core Syntax (need 12 more → Total 20)
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "vocab",
+        prompt: "Module 1: Which Swift keyword declares a mutable variable?",
+        options: ["let", "var", "func", "const"],
+        answer: 1,
+        explanation: "`var` declares a variable that can be changed."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "tf",
+        prompt: "Module 1: True or False: `let` creates a constant in Swift.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. `let` declares immutable constants."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "vocab",
+        prompt: "Module 1: What type represents true/false values in Swift?",
+        options: ["Int", "Bool", "String", "Double"],
+        answer: 1,
+        explanation: "`Bool` represents boolean values."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "code",
+        prompt: "Module 1: Write 2-3 lines declaring `age` as an Int constant with value 25 and print it.",
+        checks: ["let age: int", "= 25", "print(age)"],
+        sample: "let age: Int = 25\nprint(age)"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "tf",
+        prompt: "Module 1: True or False: Swift uses double quotes for String literals.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Strings use double quotes like \"hello\"."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "vocab",
+        prompt: "Module 1: Which operator is used for string interpolation in Swift?",
+        options: ["$", "#", "\\()", "@"],
+        answer: 2,
+        explanation: "`\\()` embeds expressions in strings."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "code",
+        prompt: "Module 1: Write 2-3 lines creating constant `city` with \"Paris\" and print \"City: <value>\" using interpolation.",
+        checks: ["let city", "\"paris\"", "print(\"city:", "\\(city)"],
+        sample: "let city = \"Paris\"\nprint(\"City: \\(city)\")"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "output",
+        prompt: "Module 1: What prints? `let x = 5; print(x * 2)`",
+        options: ["5", "10", "x", "52"],
+        answer: 1,
+        explanation: "5 * 2 = 10"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "vocab",
+        prompt: "Module 1: Which type is used for whole numbers in Swift?",
+        options: ["Float", "Int", "String", "Character"],
+        answer: 1,
+        explanation: "`Int` represents integers."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "tf",
+        prompt: "Module 1: True or False: Comments in Swift use // for single lines.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. // creates single-line comments."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "code",
+        prompt: "Module 1: Write 3-4 lines declaring `isReady` as a Bool constant set to true and print it with a label.",
+        checks: ["let isready: bool", "= true", "print("],
+        sample: "let isReady: Bool = true\nprint(\"Ready: \\(isReady)\")"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "1",
+      question: {
+        type: "vocab",
+        prompt: "Module 1: What does the + operator do with two strings in Swift?",
+        options: ["Subtracts", "Concatenates", "Divides", "Compares"],
+        answer: 1,
+        explanation: "+ concatenates strings."
+      }
+    },
+    // MODULE 2 EXPANSION: Optionals and Types (need 19 more → Total 20)
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "vocab",
+        prompt: "Module 2: What symbol indicates an optional type in Swift?",
+        options: ["!", "?", "&", "#"],
+        answer: 1,
+        explanation: "? makes a type optional, like String?"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "tf",
+        prompt: "Module 2: True or False: Optionals can hold nil.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Optionals represent absence of value."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "code",
+        prompt: "Module 2: Write 2-4 lines declaring `email: String?` set to nil, then safely unwrap with `if let`.",
+        checks: ["var email: string?", "= nil", "if let"],
+        sample: "var email: String? = nil\nif let value = email {\n  print(value)\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "vocab",
+        prompt: "Module 2: Which keyword is used to safely unwrap optionals?",
+        options: ["var", "if let", "func", "enum"],
+        answer: 1,
+        explanation: "`if let` safely unwraps optionals."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "tf",
+        prompt: "Module 2: True or False: `guard let` can unwrap optionals early.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. `guard let` exits early if nil."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "code",
+        prompt: "Module 2: Write 3-5 lines using `guard let` to unwrap `name: String?` or return \"No name\".",
+        checks: ["guard let", "else", "return"],
+        sample: "func display(name: String?) -> String {\n  guard let value = name else { return \"No name\" }\n  return value\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "vocab",
+        prompt: "Module 2: What operator provides a default value for nil?",
+        options: ["??", "!!", "&&", "++"],
+        answer: 0,
+        explanation: "?? is the nil-coalescing operator."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "output",
+        prompt: "Module 2: What prints? `let x: Int? = nil; print(x ?? 10)`",
+        options: ["nil", "10", "x", "Error"],
+        answer: 1,
+        explanation: "?? returns 10 when x is nil."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "tf",
+        prompt: "Module 2: True or False: Force unwrapping with ! can cause crashes if nil.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. ! crashes on nil values."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "code",
+        prompt: "Module 2: Write 2-3 lines using ?? to print `username` or \"Guest\" if nil.",
+        checks: ["let username: string?", "print(username ??"],
+        sample: "let username: String? = nil\nprint(username ?? \"Guest\")"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "vocab",
+        prompt: "Module 2: What does optional chaining use to safely access nested properties?",
+        options: ["!",  "?", "&", "*"],
+        answer: 1,
+        explanation: "? enables optional chaining like user?.name"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "tf",
+        prompt: "Module 2: True or False: Type inference allows Swift to deduce types automatically.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Swift infers types from context."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "code",
+        prompt: "Module 2: Write 2-3 lines declaring `score: Int?` = 100 and use optional binding to print it.",
+        checks: ["let score: int?", "if let", "print("],
+        sample: "let score: Int? = 100\nif let value = score {\n  print(value)\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "vocab",
+        prompt: "Module 2: Which type annotation indicates a non-optional String?",
+        options: ["String?", "String!", "String", "String??"],
+        answer: 2,
+        explanation: "String without ? is non-optional."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "output",
+        prompt: "Module 2: What returns? `func get() -> String? { nil }; get() ?? \"Default\"`",
+        options: ["nil", "Default", "Error", "Nothing"],
+        answer: 1,
+        explanation: "?? provides Default when nil."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "tf",
+        prompt: "Module 2: True or False: You can compare optionals directly with ==.",
+        options: ["True", "False"], 
+        answer: 0,
+        explanation: "True. Swift supports optional comparison."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "code",
+        prompt: "Module 2: Write 4-5 lines with `if let` chain unwrapping two optionals `a` and `b`.",
+        checks: ["if let", ", let"],
+        sample: "let a: Int? = 5\nlet b: Int? = 10\nif let x = a, let y = b {\n  print(x + y)\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "vocab",
+        prompt: "Module 2: What type represents optional integers?",
+        options: ["Int", "Int?", "Optional", "Nil"],
+        answer: 1,
+        explanation: "Int? is an optional integer."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "2",
+      question: {
+        type: "tf",
+        prompt: "Module 2: True or False: Implicitly unwrapped optionals use Int!.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. ! creates implicitly unwrapped optionals."
+      }
+    },
+    // MODULE 3 EXPANSION: State and Data Flow (need 19 more → Total 20)
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "vocab",
+        prompt: "Module 3: Which property wrapper declares local view state?",
+        options: ["@Binding", "@State", "@Published", "@Environment"],
+        answer: 1,
+        explanation: "@State manages local mutable view state."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "tf",
+        prompt: "Module 3: True or False: @State should be marked private.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. @State is view-private state."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "code",
+        prompt: "Module 3: Write 3-5 lines with `@State private var name = \"\"` and a TextField bound to it.",
+        checks: ["@state private var name", "textfield(", "$name"],
+        sample: "@State private var name = \"\"\n\nvar body: some View {\n  TextField(\"Name\", text: $name)\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "vocab",
+        prompt: "Module 3: What does the $ prefix create for @State properties?",
+        options: ["Copy", "Binding", "Constant", "Optional"],
+        answer: 1,
+        explanation: "$ creates a Binding for two-way access."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "tf",
+        prompt: "Module 3: True or False: @Binding passes write access to child views.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. @Binding enables child state updates."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "code",
+        prompt: "Module 3: Write 2-4 lines declaring @ObservedObject with a model conforming to ObservableObject.",
+        checks: ["@observedobject var", ": ", "observableobject"],
+        sample: "@ObservedObject var viewModel: DataModel\n\nclass DataModel: ObservableObject {\n  @Published var count = 0\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "vocab",
+        prompt: "Module 3: Which property wrapper publishes changes in ObservableObject?",
+        options: ["@State", "@Published", "@Binding", "@Environment"],
+        answer: 1,
+        explanation: "@Published triggers view updates."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "output",
+        prompt: "Module 3: If @State var count = 5 and button does `count += 1`, what's count after tap?",
+        options: ["5", "6", "0", "Error"],
+        answer: 1,
+        explanation: "count increments to 6."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "tf",
+        prompt: "Module 3: True or False: @StateObject creates and owns an observable object.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. @StateObject initializes and persists across view updates."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "code",
+        prompt: "Module 3: Write 3-4 lines with `@Binding var isOn: Bool` in a child view.",
+        checks: ["@binding var ison: bool"],
+        sample: "struct ToggleView: View {\n  @Binding var isOn: Bool\n  var body: some View { Toggle(\"Setting\", isOn: $isOn) }\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "vocab",
+        prompt: "Module 3: What does @EnvironmentObject inject into views?",
+        options: ["Local state", "Shared observable object", "Constants", "Functions"],
+        answer: 1,
+        explanation: "@EnvironmentObject provides shared model access."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "tf",
+        prompt: "Module 3: True or False: Data flows down and actions flow up in SwiftUI.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Parent owns state, children call actions."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "code",
+        prompt: "Module 3: Write 2-3 lines with Toggle bound to `@State var enabled = false`.",
+        checks: ["toggle(", "$enabled"],
+        sample: "@State private var enabled = false\nToggle(\"Enable\", isOn: $enabled)"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "vocab",
+        prompt: "Module 3: Which wrapper watches external model changes?",
+        options: ["@State", "@Binding", "@ObservedObject", "@AppStorage"],
+        answer: 2,
+        explanation: "@ObservedObject observes external models."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "output",
+        prompt: "Module 3: If @State var text = \"Hi\" changes to \"Hello\", does the view update?",
+        options: ["Yes", "No", "Sometimes", "Error"],
+        answer: 0,
+        explanation: "Yes. @State triggers view refresh."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "tf",
+        prompt: "Module 3: True or False: @AppStorage persists values to UserDefaults.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. @AppStorage syncs with UserDefaults."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "code",
+        prompt: "Module 3: Write 2-3 lines passing $count binding from parent to ChildView.",
+        checks: ["childview(count: $count)"],
+        sample: "@State private var count = 0\nChildView(count: $count)"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "vocab",
+        prompt: "Module 3: What does source of truth mean in SwiftUI?",
+        options: ["API response", "Single data owner", "Environment value", "Constant"],
+        answer: 1,
+        explanation: "Source of truth is the single owner of state."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "3",
+      question: {
+        type: "tf",
+        prompt: "Module 3: True or False: Derived values should recompute from state, not duplicate it.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Compute derived values to avoid sync issues."
+      }
+    },
+    // MODULE 4 EXPANSION: SwiftUI View Composition (need 18 more → Total 20)
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "vocab",
+        prompt: "Module 4: Which stack arranges views horizontally?",
+        options: ["VStack", "HStack", "ZStack", "List"],
+        answer: 1,
+        explanation: "HStack places views left-to-right."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "tf",
+        prompt: "Module 4: True or False: VStack arranges views vertically.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. VStack stacks top-to-bottom."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "code",
+        prompt: "Module 4: Write 3-5 lines with VStack containing a Text and Button.",
+        checks: ["vstack", "text(", "button("],
+        sample: "VStack {\n  Text(\"Title\")\n  Button(\"Tap\") { }\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "vocab",
+        prompt: "Module 4: Which view shows a single line of text?",
+        options: ["Label", "Text", "Button", "Image"],
+        answer: 1,
+        explanation: "Text displays strings."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "tf",
+        prompt: "Module 4: True or False: ZStack layers views on top of each other.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. ZStack creates depth layers."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "code",
+        prompt: "Module 4: Write 3-5 lines with HStack containing two Circle shapes.",
+        checks: ["hstack", "circle()"],
+        sample: "HStack {\n  Circle().frame(width: 40, height: 40)\n  Circle().frame(width: 40, height: 40)\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "vocab",
+        prompt: "Module 4: Which modifier adds space inside a view?",
+        options: ["margin", "padding", "spacing", "border"],
+        answer: 1,
+        explanation: ".padding() adds internal space."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "output",
+        prompt: "Module 4: How many views in `VStack { Text(\"A\"); Text(\"B\") }`?",
+        options: ["1", "2", "3", "0"],
+        answer: 1,
+        explanation: "Two Text views."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "tf",
+        prompt: "Module 4: True or False: Button takes a label and action closure.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Button(\"Label\") { action }"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "code",
+        prompt: "Module 4: Write 2-4 lines with Image systemName and resizable modifier.",
+        checks: ["image(systemname:", ".resizable()"],
+        sample: "Image(systemName: \"star\")\n  .resizable()\n  .frame(width: 50, height: 50)"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "vocab",
+        prompt: "Module 4: Which view displays scrollable content?",
+        options: ["Stack", "ScrollView", "List", "Grid"],
+        answer: 1,
+        explanation: "ScrollView enables scrolling."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "tf",
+        prompt: "Module 4: True or False: Spacer pushes views apart.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Spacer fills available space."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "code",
+        prompt: "Module 4: Write 3-4 lines with ZStack showing background color and text overlay.",
+        checks: ["zstack", "color.", "text("],
+        sample: "ZStack {\n  Color.blue\n  Text(\"Overlay\")\n}"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "vocab",
+        prompt: "Module 4: Which modifier sets view dimensions?",
+        options: [".size", ".frame", ".bounds", ".rect"],
+        answer: 1,
+        explanation: ".frame(width:height:) sets size."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "output",
+        prompt: "Module 4: What does `Text(\"Hello\").font(.title)` change?",
+        options: ["Color", "Font style", "Padding", "Alignment"],
+        answer: 1,
+        explanation: ".font() changes text style."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "tf",
+        prompt: "Module 4: True or False: List automatically creates scrollable rows.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. List provides scrolling by default."
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "code",
+        prompt: "Module 4: Write 2-3 lines creating a rounded rectangle shape.",
+        checks: ["roundedrectangle(cornerradius:"],
+        sample: "RoundedRectangle(cornerRadius: 10)\n  .fill(Color.blue)\n  .frame(width: 100, height: 100)"
+      }
+    },
+    {
+      level: "beginner",
+      moduleUnit: "4",
+      question: {
+        type: "vocab",
+        prompt: "Module 4: Which parameter controls spacing between stack children?",
+        options: ["gap", "spacing", "margin", "padding"],
+        answer: 1,
+        explanation: "spacing: sets child gaps in stacks."
+      }
+    },
+    // MODULE 5 EXPANSION: Debugging Swift Basics (need 17 more → Total 20)
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the syntax error in variable declaration.",
+        starterCode: "let name String = \"Sam\"",
+        checks: ["let name: string = \"sam\""],
+        sample: "let name: String = \"Sam\""
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the code so the array compiles.",
+        starterCode: "let nums: [Int] = [1, \"two\", 3]",
+        checks: ["let nums: [int] = [1, 2, 3]"],
+        sample: "let nums: [Int] = [1, 2, 3]"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the missing return statement.",
+        starterCode: "func add(a: Int, b: Int) -> Int {\n  a + b\n}",
+        checks: ["return a + b"],
+        sample: "func add(a: Int, b: Int) -> Int {\n  return a + b\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "vocab",
+        prompt: "Module 5: What causes \"Use of unresolved identifier\" error?",
+        options: ["Missing import", "Undefined variable", "Wrong type", "All of the above"],
+        answer: 3,
+        explanation: "All can cause this error."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the optional unwrapping to prevent crashes.",
+        starterCode: "let value: Int? = nil\nprint(value!)",
+        checks: ["if let", "value ?? "],
+        sample: "let value: Int? = nil\nprint(value ?? 0)"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "tf",
+        prompt: "Module 5: True or False: Compiler errors must be fixed before runtime.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Code won't build with compile errors."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the loop to iterate correctly.",
+        starterCode: "for i in 1...5\n  print(i)\n}",
+        checks: ["for i in 1...5 {"],
+        sample: "for i in 1...5 {\n  print(i)\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "vocab",
+        prompt: "Module 5: Which keyword exits a function early?",
+        options: ["break", "return", "exit", "stop"],
+        answer: 1,
+        explanation: "return exits functions."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the string interpolation syntax.",
+        starterCode: "let age = 25\nprint(\"Age: {age}\")",
+        checks: ["\\(age)"],
+        sample: "let age = 25\nprint(\"Age: \\(age)\")"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "tf",
+        prompt: "Module 5: True or False: print() helps debug by showing values.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. print() outputs debug info."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the conditional to compile.",
+        starterCode: "let x = 10\nif x = 10 {\n  print(\"Match\")\n}",
+        checks: ["if x == 10"],
+        sample: "let x = 10\nif x == 10 {\n  print(\"Match\")\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "vocab",
+        prompt: "Module 5: What does \"Type mismatch\" error indicate?",
+        options: ["Wrong operator", "Incompatible types", "Missing import", "Syntax error"],
+        answer: 1,
+        explanation: "Type mismatch means incompatible types."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the array access to prevent out-of-bounds crash.",
+        starterCode: "let arr = [1, 2, 3]\nprint(arr[5])",
+        checks: ["if arr.count > 5||arr[safe:||arr.indices.contains"],
+        sample: "let arr = [1, 2, 3]\nif arr.indices.contains(0) {\n  print(arr[0])\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "tf",
+        prompt: "Module 5: True or False: guard helps exit early on invalid conditions.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. guard ensures preconditions."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the function parameter label.",
+        starterCode: "func greet name: String {\n  print(name)\n}",
+        checks: ["func greet(name: string)"],
+        sample: "func greet(name: String) {\n  print(name)\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "vocab",
+        prompt: "Module 5: Which tool shows compile-time errors in Xcode?",
+        options: ["Console", "Issue Navigator", "Debugger", "Instruments"],
+        answer: 1,
+        explanation: "Issue Navigator lists compile errors."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "5",
+      question: {
+        type: "debug",
+        prompt: "Module 5: Fix the enum case access.",
+        starterCode: "enum Status { case active }\nlet s = Status.Active",
+        checks: ["status.active"],
+        sample: "enum Status { case active }\nlet s = Status.active"
+      }
+    },
+    // MODULE 6 EXPANSION: Debugging SwiftUI State (need 11 more → Total 20)
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "debug",
+        prompt: "Module 6: Fix the @State variable so it can be modified.",
+        starterCode: "@State let count = 0",
+        checks: ["@state var count"],
+        sample: "@State var count = 0"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "debug",
+        prompt: "Module 6: Fix the binding syntax in TextField.",
+        starterCode: "TextField(\"Name\", text: name)",
+        checks: ["$name"],
+        sample: "TextField(\"Name\", text: $name)"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "vocab",
+        prompt: "Module 6: What does missing $ in binding cause?",
+        options: ["Crash", "Compile error", "No updates", "Memory leak"],
+        answer: 1,
+        explanation: "Missing $ causes type mismatch error."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "debug",
+        prompt: "Module 6: Fix the Toggle binding.",
+        starterCode: "@State private var isOn = false\nToggle(\"Setting\", isOn: isOn)",
+        checks: ["$ison"],
+        sample: "@State private var isOn = false\nToggle(\"Setting\", isOn: $isOn)"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "tf",
+        prompt: "Module 6: True or False: @State changes trigger view updates.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. @State refreshes views on change."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "debug",
+        prompt: "Module 6: Fix the missing @State declaration.",
+        starterCode: "var counter = 0\nButton(\"Add\") { counter += 1 }",
+        checks: ["@state"],
+        sample: "@State private var counter = 0\nButton(\"Add\") { counter += 1 }"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "vocab",
+        prompt: "Module 6: What happens if @Binding receives wrong type?",
+        options: ["Runtime error", "Compile error", "Silent failure", "Crash"],
+        answer: 1,
+        explanation: "Type mismatch causes compile error."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "debug",
+        prompt: "Module 6: Fix the ObservableObject conformance.",
+        starterCode: "class Model {\n  @Published var name = \"\"\n}",
+        checks: [": observableobject"],
+        sample: "class Model: ObservableObject {\n  @Published var name = \"\"\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "tf",
+        prompt: "Module 6: True or False: @Published only works in ObservableObject.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. @Published requires ObservableObject."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "debug",
+        prompt: "Module 6: Fix the binding parameter in child view.",
+        starterCode: "struct Child: View {\n  var isOn: Bool\n}",
+        checks: ["@binding"],
+        sample: "struct Child: View {\n  @Binding var isOn: Bool\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "6",
+      question: {
+        type: "vocab",
+        prompt: "Module 6: Which wrapper observes external observable objects?",
+        options: ["@State", "@ObservedObject", "@Binding", "@Environment"],
+        answer: 1,
+        explanation: "@ObservedObject watches external models."
+      }
+    },
+    // MODULE 7 EXPANSION: Debug Review and Fixes (need 16 more → Total 20)
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the missing closing brace.",
+        starterCode: "func test() {\n  print(\"Hi\")",
+        checks: ["}"],
+        sample: "func test() {\n  print(\"Hi\")\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the array literal syntax.",
+        starterCode: "let items = [1, 2, 3,]",
+        checks: ["[1, 2, 3]"],
+        sample: "let items = [1, 2, 3]"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "vocab",
+        prompt: "Module 7: What causes \"Expected expression\" error?",
+        options: ["Missing operator", "Incomplete code", "Wrong type", "All of above"],
+        answer: 1,
+        explanation: "Incomplete syntax causes this error."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the dictionary key-value separator.",
+        starterCode: "let dict = [\"a\" = 1, \"b\" = 2]",
+        checks: ["\"a\": 1"],
+        sample: "let dict = [\"a\": 1, \"b\": 2]"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "tf",
+        prompt: "Module 7: True or False: Unused variables cause warnings, not errors.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Warnings don't prevent building."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the switch statement to be exhaustive.",
+        starterCode: "let x = 1\nswitch x {\ncase 1: print(\"One\")\n}",
+        checks: ["default:"],
+        sample: "let x = 1\nswitch x {\ncase 1: print(\"One\")\ndefault: break\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "vocab",
+        prompt: "Module 7: Which keyword marks code that may fail?",
+        options: ["try", "catch", "throw", "fail"],
+        answer: 0,
+        explanation: "try marks potentially throwing calls."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the guard else clause.",
+        starterCode: "guard let x = value else\n  print(\"Error\")\n}",
+        checks: ["else {"],
+        sample: "guard let x = value else {\n  print(\"Error\")\n  return\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "tf",
+        prompt: "Module 7: True or False: Breakpoints pause execution for inspection.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Breakpoints enable debugging."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the closure syntax.",
+        starterCode: "let add = { a, b in a + b",
+        checks: ["}"],
+        sample: "let add = { (a: Int, b: Int) in a + b }"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "vocab",
+        prompt: "Module 7: What does lldb do in Xcode?",
+        options: ["Compiles code", "Debugs runtime", "Lints style", "Archives builds"],
+        answer: 1,
+        explanation: "lldb is the debugger."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the missing parameter type.",
+        starterCode: "func process(_ value) { }",
+        checks: ["_ value:"],
+        sample: "func process(_ value: String) { }"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "tf",
+        prompt: "Module 7: True or False: po command prints object descriptions in debugger.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. po evaluates and prints."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the struct init parameter label.",
+        starterCode: "struct Point { var x, y: Int }",
+        checks: ["var x: int"],
+        sample: "struct Point { var x: Int, y: Int }"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "vocab",
+        prompt: "Module 7: Which panel shows variable values during debugging?",
+        options: ["Console", "Variables View", "Navigator", "Inspector"],
+        answer: 1,
+        explanation: "Variables View displays current state."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "7",
+      question: {
+        type: "debug",
+        prompt: "Module 7: Fix the ternary operator syntax.",
+        starterCode: "let msg = isReady ? \"Go\" : \"Wait",
+        checks: ["\"wait\""],
+        sample: "let msg = isReady ? \"Go\" : \"Wait\""
+      }
+    },
+    // MODULE 8 EXPANSION: Output Tracing in Swift (need 17 more → Total 20)
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `let x = 10; print(x / 2)`",
+        options: ["5", "10", "2", "5.0"],
+        answer: 0,
+        explanation: "Integer division: 10 / 2 = 5"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `let s = \"Hi\"; print(s + s)`",
+        options: ["HiHi", "Hi Hi", "2", "Error"],
+        answer: 0,
+        explanation: "String concatenation produces HiHi."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "vocab",
+        prompt: "Module 8: What operator checks for equality?",
+        options: ["=", "==", "!=", "==="],
+        answer: 1,
+        explanation: "== tests equality."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `for i in 1...3 { print(i) }`",
+        options: ["1 2 3", "123", "1\\n2\\n3", "3"],
+        answer: 2,
+        explanation: "Prints 1, 2, 3 on separate lines."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "tf",
+        prompt: "Module 8: True or False: 10 % 3 equals 1.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Modulo gives remainder."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `let arr = [1, 2]; print(arr.count)`",
+        options: ["1", "2", "3", "0"],
+        answer: 1,
+        explanation: "Array has 2 elements."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "vocab",
+        prompt: "Module 8: What does ?? operator return if value is nil?",
+        options: ["Error", "nil", "Default value", "Empty"],
+        answer: 2,
+        explanation: "?? provides fallback value."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `let b = true; print(!b)`",
+        options: ["true", "false", "!b", "0"],
+        answer: 1,
+        explanation: "! negates to false."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "tf",
+        prompt: "Module 8: True or False: \"5\" + \"5\" produces \"55\".",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. String concatenation."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `let x = 4; print(x * x)`",
+        options: ["4", "8", "16", "44"],
+        answer: 2,
+        explanation: "4 * 4 = 16"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "vocab",
+        prompt: "Module 8: Which operator checks if value is in range?",
+        options: ["...", "..<", "in", "contains"],
+        answer: 0,
+        explanation: "... creates closed range."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `print(\"Count: \\(2 + 3)\")`",
+        options: ["Count: 2 + 3", "Count: 5", "5", "Error"],
+        answer: 1,
+        explanation: "Interpolation evaluates to 5."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "tf",
+        prompt: "Module 8: True or False: 5 > 3 evaluates to true.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. 5 is greater than 3."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `let nums = [10, 20]; print(nums.first!)`",
+        options: ["10", "20", "nil", "Error"],
+        answer: 0,
+        explanation: "first returns 10."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "vocab",
+        prompt: "Module 8: What does && operator do?",
+        options: ["Adds", "Logical AND", "Concatenates", "Compares"],
+        answer: 1,
+        explanation: "&& performs logical AND."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "output",
+        prompt: "Module 8: What prints? `let x = 10, y = 20; print(x < y)`",
+        options: ["true", "false", "10", "20"],
+        answer: 0,
+        explanation: "10 < 20 is true."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "8",
+      question: {
+        type: "tf",
+        prompt: "Module 8: True or False: nil ?? 0 returns 0.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. ?? provides default."
+      }
+    },
+    // MODULE 9 EXPANSION: Output Tracing in SwiftUI (need 19 more → Total 20)
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: If `@State var count = 3`, what does `Text(\"\\(count)\")` show?",
+        options: ["count", "3", "@State", "Error"],
+        answer: 1,
+        explanation: "Displays the value 3."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "tf",
+        prompt: "Module 9: True or False: Button action runs when tapped.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Closure executes on tap."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: If `@State var show = false`, does `if show { Text(\"Hi\") }` appear?",
+        options: ["Yes", "No", "Sometimes", "Error"],
+        answer: 1,
+        explanation: "No. Condition is false."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "vocab",
+        prompt: "Module 9: What determines when SwiftUI body recomputes?",
+        options: ["Timer", "State change", "Manual call", "Random"],
+        answer: 1,
+        explanation: "State changes trigger body refresh."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: If Button increments count from 0, what shows after 2 taps?",
+        options: ["0", "1", "2", "count"],
+        answer: 2,
+        explanation: "After 2 taps, count is 2."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "tf",
+        prompt: "Module 9: True or False: ForEach renders list items dynamically.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. ForEach creates views from data."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: What renders? `VStack { Text(\"A\"); Text(\"B\") }`",
+        options: ["A above B", "A beside B", "Only A", "Only B"],
+        answer: 0,
+        explanation: "VStack stacks vertically."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "vocab",
+        prompt: "Module 9: Which shows 5 items? `ForEach(0..<5)`",
+        options: ["0 items", "4 items", "5 items", "6 items"],
+        answer: 2,
+        explanation: "0..<5 creates 5 iterations."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: If `@State var name = \"Sam\"`, does TextField update name on typing?",
+        options: ["Yes", "No", "Only once", "Error"],
+        answer: 0,
+        explanation: "Yes. TextField binds to state."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "tf",
+        prompt: "Module 9: True or False: Spacer() fills available space.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Spacer expands to fill."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: What color shows? `Circle().fill(Color.blue)`",
+        options: ["Red", "Blue", "Green", "None"],
+        answer: 1,
+        explanation: ".fill(Color.blue) makes it blue."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "vocab",
+        prompt: "Module 9: What does .font(.title) change in Text?",
+        options: ["Color", "Size/style", "Alignment", "Padding"],
+        answer: 1,
+        explanation: ".font() changes text size/style."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: Does `Toggle(\"On\", isOn: $enabled)` show switch control?",
+        options: ["Yes", "No", "Only iOS", "Error"],
+        answer: 0,
+        explanation: "Yes. Toggle renders switch."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "tf",
+        prompt: "Module 9: True or False: .padding() adds space inside a view.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Padding creates internal space."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: If `@State var count = 10` and button does `count -= 1`, what after 1 tap?",
+        options: ["10", "9", "11", "0"],
+        answer: 1,
+        explanation: "Decrements to 9."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "vocab",
+        prompt: "Module 9: Which creates rounded corners?",
+        options: ["Border", "Shadow", ".cornerRadius()", "Padding"],
+        answer: 2,
+        explanation: ".cornerRadius() rounds edges."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: What shows? `Text(\"Score: \\(5 * 2)\")`",
+        options: ["Score: 5 * 2", "Score: 10", "10", "Error"],
+        answer: 1,
+        explanation: "Interpolation evaluates 5 * 2 = 10."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "tf",
+        prompt: "Module 9: True or False: Text can display interpolated values.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Use \\() for interpolation."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "9",
+      question: {
+        type: "output",
+        prompt: "Module 9: Does `if true { Text(\"Show\") }` display the text?",
+        options: ["Yes", "No", "Sometimes", "Error"],
+        answer: 0,
+        explanation: "Yes. Condition is true."
+      }
+    },
+    // MODULE 10 EXPANSION COMPLETE: Swift + SwiftUI Mastery (need 18 more → Total 20)
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "vocab",
+        prompt: "Module 10: What does MVVM stand for in SwiftUI architecture?",
+        options: ["Model View ViewModel", "Multi View Model", "Main View Method", "None"],
+        answer: 0,
+        explanation: "MVVM separates view logic from models."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "tf",
+        prompt: "Module 10: True or False: ViewModels handle business logic outside views.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. ViewModels separate concerns."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "code",
+        prompt: "Module 10: Write 3-5 lines creating a ViewModel class conforming to ObservableObject.",
+        checks: ["class", "viewmodel: observableobject", "@published"],
+        sample: "class DataViewModel: ObservableObject {\n  @Published var items: [String] = []\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "vocab",
+        prompt: "Module 10: What pattern passes dependencies explicitly?",
+        options: ["Singleton", "Dependency Injection", "Global state", "Hard-coding"],
+        answer: 1,
+        explanation: "Dependency Injection improves testability."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "tf",
+        prompt: "Module 10: True or False: Computed properties derive values without storage.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Computed properties calculate on access."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "code",
+        prompt: "Module 10: Write 2-4 lines with computed property returning filtered array.",
+        checks: ["var", "filter"],
+        sample: "var activeItems: [Item] {\n  items.filter { $0.isActive }\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "vocab",
+        prompt: "Module 10: Which protocol makes structs list-renderable?",
+        options: ["Codable", "Identifiable", "Equatable", "Hashable"],
+        answer: 1,
+        explanation: "Identifiable provides unique IDs for lists."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "tf",
+        prompt: "Module 10: True or False: Protocols define behavior contracts.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Protocols specify required methods/properties."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "code",
+        prompt: "Module 10: Write 2-3 lines defining protocol with required method.",
+        checks: ["protocol", "func"],
+        sample: "protocol DataSource {\n  func fetchData() -> [String]\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "vocab",
+        prompt: "Module 10: What makes views reusable across screens?",
+        options: ["Singletons", "Component extraction", "Copy-paste", "Global vars"],
+        answer: 1,
+        explanation: "Extracting components improves reuse."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "tf",
+        prompt: "Module 10: True or False: Extensions add functionality to existing types.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Extensions enhance types."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "code",
+        prompt: "Module 10: Write 2-3 lines extending String with computed property for length.",
+        checks: ["extension string", "var", "count"],
+        sample: "extension String {\n  var length: Int { count }\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "vocab",
+        prompt: "Module 10: Which stores app-wide shared state?",
+        options: ["@State", "@EnvironmentObject", "@Binding", "Local var"],
+        answer: 1,
+        explanation: "@EnvironmentObject provides global access."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "tf",
+        prompt: "Module 10: True or False: Modular design improves maintainability.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Modular code is easier to maintain."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "code",
+        prompt: "Module 10: Write 3-4 lines with enum modeling LoadState (idle, loading, success).",
+        checks: ["enum loadstate", "case idle", "case loading", "case success"],
+        sample: "enum LoadState {\n  case idle\n  case loading\n  case success(Data)\n}"
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "vocab",
+        prompt: "Module 10: What does single responsibility principle mean?",
+        options: ["One file", "One purpose per component", "One developer", "One language"],
+        answer: 1,
+        explanation: "Each component should have one clear purpose."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "tf",
+        prompt: "Module 10: True or False: Separation of concerns improves testability.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Isolated logic is easier to test."
+      }
+    },
+    {
+      level: "medium",
+      moduleUnit: "10",
+      question: {
+        type: "code",
+        prompt: "Module 10: Write 2-3 lines with private helper function keeping logic internal.",
+        checks: ["private func"],
+        sample: "private func validateInput(_ text: String) -> Bool {\n  !text.isEmpty\n}"
+      }
+    },
+    // MODULE 11 EXPANSION COMPLETE: Swift Testing Fundamentals (need 19 more → Total 20)
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "vocab",
+        prompt: "Module 11: What framework provides Swift unit testing?",
+        options: ["UITest", "XCTest", "TestKit", "SwiftTest"],
+        answer: 1,
+        explanation: "XCTest is the standard framework."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "tf",
+        prompt: "Module 11: True or False: XCTAssert checks test conditions.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. XCTAssert validates expectations."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "code",
+        prompt: "Module 11: Write 3-5 lines with XCTAssertEqual testing 2 + 2 equals 4.",
+        checks: ["xctassertequal", "2 + 2", "4"],
+        sample: "func testAddition() {\n  let result = 2 + 2\n  XCTAssertEqual(result, 4)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "vocab",
+        prompt: "Module 11: What does TDD stand for?",
+        options: ["Test Driven Development", "Type Data Design", "Total Debug Deployment", "None"],
+        answer: 0,
+        explanation: "TDD writes tests before implementation."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "tf",
+        prompt: "Module 11: True or False: setUp() runs before each test method.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. setUp() initializes test state."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "code",
+        prompt: "Module 11: Write 3-4 lines testing array count equals 3.",
+        checks: ["xctassertequal", ".count", "3"],
+        sample: "func testCount() {\n  let items = [1, 2, 3]\n  XCTAssertEqual(items.count, 3)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "vocab",
+        prompt: "Module 11: Which assertion checks for nil?",
+        options: ["XCTAssertNil", "XCTAssertNull", "XC TAssertEmpty", "XCTAssertNone"],
+        answer: 0,
+        explanation: "XCTAssertNil validates nil values."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "tf",
+        prompt: "Module 11: True or False: tearDown() cleans up after tests.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. tearDown() performs cleanup."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "code",
+        prompt: "Module 11: Write 3-4 lines testing string isEmpty returns true.",
+        checks: ["xctasserttrue", ".isempty"],
+        sample: "func testEmpty() {\n  let text = \"\"\n  XCTAssertTrue(text.isEmpty)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "vocab",
+        prompt: "Module 11: What tests user interactions in UI?",
+        options: ["Unit tests", "UI tests", "Integration tests", "Smoke tests"],
+        answer: 1,
+        explanation: "UI tests validate interface behavior."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "tf",
+        prompt: "Module 11: True or False: Test methods must start with 'test'.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. 'test' prefix identifies test methods."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "code",
+        prompt: "Module 11: Write 2-3 lines testing function throws error.",
+        checks: ["xctassertthrowserror"],
+        sample: "func testError() {\n  XCTAssertThrowsError(try riskyFunction())\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "vocab",
+        prompt: "Module 11: Which follows Arrange-Act-Assert pattern?",
+        options: ["Test structure", "Error handling", "State management", "UI design"],
+        answer: 0,
+        explanation: "Arrange-Act-Assert organizes test logic."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "tf",
+        prompt: "Module 11: True or False: Mocks simulate dependencies in tests.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Mocks isolate code under test."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "code",
+        prompt: "Module 11: Write 3-4 lines testing optional is not nil.",
+        checks: ["xctassertnotnil"],
+        sample: "func testNotNil() {\n  let value: Int? = 10\n  XCTAssertNotNil(value)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "vocab",
+        prompt: "Module 11: What measures code covered by tests?",
+        options: ["Coverage", "Quality", "Performance", "Complexity"],
+        answer: 0,
+        explanation: "Test coverage measures code execution."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "tf",
+        prompt: "Module 11: True or False: XCTAssertFalse checks condition is false.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. XCTAssertFalse validates false conditions."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "code",
+        prompt: "Module 11: Write 3-4 lines testing ViewModel initialization.",
+        checks: ["xctassertequal", "viewmodel"],
+        sample: "func testInit() {\n  let vm = ViewModel()\n  XCTAssertEqual(vm.count, 0)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "11",
+      question: {
+        type: "vocab",
+        prompt: "Module 11: Which tests individual functions in isolation?",
+        options: ["UI tests", "Unit tests", "Integration tests", "E2E tests"],
+        answer: 1,
+        explanation: "Unit tests validate individual components."
+      }
+    },
+    // MODULE 12 EXPANSION COMPLETE: Swift Refactoring and Quality (need 17 more → Total 20)
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "vocab",
+        prompt: "Module 12: What improves code without changing behavior?",
+        options: ["Adding features", "Refactoring", "Debugging", "Testing"],
+        answer: 1,
+        explanation: "Refactoring restructures code internally."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "tf",
+        prompt: "Module 12: True or False: Extract Method creates reusable functions.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Extracting methods reduces duplication."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "code",
+        prompt: "Module 12: Write 4-6 lines extracting validation logic into separate function.",
+        checks: ["func validate", "bool"],
+        sample: "func validate(email: String) -> Bool {\n  email.contains(\"@\") && email.count > 3\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "vocab",
+        prompt: "Module 12: What principle suggests functions do one thing?",
+        options: ["DRY", "Single Responsibility", "KISS", "YAGNI"],
+        answer: 1,
+        explanation: "Single Responsibility keeps functions focused."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "tf",
+        prompt: "Module 12: True or False: Magic numbers should become named constants.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Named constants improve readability."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "code",
+        prompt: "Module 12: Write 2-3 lines replacing magic number 86400 with constant.",
+        checks: ["let", "= 86400"],
+        sample: "let secondsPerDay = 86400\nlet days = seconds / secondsPerDay"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "vocab",
+        prompt: "Module 12: What does DRY stand for?",
+        options: ["Don't Repeat Yourself", "Do Right Yesterday", "Debug Run Yield", "None"],
+        answer: 0,
+        explanation: "DRY avoids code duplication."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "tf",
+        prompt: "Module 12: True or False: Long functions should be split into smaller ones.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Smaller functions improve clarity."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "code",
+        prompt: "Module 12: Write 3-5 lines refactoring nested if into guard.",
+        checks: ["guard", "else", "return"],
+        sample: "guard let user = getUser() else { return }\nprocess(user)"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "vocab",
+        prompt: "Module 12: Which improves code readability?",
+        options: ["Unclear names", "Comments everywhere", "Clear naming", "Long lines"],
+        answer: 2,
+        explanation: "Clear naming makes code self-documenting."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "tf",
+        prompt: "Module 12: True or False: Code reviews catch quality issues early.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Reviews improve code quality."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "code",
+        prompt: "Module 12: Write 2-3 lines renaming vague variable 'x' to meaningful name.",
+        checks: ["let"],
+        sample: "let userCount = users.count // was: let x = users.count"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "vocab",
+        prompt: "Module 12: What reduces cognitive load when reading code?",
+        options: ["Complexity", "Simplicity", "Obscurity", "Verbosity"],
+        answer: 1,
+        explanation: "Simplicity makes code easier to understand."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "tf",
+        prompt: "Module 12: True or False: Consistent style improves team productivity.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Consistency reduces friction."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "code",
+        prompt: "Module 12: Write 3-4 lines showing early return pattern for validation.",
+        checks: ["guard", "return"],
+        sample: "func process(_ text: String) {\n  guard !text.isEmpty else { return }\n  // process\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "vocab",
+        prompt: "Module 12: Which tool enforces style guidelines automatically?",
+        options: ["Compiler", "Linter", "Debugger", "Profiler"],
+        answer: 1,
+        explanation: "Linters check code style."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "12",
+      question: {
+        type: "tf",
+        prompt: "Module 12: True or False: Refactoring should have test coverage first.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Tests ensure refactoring doesn't break behavior."
+      }
+    },
+    // MODULE 13 EXPANSION COMPLETE: Swift Performance and Reliability (need 16 more → Total 20)
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "vocab",
+        prompt: "Module 13: What isolates mutable state in Swift concurrency?",
+        options: ["class", "actor", "struct", "enum"],
+        answer: 1,
+        explanation: "Actors protect state from data races."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "tf",
+        prompt: "Module 13: True or False: async/await improves concurrent code readability.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. async/await simplifies async code."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "code",
+        prompt: "Module 13: Write 3-5 lines with async function using Task.",
+        checks: ["task", "await"],
+        sample: "Task {\n  let data = await fetchData()\n  process(data)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "vocab",
+        prompt: "Module 13: Which ensures UI updates happen on main thread?",
+        options: ["@Background", "@MainActor", "@Thread", "@UI"],
+        answer: 1,
+        explanation: "@MainActor runs code on main thread."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "tf",
+        prompt: "Module 13: True or False: Value types avoid shared mutable state.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Structs copy on assignment."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "code",
+        prompt: "Module 13: Write 3-4 lines with actor protecting count property.",
+        checks: ["actor", "var count"],
+        sample: "actor Counter {\n  var count = 0\n  func increment() { count += 1 }\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "vocab",
+        prompt: "Module 13: What tool measures app performance?",
+        options: ["Debugger", "Instruments", "Console", "Navigator"],
+        answer: 1,
+        explanation: "Instruments profiles performance."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "tf",
+        prompt: "Module 13: True or False: Lazy variables defer initialization.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. lazy delays computation."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "code",
+        prompt: "Module 13: Write 2-3 lines with lazy var for expensive computation.",
+        checks: ["lazy var"],
+        sample: "lazy var processedData = expensiveComputation()"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "vocab",
+        prompt: "Module 13: What causes memory leaks with closures?",
+        options: ["Strong references", "Retain cycles", "Weak self", "All above"],
+        answer: 1,
+        explanation: "Retain cycles prevent deallocation."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "tf",
+        prompt: "Module 13: True or False: [weak self] prevents capture cycles.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. weak breaks strong references."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "code",
+        prompt: "Module 13: Write 3-4 lines with closure avoiding retain cycle.",
+        checks: ["[weak self]"],
+        sample: "service.load { [weak self] data in\n  self?.update(data)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "vocab",
+        prompt: "Module 13: Which reduces memory usage for large collections?",
+        options: ["Copy all", "Lazy sequences", "Force unwrap", "Global vars"],
+        answer: 1,
+        explanation: "Lazy sequences defer computation."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "tf",
+        prompt: "Module 13: True or False: Task cancellation should be checked.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Check Task.isCancelled."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "code",
+        prompt: "Module 13: Write 3-4 lines checking task cancellation.",
+        checks: ["task.iscancelled", "return"],
+        sample: "if Task.isCancelled { return }\nawait processNext()"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "vocab",
+        prompt: "Module 13: What pattern handles errors in async code?",
+        options: ["Ignore", "do-catch", "Force try", "Print"],
+        answer: 1,
+        explanation: "do-catch handles async errors."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "13",
+      question: {
+        type: "tf",
+        prompt: "Module 13: True or False: Immutable data is thread-safe.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Immutable values prevent races."
+      }
+    },
+    // MODULE 14 FINAL EXPANSION: Swift Real-World Scenarios (need 4 more → Total 20)
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "vocab",
+        prompt: "Module 14: What pattern improves app architecture?",
+        options: ["God object", "MVVM", "Global state", "Hardcoding"],
+        answer: 1,
+        explanation: "MVVM separates concerns properly."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "tf",
+        prompt: "Module 14: True or False: Error handling improves app reliability.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Proper error handling prevents crashes."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "code",
+        prompt: "Module 14: Write 4-6 lines with do-catch handling network errors.",
+        checks: ["do", "try await", "catch"],
+        sample: "do {\n  let data = try await network.fetch()\n  process(data)\n} catch {\n  handleError(error)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "vocab",
+        prompt: "Module 14: Which improves production code quality?",
+        options: ["No validation", "Logging + monitoring", "Ignoring errors", "Hard-coded values"],
+        answer: 1,
+        explanation: "Logging and monitoring enable debugging."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "tf",
+        prompt: "Module 14: True or False: Graceful degradation handles failures safely.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Apps should handle failures gracefully."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "code",
+        prompt: "Module 14: Write 3-5 lines with retry logic for failed operations.",
+        checks: ["for", "in", "try"],
+        sample: "for attempt in 1...3 {\n  if try? operation() != nil { break }\n  await Task.sleep(1_000_000_000)\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "vocab",
+        prompt: "Module 14: What validates user input before processing?",
+        options: ["Skip validation", "Input validation", "Force unwrap", "Ignore errors"],
+        answer: 1,
+        explanation: "Input validation prevents bad data."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "tf",
+        prompt: "Module 14: True or False: Production apps need error boundaries.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Error boundaries contain failures."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "code",
+        prompt: "Module 14: Write 3-4 lines validating email contains @ symbol.",
+        checks: ["func", "validate", ".contains("],
+        sample: "func validateEmail(_ email: String) -> Bool {\n  email.contains(\"@\") && email.count >= 5\n}"
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "vocab",
+        prompt: "Module 14: Which tracks app health in production?",
+        options: ["Print statements", "Analytics + crash reporting", "Comments", "Nothing"],
+        answer: 1,
+        explanation: "Analytics and crash reporting monitor health."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "tf",
+        prompt: "Module 14: True or False: Loading states improve user experience.",
+        options: ["True", "False"],
+        answer: 0,
+        explanation: "True. Users need feedback during async operations."
+      }
+    },
+    {
+      level: "advanced",
+      moduleUnit: "14",
+      question: {
+        type: "code",
+        prompt: "Module 14: Write 3-5 lines showing loading/success/error states enum.",
+        checks: ["enum", "case loading", "case success", "case error"],
+        sample: "enum ViewState {\n  case loading\n  case success(Data)\n  case error(Error)\n}"
+      }
+    }
+  ];
+
+  moduleSpecific.forEach(({ level, moduleUnit, question }) => {
+    if (!Array.isArray(swiftSet[level])) {
+      return;
+    }
+
+    swiftSet[level].push({
+      ...question,
+      moduleUnit,
+      moduleUnits: [moduleUnit]
+    });
+  });
+}
+
+injectSwiftModuleSpecificQuestions();
+
+function buildSwiftModuleGeneratedQuestion(moduleUnit, questionNumber, concept, variant) {
+  const unit = String(moduleUnit);
+  const moduleLabel = `Module ${unit}`;
+  const templateTypeCycle = unit === "8" || unit === "9" || unit === "10"
+    ? ["output", "vocab", "tf"]
+    : ["vocab", "tf", "output"];
+  const templateType = templateTypeCycle[(questionNumber - 1) % templateTypeCycle.length];
+
+  if (templateType === "tf") {
+    return {
+      type: "tf",
+      prompt: `SwiftUI ${moduleLabel} Practice ${questionNumber} (Set ${variant}): True or False: ${concept.statement}`,
+      options: ["True", "False"],
+      answer: concept.truthy ? 0 : 1,
+      explanation: concept.explanation
+    };
+  }
+
+  if (templateType === "output") {
+    const seedA = (questionNumber % 7) + 2;
+    const seedB = (variant % 5) + 1;
+    if (unit === "2") {
+      return {
+        type: "output",
+        prompt: `SwiftUI ${moduleLabel} Practice ${questionNumber} (Set ${variant}): What prints? \`let nickname: String? = nil; print(nickname ?? "Guest${seedA}")\``,
+        options: [`Guest${seedA}`, "nil", "nickname", `Guest${seedB}`],
+        answer: 0,
+        explanation: "Nil-coalescing (??) returns the fallback string when the optional is nil."
+      };
+    }
+    if (unit === "4" || unit === "9") {
+      return {
+        type: "output",
+        prompt: `SwiftUI ${moduleLabel} Practice ${questionNumber} (Set ${variant}): If isOn is ${seedA % 2 === 0 ? "true" : "false"}, what does \`Text(isOn ? "On" : "Off")\` show?`,
+        options: [seedA % 2 === 0 ? "On" : "Off", seedA % 2 === 0 ? "Off" : "On", "true", "nil"],
+        answer: 0,
+        explanation: "The ternary expression selects the matching branch for the current boolean state."
+      };
+    }
+    return {
+      type: "output",
+      prompt: `SwiftUI ${moduleLabel} Practice ${questionNumber} (Set ${variant}): What prints? \`let a = ${seedA}; let b = ${seedB}; print(a + b)\``,
+      options: [String(seedA + seedB), String(seedA * seedB), String(seedA), String(seedB)],
+      answer: 0,
+      explanation: "The print statement outputs the sum of a and b."
+    };
+  }
+
+  return {
+    type: "vocab",
+    prompt: `SwiftUI ${moduleLabel} Practice ${questionNumber} (Set ${variant}): Which statement is most accurate about ${concept.term}?`,
+    options: [
+      concept.correct,
+      concept.distractors[0],
+      concept.distractors[1],
+      concept.distractors[2]
+    ],
+    answer: 0,
+    explanation: concept.explanation
+  };
+}
+
+function ensureSwiftModuleQuestionTarget(targetPerModule = 50) {
+  const swiftSet = questionSets.swift;
+  if (!swiftSet || !Number.isFinite(targetPerModule) || targetPerModule <= 0) {
+    return;
+  }
+
+  const moduleLevelMap = {
+    "1": "beginner",
+    "2": "beginner",
+    "3": "beginner",
+    "4": "beginner",
+    "5": "medium",
+    "6": "medium",
+    "7": "medium",
+    "8": "medium",
+    "9": "medium",
+    "10": "medium",
+    "11": "advanced",
+    "12": "advanced",
+    "13": "advanced",
+    "14": "advanced"
+  };
+
+  const moduleConceptBanks = {
+    "1": [
+      { term: "let and var", correct: "`let` is immutable and `var` is mutable.", distractors: ["`let` is mutable and `var` is immutable.", "Both always infer to optional types.", "Both are only valid inside classes."], statement: "`let` creates constants and `var` creates mutable values in Swift.", truthy: true, explanation: "Swift uses let for constants and var for variables." },
+      { term: "type inference", correct: "Swift infers types from assigned values when possible.", distractors: ["Swift requires explicit types in every declaration.", "Type inference only works in SwiftUI views.", "Type inference is disabled when using print."], statement: "Swift can infer the type of a value from its initializer.", truthy: true, explanation: "Type inference reduces boilerplate while preserving type safety." },
+      { term: "String interpolation", correct: "Use `\\(value)` inside a string to embed expressions.", distractors: ["Use `${value}` inside a string.", "Use `%value` in every string.", "Interpolation is only available for Int values."], statement: "Swift string interpolation uses \\(expression) syntax.", truthy: true, explanation: "Interpolation embeds evaluated expressions into strings." },
+      { term: "Bool", correct: "`Bool` stores true/false values.", distractors: ["`Bool` stores decimal values.", "`Bool` is the same as `String`.", "`Bool` is only for SwiftUI previews."], statement: "`Bool` is the Swift type for true or false.", truthy: true, explanation: "Bool is the boolean type in Swift." },
+      { term: "Int", correct: "`Int` represents whole numbers.", distractors: ["`Int` represents fractional values only.", "`Int` is only valid in arrays.", "`Int` is deprecated in Swift."], statement: "`Int` is used for whole number arithmetic.", truthy: true, explanation: "Use Int for integer values in Swift." }
+    ],
+    "2": [
+      { term: "optional types", correct: "An optional may hold a value or nil.", distractors: ["Optionals can never be nil.", "Optionals are only for strings.", "Optionals force unwrap automatically."], statement: "A value declared as `String?` can be nil.", truthy: true, explanation: "Optional syntax (`?`) indicates the value may be missing." },
+      { term: "if let", correct: "`if let` safely unwraps optionals inside a scoped block.", distractors: ["`if let` force unwraps and crashes on nil.", "`if let` is only for arrays.", "`if let` converts any type to string."], statement: "`if let` creates a non-optional constant when unwrapping succeeds.", truthy: true, explanation: "if let safely binds non-nil optional values." },
+      { term: "guard let", correct: "`guard let` exits early when unwrapping fails.", distractors: ["`guard let` ignores nil values and continues.", "`guard let` can only be used in classes.", "`guard let` replaces all switch statements."], statement: "`guard let` supports early exits for clearer control flow.", truthy: true, explanation: "guard is commonly used for fail-fast validation." },
+      { term: "nil-coalescing", correct: "`??` provides a fallback when an optional is nil.", distractors: ["`??` compares two booleans.", "`??` unwraps arrays only.", "`??` forces a runtime crash on nil."], statement: "The nil-coalescing operator returns the fallback value when needed.", truthy: true, explanation: "Use `optional ?? fallback` to supply defaults." },
+      { term: "force unwrap", correct: "`!` should be used carefully because nil will crash.", distractors: ["`!` is always safe with any optional.", "`!` turns every value into Bool.", "`!` is required for String interpolation."], statement: "Force unwrapping a nil optional causes a runtime crash.", truthy: true, explanation: "Prefer safe unwrapping unless you're certain the value exists." }
+    ],
+    "3": [
+      { term: "source of truth", correct: "Keep one owner for mutable state and derive other values.", distractors: ["Duplicate mutable state in all child views.", "Use global variables for every view.", "Avoid state in SwiftUI entirely."], statement: "A single source of truth reduces inconsistent UI updates.", truthy: true, explanation: "One authoritative state owner keeps data flow predictable." },
+      { term: "@State", correct: "`@State` stores local mutable state for a SwiftUI view.", distractors: ["`@State` persists data to disk automatically.", "`@State` is only for networking calls.", "`@State` can only hold strings."], statement: "`@State` is intended for view-local state.", truthy: true, explanation: "@State is a property wrapper for local state." },
+      { term: "@Binding", correct: "`@Binding` lets child views read and write parent-owned state.", distractors: ["`@Binding` creates independent state copies.", "`@Binding` can only be read-only.", "`@Binding` is a testing-only feature."], statement: "`@Binding` creates a two-way connection to external state.", truthy: true, explanation: "Bindings enable controlled mutation from child views." },
+      { term: "derived values", correct: "Compute display values from state instead of duplicating them.", distractors: ["Store every derived value in separate mutable properties.", "Derived values should ignore source state.", "Derived values are only for async code."], statement: "Derived values should be recomputed from source state.", truthy: true, explanation: "Derivation prevents drift between duplicated values." },
+      { term: "state updates", correct: "State updates should happen through clear, intentional actions.", distractors: ["Update state from random background threads without coordination.", "Mutate state in every computed property.", "Avoid changing state after initialization."], statement: "Clear update pathways make UI behavior easier to debug.", truthy: true, explanation: "Predictable updates reduce accidental side effects." }
+    ],
+    "4": [
+      { term: "VStack", correct: "`VStack` arranges child views vertically.", distractors: ["`VStack` arranges child views in depth order.", "`VStack` is only for lists with sections.", "`VStack` requires explicit Auto Layout constraints."], statement: "`VStack` stacks subviews top-to-bottom.", truthy: true, explanation: "Use VStack for vertical layout composition." },
+      { term: "HStack", correct: "`HStack` arranges child views horizontally.", distractors: ["`HStack` overlaps views by default.", "`HStack` can only hold two views.", "`HStack` is only available on macOS."], statement: "`HStack` lays out views left-to-right.", truthy: true, explanation: "Use HStack for horizontal arrangements." },
+      { term: "ZStack", correct: "`ZStack` layers views on top of each other.", distractors: ["`ZStack` forces equal widths automatically.", "`ZStack` can only contain images.", "`ZStack` is deprecated in SwiftUI."], statement: "`ZStack` supports overlay-style compositions.", truthy: true, explanation: "ZStack is useful for layered interfaces." },
+      { term: "modifiers", correct: "SwiftUI modifiers return new configured views.", distractors: ["Modifiers mutate views in place only.", "Only one modifier is allowed per view.", "Modifiers work only on Text views."], statement: "SwiftUI modifiers are chained to transform view configuration.", truthy: true, explanation: "Modifiers create declarative, composable UI changes." },
+      { term: "view composition", correct: "Break large screens into reusable smaller views.", distractors: ["Put all screen logic in one giant body.", "Avoid extracting reusable components.", "Reusable views are not supported in SwiftUI."], statement: "Composed views improve readability and reuse.", truthy: true, explanation: "Small view components are easier to reason about and test." }
+    ],
+    "5": [
+      { term: "compiler errors", correct: "Fix top compiler errors first because later errors may cascade.", distractors: ["Ignore compiler errors and run anyway.", "Fix random lines first.", "Compiler errors never affect runtime behavior."], statement: "One compile fix can clear many downstream errors.", truthy: true, explanation: "Compiler diagnostics often cascade from the first real issue." },
+      { term: "mutability bugs", correct: "Use `var` when mutation is required, not `let`.", distractors: ["Always use `let`, even when incrementing counters.", "`var` is invalid in Swift.", "Mutability has no impact on compile behavior."], statement: "Trying to mutate a `let` constant causes a compile error.", truthy: true, explanation: "Constants cannot be reassigned in Swift." },
+      { term: "type mismatch", correct: "Match expected types at assignment and function boundaries.", distractors: ["Swift auto-converts every type without checks.", "Type mismatches only matter in tests.", "Type mismatch errors can be ignored."], statement: "Type mismatches are a common source of Swift compile failures.", truthy: true, explanation: "Strong typing catches incompatibilities early." },
+      { term: "increment logic", correct: "Use `+=` or reassignment when changing counters.", distractors: ["`count + 1` mutates count automatically.", "Counters only update inside print statements.", "Incrementing is unsupported in Swift."], statement: "`count + 1` alone does not persist a new value.", truthy: true, explanation: "You must assign the computed value back to the variable." },
+      { term: "small repro", correct: "Create minimal failing examples to isolate bugs quickly.", distractors: ["Debug only in the full app every time.", "Add random fixes until it compiles.", "Avoid reducing context when debugging."], statement: "Minimal repros make root causes easier to identify.", truthy: true, explanation: "Smaller test cases reduce noise while debugging." }
+    ],
+    "6": [
+      { term: "@State updates", correct: "Update state inside event handlers using assignment.", distractors: ["Use expressions without assignment to change state.", "Never mutate @State values.", "@State updates only in previews."], statement: "`count += 1` changes @State; `count + 1` does not.", truthy: true, explanation: "State must be assigned a new value to trigger updates." },
+      { term: "binding flow", correct: "Use bindings for controlled child write access to parent state.", distractors: ["Pass copied values when child must edit parent state.", "Bindings are read-only.", "Bindings replace all view models."], statement: "Bindings help synchronize parent and child state.", truthy: true, explanation: "@Binding expresses two-way relationships intentionally." },
+      { term: "main-thread UI", correct: "UI state updates should occur on the main actor.", distractors: ["UI updates should prefer background threads.", "Threading never matters in SwiftUI.", "Main actor is only for tests."], statement: "Main-thread updates avoid UI consistency issues.", truthy: true, explanation: "SwiftUI expects UI-related mutations on the main actor." },
+      { term: "preview troubleshooting", correct: "Use small preview data to debug rendering quickly.", distractors: ["Previews should always call live production APIs.", "Previews cannot simulate different states.", "Previews are unrelated to UI debugging."], statement: "Preview states can reveal layout/state issues early.", truthy: true, explanation: "Multiple preview states are useful for fast iteration." },
+      { term: "state ownership", correct: "Keep one owner for mutable state and pass bindings when needed.", distractors: ["Every child should own duplicate mutable state.", "State ownership is irrelevant in SwiftUI.", "Only global singletons should hold state."], statement: "Clear ownership reduces update conflicts.", truthy: true, explanation: "Explicit state ownership keeps data flow predictable." }
+    ],
+    "7": [
+      { term: "debug workflow", correct: "Reproduce, isolate, fix, verify, and regress-test.", distractors: ["Apply random edits and hope for a fix.", "Skip verification after the first pass.", "Avoid writing down root causes."], statement: "A repeatable debug loop improves fix quality.", truthy: true, explanation: "Systematic debugging reduces recurring issues." },
+      { term: "root cause", correct: "Document root cause and fix path for future reference.", distractors: ["Only patch symptoms and move on.", "Never record debugging notes.", "Root causes are unnecessary if tests pass once."], statement: "Root-cause notes strengthen future debugging speed.", truthy: true, explanation: "Documented context helps prevent repeated mistakes." },
+      { term: "regression checks", correct: "Retest related behavior after fixing a bug.", distractors: ["Retest only the exact failing line.", "Regression testing is optional for all fixes.", "Fixes cannot impact nearby logic."], statement: "Regression checks help catch side effects.", truthy: true, explanation: "A bug fix can impact adjacent behavior." },
+      { term: "computed properties", correct: "Keep computed properties side-effect free and deterministic.", distractors: ["Mutate global state in computed properties.", "Perform heavy network calls in computed properties.", "Computed properties should ignore state changes."], statement: "Computed properties should avoid hidden side effects.", truthy: true, explanation: "Pure computed logic is easier to debug and reason about." },
+      { term: "naming for clarity", correct: "Descriptive names reduce misunderstanding during debugging.", distractors: ["One-letter names are best for all code.", "Naming has no effect on maintenance.", "Reuse vague names across unrelated contexts."], statement: "Clear naming helps trace logic faster.", truthy: true, explanation: "Readable identifiers improve code review and fixes." }
+    ],
+    "8": [
+      { term: "print tracing", correct: "Trace variable transitions before and after transformations.", distractors: ["Print once at startup and stop.", "Never inspect intermediate values.", "Output tracing is unrelated to logic errors."], statement: "Output tracing reveals where values diverge from expectation.", truthy: true, explanation: "Strategic tracing is useful for reasoning about execution." },
+      { term: "arithmetic flow", correct: "Evaluate expressions in order and verify each step.", distractors: ["Guess arithmetic output without checking operators.", "Operator precedence never matters.", "Arithmetic output is random in Swift."], statement: "Stepwise evaluation improves prediction accuracy.", truthy: true, explanation: "Breaking expressions into steps reduces mistakes." },
+      { term: "array output", correct: "Index and first/last access determine printed values.", distractors: ["Array prints are always the count.", "first/last are only for strings.", "Array output ignores indexes."], statement: "Understanding array access helps predict output.", truthy: true, explanation: "Array APIs produce specific values based on access methods." },
+      { term: "condition output", correct: "Boolean conditions choose control-flow branches.", distractors: ["Conditions do not affect output.", "if statements always run both branches.", "Swift has no boolean branches."], statement: "Control flow directly affects printed output.", truthy: true, explanation: "Branching determines which statements execute." },
+      { term: "string interpolation output", correct: "Interpolated expressions are evaluated before printing.", distractors: ["Interpolation prints placeholders literally.", "Interpolation works only with Int.", "Interpolation cannot include expressions."], statement: "Interpolation output reflects evaluated expression values.", truthy: true, explanation: "Swift evaluates expressions inside interpolation syntax." }
+    ],
+    "9": [
+      { term: "ternary rendering", correct: "Ternary expressions choose one view/text branch.", distractors: ["Ternary expressions render both branches.", "Ternary cannot be used in SwiftUI.", "Ternary always returns Bool."], statement: "A SwiftUI ternary returns one branch based on condition value.", truthy: true, explanation: "This is common for concise conditional UI." },
+      { term: "state-driven text", correct: "Text labels should derive from current state.", distractors: ["Hard-code labels and ignore state.", "State is irrelevant for Text.", "Text updates only after app restart."], statement: "SwiftUI text output should reflect current state.", truthy: true, explanation: "Declarative UI derives visible output from state." },
+      { term: "conditional views", correct: "if/switch in view bodies control what is rendered.", distractors: ["if/switch are invalid in SwiftUI bodies.", "All conditional branches render together.", "Conditional rendering requires UIKit only."], statement: "Conditional blocks can render different SwiftUI views.", truthy: true, explanation: "SwiftUI supports declarative conditional rendering." },
+      { term: "list output", correct: "ForEach output depends on data collection values.", distractors: ["ForEach ignores data and prints placeholders.", "ForEach always renders exactly one row.", "ForEach cannot render Text rows."], statement: "ForEach generates output from each data element.", truthy: true, explanation: "Collection-driven rendering is central in SwiftUI." },
+      { term: "toggle state", correct: "Toggle-driven booleans can switch visible text or style.", distractors: ["Toggle state cannot drive text output.", "Toggle values are strings only.", "Toggles require manual UI mutation APIs."], statement: "Toggle changes should immediately affect dependent UI output.", truthy: true, explanation: "SwiftUI recomputes body when observed state changes." }
+    ],
+    "10": [
+      { term: "declarative architecture", correct: "Describe UI from state rather than imperative mutation steps.", distractors: ["Manually mutate every view property directly.", "Avoid modeling state explicitly.", "Disable type safety for faster UI."], statement: "SwiftUI architecture is declarative and state-driven.", truthy: true, explanation: "Declarative design improves predictability and reuse." },
+      { term: "state models", correct: "Model loading/success/error states explicitly.", distractors: ["Use one string for all app states.", "Skip error states in production UIs.", "State models are unnecessary in SwiftUI."], statement: "Explicit states reduce ambiguous UI behavior.", truthy: true, explanation: "State modeling clarifies transitions and rendering." },
+      { term: "modular views", correct: "Split large views into reusable focused components.", distractors: ["Keep all code in one massive body.", "Reuse should be avoided for clarity.", "Only UIKit supports componentization."], statement: "Reusable view modules improve maintainability.", truthy: true, explanation: "Smaller components are easier to test and evolve." },
+      { term: "data flow", correct: "Pass data down and events up through explicit boundaries.", distractors: ["Use hidden globals for all updates.", "Allow every view to mutate all shared state.", "Avoid parent-child data contracts."], statement: "Clear data flow improves architecture quality.", truthy: true, explanation: "Explicit boundaries reduce unintended coupling." },
+      { term: "integration mindset", correct: "Combine syntax, state, and layout concepts in cohesive features.", distractors: ["Learn concepts in isolation and never integrate.", "Architecture only matters after deployment.", "Ignore feature-level composition patterns."], statement: "Integrated practice builds real SwiftUI proficiency.", truthy: true, explanation: "Production apps require coordinated skills, not isolated snippets." }
+    ],
+    "11": [
+      { term: "XCTest", correct: "XCTest is the standard unit-testing framework in Swift.", distractors: ["SwiftUI is the unit-testing framework.", "UIKit replaces test frameworks.", "Testing in Swift requires third-party tools only."], statement: "XCTest is commonly used for Swift unit tests.", truthy: true, explanation: "XCTest ships with Apple's development tooling." },
+      { term: "arrange-act-assert", correct: "Tests are clearer when setup, action, and assertions are explicit.", distractors: ["Combine all test logic into one unreadable block.", "Assertions are optional for good tests.", "Tests should avoid deterministic inputs."], statement: "Arrange-act-assert structure improves test readability.", truthy: true, explanation: "Clear structure makes tests easier to maintain." },
+      { term: "deterministic tests", correct: "Stable test data helps keep tests repeatable and reliable.", distractors: ["Random data should drive all unit tests.", "Determinism is unnecessary in CI.", "Tests should depend on live network by default."], statement: "Deterministic tests reduce flaky failures.", truthy: true, explanation: "Repeatable inputs make failures actionable." },
+      { term: "assertions", correct: "Assertions verify expected outputs and side effects.", distractors: ["Assertions are only for UI screenshots.", "Assertions should be skipped in fast tests.", "Assertions hide logic bugs."], statement: "Assertions are core to automated test confidence.", truthy: true, explanation: "Without assertions, tests cannot verify behavior." },
+      { term: "test boundaries", correct: "Unit tests should focus on small isolated behavior.", distractors: ["Every unit test should boot the full app.", "Unit tests must always call production APIs.", "Isolation makes tests less useful."], statement: "Isolated unit tests identify failures quickly.", truthy: true, explanation: "Smaller scopes improve diagnosis speed." }
+    ],
+    "12": [
+      { term: "refactoring", correct: "Refactoring improves structure without changing intended behavior.", distractors: ["Refactoring means adding random new features.", "Refactoring should always alter external behavior.", "Refactoring is only formatting."], statement: "Behavior-preserving change is a key refactoring principle.", truthy: true, explanation: "Refactoring targets maintainability and clarity." },
+      { term: "code smells", correct: "Duplicate logic and long methods signal refactoring opportunities.", distractors: ["Duplicate logic improves reliability.", "Long methods are always better.", "Code smells are compile errors only."], statement: "Code smells indicate potential maintainability problems.", truthy: true, explanation: "Smells guide where to improve design." },
+      { term: "naming clarity", correct: "Clear names make code intent easier to review and change.", distractors: ["Vague names improve flexibility.", "Naming has no impact on quality.", "Only comments should express intent."], statement: "Improving naming is a valuable refactoring step.", truthy: true, explanation: "Readable identifiers reduce cognitive load." },
+      { term: "small functions", correct: "Smaller focused functions are easier to test and reason about.", distractors: ["Single huge functions are always better.", "Function size has no effect on readability.", "Small functions cannot express complex behavior."], statement: "Function extraction helps isolate responsibilities.", truthy: true, explanation: "Separation of concerns improves maintainability." },
+      { term: "safe refactor flow", correct: "Use tests before and after refactors to confirm behavior.", distractors: ["Refactor without tests for maximum speed.", "Tests should be removed before refactoring.", "Refactors never need verification."], statement: "Tests reduce regression risk during refactoring.", truthy: true, explanation: "Verification is essential for safe structural change." }
+    ],
+    "13": [
+      { term: "actors", correct: "Actors isolate mutable state across concurrency boundaries.", distractors: ["Actors are only for UI styling.", "Actors replace every protocol.", "Actors disable async/await."], statement: "Actors help reduce data races in concurrent Swift code.", truthy: true, explanation: "Actor isolation enforces serialized access to mutable state." },
+      { term: "Task cancellation", correct: "Check cancellation and exit early for responsive async flows.", distractors: ["Ignore cancellation in all async tasks.", "Cancellation only matters in tests.", "Cancelled tasks should continue heavy work."], statement: "Cancellation handling improves responsiveness and resource usage.", truthy: true, explanation: "Cooperative cancellation avoids wasted work." },
+      { term: "performance profiling", correct: "Profile bottlenecks before optimizing implementation details.", distractors: ["Always optimize blindly first.", "Profiling is unnecessary for Swift apps.", "Performance issues cannot be measured."], statement: "Evidence-driven optimization is more reliable than guesswork.", truthy: true, explanation: "Profilers reveal real hotspots." },
+      { term: "memory discipline", correct: "Avoid unnecessary allocations in hot paths.", distractors: ["Allocate freely in tight loops without measurement.", "Memory usage never impacts performance.", "ARC removes all memory concerns."], statement: "Allocation patterns can impact runtime performance.", truthy: true, explanation: "Efficient memory behavior supports reliability and speed." },
+      { term: "reliability", correct: "Graceful error handling and retries improve reliability.", distractors: ["Crash on every network error.", "Retry forever without limits.", "Reliability is unrelated to error paths."], statement: "Reliability depends on controlled failure handling.", truthy: true, explanation: "Predictable recovery improves production behavior." }
+    ],
+    "14": [
+      { term: "production readiness", correct: "Production apps need validation, logging, and resilient error handling.", distractors: ["Production apps should skip validation for speed.", "Logging is only useful during development.", "Crash reports are unnecessary after launch."], statement: "Operational safeguards are essential in real-world apps.", truthy: true, explanation: "Production readiness includes observability and safety checks." },
+      { term: "MVVM boundaries", correct: "Separate view rendering from business and data coordination.", distractors: ["Put all logic in views only.", "Use one global object for all concerns.", "Architecture boundaries reduce performance automatically."], statement: "Clear boundaries improve maintainability in larger SwiftUI apps.", truthy: true, explanation: "Separation of concerns helps scaling and testing." },
+      { term: "error UX", correct: "User-friendly error states should guide recovery actions.", distractors: ["Hide all failures from users.", "Show raw stack traces in production UI.", "Errors should always close the app."], statement: "Error UX should provide clear next steps.", truthy: true, explanation: "Helpful messaging improves real-world usability." },
+      { term: "observability", correct: "Metrics and crash reporting support faster production diagnosis.", distractors: ["Observability is unnecessary after launch.", "Only local prints are needed in production.", "Metrics replace all testing."], statement: "Observability shortens incident detection and resolution time.", truthy: true, explanation: "Operational signals are key in real deployments." },
+      { term: "release discipline", correct: "Use staged rollout and monitoring after release.", distractors: ["Ship globally without checks every time.", "Ignore post-release telemetry.", "Versioning and notes are optional in production."], statement: "Post-release monitoring helps catch issues early.", truthy: true, explanation: "Release discipline reduces user impact from regressions." }
+    ]
+  };
+
+  const existingPromptKeys = new Set();
+  const moduleCounts = {
+    "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0,
+    "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0
+  };
+
+  ["beginner", "medium", "advanced"].forEach((levelKey) => {
+    const list = Array.isArray(swiftSet[levelKey]) ? swiftSet[levelKey] : [];
+    list.forEach((question) => {
+      if (!question || typeof question !== "object") {
+        return;
+      }
+
+      const promptKey = normalizePromptForUniqueness(question.prompt);
+      if (promptKey) {
+        existingPromptKeys.add(promptKey);
+      }
+
+      const unit = question.moduleUnit ? String(question.moduleUnit) : "";
+      if (unit && Object.prototype.hasOwnProperty.call(moduleCounts, unit)) {
+        moduleCounts[unit] += 1;
+      }
+    });
+  });
+
+  Object.keys(moduleCounts).forEach((moduleUnit) => {
+    const levelKey = moduleLevelMap[moduleUnit];
+    if (!levelKey || !Array.isArray(swiftSet[levelKey])) {
+      return;
+    }
+
+    const conceptBank = moduleConceptBanks[moduleUnit] || moduleConceptBanks["1"];
+    let safety = 0;
+
+    while (moduleCounts[moduleUnit] < targetPerModule && safety < targetPerModule * 20) {
+      const questionNumber = moduleCounts[moduleUnit] + 1;
+      const concept = conceptBank[(questionNumber - 1) % conceptBank.length];
+      const variant = Math.floor((questionNumber - 1) / conceptBank.length) + 1;
+      const generatedQuestion = buildSwiftModuleGeneratedQuestion(moduleUnit, questionNumber, concept, variant);
+      const promptKey = normalizePromptForUniqueness(generatedQuestion.prompt);
+      safety += 1;
+
+      if (!promptKey || existingPromptKeys.has(promptKey)) {
+        continue;
+      }
+
+      swiftSet[levelKey].push({
+        ...generatedQuestion,
+        moduleUnit,
+        moduleUnits: [moduleUnit]
+      });
+
+      existingPromptKeys.add(promptKey);
+      moduleCounts[moduleUnit] += 1;
+    }
+  });
+}
+
+ensureSwiftModuleQuestionTarget(60);
+
+const minimumQuestionsPerLanguage = 420;
+const minimumQuestionsPerStructuredTrack = 420;
 const coreLanguageTopics = ["swift", "web", "react", "python", "typescript", "java", "kotlin", "markdown", "csharp", "sql", "go", "rust", "cpp", "php", "dart", "bash"];
-const structuredTrackTopics = ["sourcecontrol", "ides"];
+const structuredTrackTopics = ["sourcecontrol", "ides", "cloudkit", "firebase", "aiassist"];
 const topicDisplayNames = {
   swift: "Swift + SwiftUI",
   web: "HTML + CSS + JavaScript",
@@ -2166,8 +5114,256 @@ const topicDisplayNames = {
   dart: "Dart + Flutter",
   bash: "Bash / Shell",
   sourcecontrol: "Source Control",
-  ides: "IDEs"
+  ides: "IDEs",
+  cloudkit: "CloudKit",
+  firebase: "Firebase",
+  aiassist: "AI Coding Assistants"
 };
+
+function normalizePromptForUniqueness(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^\[[^\]]+\]\s*/g, "")
+    .replace(/^module\s*\d+\s*:\s*/g, "")
+    .replace(/^swiftui\s*module\s*\d+\s*\([^)]*\)\s*:\s*/g, "")
+    .replace(/\b(q|question|quiz)\s*\d+\b/g, "")
+    .replace(/\b\d+\b/g, "#")
+    .replace(/["'`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const moduleBucketsByQuestionShape = {
+  beginner: ["1", "2", "3", "4"],
+  debug: ["5", "6", "7"],
+  output: ["8", "9", "10"],
+  advanced: ["11", "12", "13", "14"]
+};
+
+function resolveQuestionModuleBucket(levelKey, questionType) {
+  if (questionType === "debug") {
+    return moduleBucketsByQuestionShape.debug;
+  }
+  if (questionType === "output") {
+    return moduleBucketsByQuestionShape.output;
+  }
+  if (levelKey === "beginner") {
+    return moduleBucketsByQuestionShape.beginner;
+  }
+  if (levelKey === "advanced") {
+    return moduleBucketsByQuestionShape.advanced;
+  }
+  return moduleBucketsByQuestionShape.debug;
+}
+
+function assignDeterministicQuestionModule(topicKey, levelKey, question, questionIndex = 0) {
+  const explicitUnits = Array.isArray(question && question.moduleUnits)
+    ? question.moduleUnits.map((value) => String(value)).filter(Boolean)
+    : [];
+  if (explicitUnits.length) {
+    question.moduleUnits = [...new Set(explicitUnits)];
+    question.moduleUnit = question.moduleUnits[0];
+    return;
+  }
+
+  if (question && question.moduleUnit) {
+    question.moduleUnit = String(question.moduleUnit);
+    question.moduleUnits = [question.moduleUnit];
+    return;
+  }
+
+  const moduleBucket = resolveQuestionModuleBucket(levelKey, question && question.type);
+  const stableKey = normalizePromptForUniqueness(
+    `${topicKey}|${levelKey}|${question && question.type ? question.type : "unknown"}|${question && question.prompt ? question.prompt : ""}`
+  );
+  const numericIndex = Number.isFinite(Number(questionIndex)) ? Number(questionIndex) : 0;
+  const chunkSize = 20;
+  const fallbackIndex = Math.floor(Math.max(0, numericIndex) / chunkSize) % moduleBucket.length;
+  const fallbackUnit = moduleBucket[fallbackIndex];
+
+  const rankedModules = moduleBucket
+    .map((moduleUnit) => {
+      const pathKey = resolvePathFromUnit(moduleUnit);
+      const focusTerms = buildModuleFocusTerms(topicKey, moduleUnit, pathKey);
+      const score = scoreQuestionForModule(question, focusTerms);
+      const tieBreaker = hashString(`${stableKey}|${moduleUnit}`);
+      return {
+        moduleUnit,
+        score,
+        tieBreaker
+      };
+    })
+    .sort((left, right) => right.score - left.score || left.tieBreaker - right.tieBreaker);
+
+  const moduleUnit = rankedModules.length && rankedModules[0].score > 0
+    ? rankedModules[0].moduleUnit
+    : fallbackUnit;
+
+  question.moduleUnit = moduleUnit;
+  question.moduleUnits = [moduleUnit];
+}
+
+function questionMatchesModuleUnit(question, moduleUnitKey) {
+  if (!moduleUnitKey || moduleUnitKey === "all") {
+    return true;
+  }
+
+  const units = Array.isArray(question && question.moduleUnits)
+    ? question.moduleUnits.map((value) => String(value))
+    : [];
+
+  if (units.length) {
+    return units.includes(String(moduleUnitKey));
+  }
+
+  if (question && question.moduleUnit) {
+    return String(question.moduleUnit) === String(moduleUnitKey);
+  }
+
+  return false;
+}
+
+const courseCoverageTargets = {
+  beginner: 6,
+  medium: 6,
+  advanced: 6
+};
+
+const coverageSkillHints = {
+  swift: ["guard", "return", "state", "error"],
+  web: ["if", "return", "fetch", "catch"],
+  react: ["usestate", "useeffect", "return", "error"],
+  python: ["def", "return", "try", "except"],
+  typescript: ["type", "return", "async", "promise"],
+  markdown: ["#", "-", "link", "format"],
+  java: ["class", "public", "return", "try"],
+  kotlin: ["fun", "when", "return", "null"],
+  csharp: ["public", "return", "async", "null"],
+  sql: ["select", "from", "where", "join"],
+  go: ["func", "return", "error", "if"],
+  rust: ["fn", "result", "match", "return"],
+  cpp: ["std::", "return", "if", "class"],
+  php: ["function", "return", "if", "json"],
+  dart: ["future", "async", "return", "if"],
+  bash: ["if", "fi", "echo", "exit"],
+  sourcecontrol: ["git", "branch", "merge", "commit"],
+  ides: ["debug", "breakpoint", "run", "task"],
+  cloudkit: ["ckrecord", "save", "query", "error"],
+  firebase: ["auth", "firestore", "rules", "error"],
+  aiassist: ["prompt", "verify", "policy", "ownership"]
+};
+
+function formatTopicDisplayNameForCoverage(topicKey) {
+  return topicDisplayNames[topicKey] || formatLabel(topicKey || "language");
+}
+
+function buildCoverageBoosterQuestion(topicKey, levelKey, index) {
+  const topicLabel = formatTopicDisplayNameForCoverage(topicKey);
+  const hints = coverageSkillHints[topicKey] || ["if", "return", "error", "result"];
+  const primary = hints[0];
+  const secondary = hints[1] || hints[0];
+  const tertiary = hints[2] || hints[1] || hints[0];
+  const stageLabel = levelKey === "beginner"
+    ? "Foundations"
+    : levelKey === "medium"
+      ? "Application"
+      : "Project Readiness";
+
+  const mode = index % 3;
+  if (mode === 0) {
+    return {
+      type: "vocab",
+      prompt: `${topicLabel} ${stageLabel} Coverage Drill ${index + 1}: Which practice best improves production reliability?`,
+      options: [
+        "Skip validation to code faster",
+        "Handle failure paths and keep outputs predictable",
+        "Only test happy-path behavior",
+        "Avoid code reviews before release"
+      ],
+      answer: 1,
+      explanation: "Production readiness requires explicit validation, failure handling, and predictable outputs."
+    };
+  }
+
+  if (mode === 1) {
+    return {
+      type: "tf",
+      prompt: `${topicLabel} ${stageLabel} Coverage Drill ${index + 1}: True or False: Clear failure handling and readable structure improve project delivery speed over time.`,
+      options: ["True", "False"],
+      answer: 0,
+      explanation: "True. Teams move faster long-term with readable code and explicit failure paths."
+    };
+  }
+
+  return {
+    type: "code",
+    prompt: `${topicLabel} ${stageLabel} Coverage Drill ${index + 1}: Write 3-6 lines that validate input, handle one failure branch, and return a stable result using ${primary}/${secondary}.`,
+    checks: [primary, secondary, "return"],
+    sample: `// ${topicLabel} sample\n// validate input\nif (invalidInput) {\n  // handle failure\n  return fallbackResult\n}\nreturn stableResult // ${tertiary}`
+  };
+}
+
+function ensureMinimumCourseCoverage() {
+  const levels = Object.keys(courseCoverageTargets);
+
+  Object.keys(questionSets).forEach((topicKey) => {
+    const topicSet = questionSets[topicKey] || {};
+
+    levels.forEach((levelKey) => {
+      const target = courseCoverageTargets[levelKey] || 0;
+      if (!Array.isArray(topicSet[levelKey])) {
+        topicSet[levelKey] = [];
+      }
+
+      const questions = topicSet[levelKey];
+      while (questions.length < target) {
+        questions.push(buildCoverageBoosterQuestion(topicKey, levelKey, questions.length));
+      }
+    });
+
+    questionSets[topicKey] = topicSet;
+  });
+}
+
+function applyTopicQuestionUniqueness() {
+  const levels = ["beginner", "medium", "advanced"];
+
+  Object.entries(questionSets).forEach(([topicKey, topicSet]) => {
+    const topicLabel = topicDisplayNames[topicKey] || topicKey;
+    const seenPromptsInTopic = new Set();
+
+    levels.forEach((levelKey) => {
+      const questions = Array.isArray(topicSet[levelKey]) ? topicSet[levelKey] : [];
+
+      topicSet[levelKey] = questions.filter((question, questionIndex) => {
+        if (!question || typeof question !== "object") {
+          return false;
+        }
+
+        question.topicKey = topicKey;
+        assignDeterministicQuestionModule(topicKey, levelKey, question, questionIndex);
+
+        if (typeof question.prompt === "string" && question.prompt.trim()) {
+          if (!question.prompt.startsWith(`[${topicLabel}`)) {
+            question.prompt = `[${topicLabel}] ${question.prompt}`;
+          }
+
+          const normalizedPrompt = normalizePromptForUniqueness(question.prompt);
+          const topicPromptKey = `${normalizedPrompt}`;
+
+          if (seenPromptsInTopic.has(topicPromptKey)) {
+            return false;
+          }
+
+          seenPromptsInTopic.add(topicPromptKey);
+        }
+
+        return true;
+      });
+    });
+  });
+}
 
 const languageSkillMaps = {
   swift: [
@@ -2183,21 +5379,10 @@ const languageSkillMaps = {
     "collection transformations",
     "guard statements for early exits",
     "testable view-model boundaries",
-    "SwiftData and Core Data modeling",
-    "URLSession networking and request lifecycle",
-    "dependency injection with protocols",
-    "memory management with ARC and weak references",
-    "Task cancellation and cooperative concurrency",
-    "main-thread UI updates with @MainActor",
-    "access control and module boundaries",
-    "Swift Package Manager dependencies",
-    "unit testing with XCTest",
-    "UI testing and launch-state assertions",
-    "error domain mapping and user-safe messaging",
-    "offline caching and sync strategies",
-    "local notifications and app lifecycle",
-    "accessibility and dynamic type support",
-    "privacy and secure storage with Keychain"
+    "CloudKit data sync and conflict resolution",
+    "Firebase Auth/Firestore integration boundaries",
+    "secure token handling with Keychain",
+    "offline-first caching strategy"
   ],
   web: [
     "semantic HTML structure",
@@ -2408,8 +5593,86 @@ const languageSkillMaps = {
     "environment variable usage",
     "automation script reliability",
     "defensive scripting habits"
+  ],
+  cloudkit: [
+    "CloudKit container and database basics",
+    "record types, zones, and references",
+    "private/shared/public database boundaries",
+    "query and predicate modeling",
+    "conflict resolution and merge rules",
+    "offline-first sync expectations",
+    "account status and iCloud availability handling",
+    "error handling and retry strategy",
+    "schema evolution and migration safety",
+    "security roles and data ownership",
+    "observability for sync failures",
+    "production rollout readiness"
+  ],
+  firebase: [
+    "Firebase project and app setup flow",
+    "authentication provider strategy",
+    "Firestore document modeling",
+    "security rules design and testing",
+    "query/index planning",
+    "offline cache behavior",
+    "Cloud Storage path and ACL boundaries",
+    "error handling with typed states",
+    "analytics and crash monitoring",
+    "cost-aware read/write patterns",
+    "environment separation dev/stage/prod",
+    "incident response and rollback discipline"
+  ],
+  aiassist: [
+    "prompt clarity and constraints",
+    "task decomposition before prompting",
+    "context window hygiene",
+    "verify before accepting suggestions",
+    "test-first acceptance criteria",
+    "security/privacy safe prompting",
+    "hallucination detection workflow",
+    "code ownership and accountability",
+    "refactor AI drafts for readability",
+    "tool selection per IDE",
+    "cost-aware AI usage",
+    "team governance for AI workflows"
   ]
 };
+
+const criticalSkillAdditionsByTopic = {
+  swift: ["swift concurrency cancellation", "access control and API boundaries", "dependency injection for testability"],
+  web: ["web accessibility basics (a11y)", "xss/csrf mitigation basics", "bundle and asset performance budgeting"],
+  react: ["state normalization strategy", "error boundaries and recovery UX", "query caching and invalidation"],
+  python: ["packaging and virtual environment workflow", "type hints with mypy discipline", "logging and structured diagnostics"],
+  typescript: ["strict mode and narrowing discipline", "runtime validation at API boundaries", "monorepo/shared type contracts"],
+  java: ["dependency injection and inversion of control", "transaction boundaries and rollback", "thread-safety fundamentals"],
+  kotlin: ["structured concurrency with coroutine scopes", "flow/stateflow architecture", "android lifecycle-safe async patterns"],
+  markdown: ["documentation information architecture", "docs-as-code review workflow", "versioned changelog discipline"],
+  csharp: ["async/await deadlock avoidance", "dependency injection patterns", "observability with structured logs/metrics"],
+  sql: ["transaction isolation and consistency", "indexing strategy and query plans", "migration/versioning safety"],
+  go: ["context propagation and cancellation", "interface-driven service boundaries", "concurrency race prevention"],
+  rust: ["lifetime reasoning in APIs", "result/error domain modeling", "unsafe boundaries and audit discipline"],
+  cpp: ["sanitizers and static analysis workflow", "threading and synchronization basics", "abi/build system discipline"],
+  php: ["owasp web security essentials", "framework routing and middleware boundaries", "database query safety and transactions"],
+  dart: ["state management architecture", "flutter rendering/performance profiling", "platform integration boundaries"],
+  bash: ["shellcheck and linting workflow", "idempotent deployment scripting", "secure secret/env handling"],
+  sourcecontrol: ["branch protection and review policy", "safe rebase/cherry-pick workflow", "release tagging discipline"],
+  ides: ["debugger breakpoint strategy", "reproducible toolchain setup", "team-level editor conventions"],
+  cloudkit: ["zone sharing and permissions", "conflict merge policy design", "sync observability and recovery"],
+  firebase: ["security rules test coverage", "index planning for query scale", "cost controls and quota monitoring"],
+  aiassist: ["prompt contracts and acceptance criteria", "source-verification workflow", "policy-safe AI usage"]
+};
+
+function mergeCriticalSkillAdditions() {
+  Object.entries(criticalSkillAdditionsByTopic).forEach(([topicKey, additions]) => {
+    if (!Array.isArray(languageSkillMaps[topicKey])) {
+      return;
+    }
+    const merged = [...languageSkillMaps[topicKey], ...additions.filter(Boolean)];
+    languageSkillMaps[topicKey] = Array.from(new Set(merged));
+  });
+}
+
+mergeCriticalSkillAdditions();
 
 const languagePitfallMaps = {
   swift: ["runtime crashes from force unwraps", "state updates on wrong execution context", "hard-to-test monolithic views"],
@@ -2428,6 +5691,9 @@ const languagePitfallMaps = {
   php: ["unsanitized input handling", "global-state coupling", "inconsistent dependency management"],
   dart: ["state rebuild issues", "async setState timing bugs", "overgrown widget classes"],
   bash: ["unsafe quoting", "unchecked command failures", "fragile path assumptions"]
+  ,cloudkit: ["sync conflicts causing silent overwrites", "schema mismatch between environments", "iCloud account availability edge-case failures"]
+  ,firebase: ["overly permissive security rules", "cost spikes from unbounded reads", "auth/session edge-case regressions"]
+  ,aiassist: ["unverified generated code shipped", "sensitive data leakage in prompts", "loss of code ownership"]
 };
 
 const languageSuccessMaps = {
@@ -2447,6 +5713,9 @@ const languageSuccessMaps = {
   php: ["productive web delivery", "safer request handling", "maintainable backend workflows"],
   dart: ["smooth cross-platform apps", "predictable UI state flow", "faster feature iteration"],
   bash: ["repeatable automation", "faster local workflows", "safer deployment scripts"]
+  ,cloudkit: ["reliable iCloud-backed sync", "safer data ownership boundaries", "predictable offline recovery"]
+  ,firebase: ["faster backend feature delivery", "cross-platform auth consistency", "better product observability"]
+  ,aiassist: ["faster implementation with guardrails", "stronger review quality", "safer AI-assisted delivery"]
 };
 
 const generatedCodeTemplates = {
@@ -2721,7 +5990,70 @@ const generatedBlankTemplates = {
     prompt: "Fill in the blank: The IDE focused on Python development from JetBrains is ____.",
     acceptableAnswers: ["pycharm"],
     sample: "PyCharm"
+  },
+  cloudkit: {
+    prompt: "Fill in the blank: CloudKit private user data is stored in the ____ database.",
+    acceptableAnswers: ["private", "private database"],
+    sample: "private"
+  },
+  firebase: {
+    prompt: "Fill in the blank: In Firebase, Firestore access should be protected by ____ rules.",
+    acceptableAnswers: ["security", "security rules"],
+    sample: "security"
+  },
+  aiassist: {
+    prompt: "Fill in the blank: AI coding output should be ____ before merge.",
+    acceptableAnswers: ["reviewed", "tested"],
+    sample: "reviewed"
   }
+};
+
+const topicProjectContexts = {
+  swift: "an iOS SwiftUI app",
+  web: "a production web front end",
+  react: "a component-driven React product",
+  python: "a Python data-processing service",
+  typescript: "a TypeScript web application",
+  java: "a Java backend service",
+  kotlin: "a Kotlin Android feature",
+  markdown: "a technical documentation workflow",
+  csharp: "a .NET business API",
+  sql: "a relational reporting pipeline",
+  go: "a Go microservice",
+  rust: "a Rust systems component",
+  cpp: "a performance-critical C++ module",
+  php: "a PHP web backend",
+  dart: "a Flutter mobile app",
+  bash: "a shell automation script",
+  sourcecontrol: "a Git collaboration workflow",
+  ides: "an IDE team setup",
+  cloudkit: "an Apple-platform iCloud sync system",
+  firebase: "a cross-platform backend product",
+  aiassist: "an AI-assisted IDE coding workflow"
+};
+
+const topicDomainArtifacts = {
+  swift: "state updates and view rendering",
+  web: "DOM behavior and layout",
+  react: "component state and effects",
+  python: "data parsing and function logic",
+  typescript: "type-safe model contracts",
+  java: "service-layer object behavior",
+  kotlin: "null-safe app state",
+  markdown: "rendered documentation output",
+  csharp: "async service behavior",
+  sql: "query correctness and row results",
+  go: "concurrency-safe request handling",
+  rust: "ownership-safe data flow",
+  cpp: "memory and runtime behavior",
+  php: "request/response handling",
+  dart: "widget and state flow",
+  bash: "command and pipeline output",
+  sourcecontrol: "branching and merge reliability",
+  ides: "debugger and run configuration flow",
+  cloudkit: "record sync and conflict handling",
+  firebase: "auth state and data consistency",
+  aiassist: "prompt quality, verification rigor, and ownership"
 };
 
 function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
@@ -2729,17 +6061,19 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
   const skills = languageSkillMaps[topicKey] || ["core language fundamentals"];
   const pitfalls = languagePitfallMaps[topicKey] || ["hard-to-find production bugs"];
   const outcomes = languageSuccessMaps[topicKey] || ["reliable production code"];
+  const projectContext = topicProjectContexts[topicKey] || `${topicName} project work`;
+  const domainArtifact = topicDomainArtifacts[topicKey] || "production behavior";
   const skill = skills[serial % skills.length];
   const pitfall = pitfalls[serial % pitfalls.length];
   const outcome = outcomes[serial % outcomes.length];
   const variant = serial % 10;
-  const nonCodeTracks = new Set(["sourcecontrol", "ides"]);
+  const nonCodeTracks = new Set(["sourcecontrol", "ides", "cloudkit", "firebase", "aiassist"]);
   const isNonCodeTrack = nonCodeTracks.has(topicKey);
 
   if (variant === 0) {
     return {
       type: "vocab",
-      prompt: `[${topicName} ${levelKey}] Which competency most directly improves ${outcome}?`,
+      prompt: `[${topicName} ${levelKey} ${serial}] In ${projectContext}, which competency most directly improves ${outcome}?`,
       options: [
         `${skill}`,
         "Skipping tests to speed up delivery",
@@ -2756,8 +6090,8 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
     return {
       type: "tf",
       prompt: isTrue
-        ? `[${topicName} ${levelKey}] True or False: Practicing ${skill} reduces the chance of ${pitfall}.`
-        : `[${topicName} ${levelKey}] True or False: Ignoring ${skill} is usually safe in production work.`,
+        ? `[${topicName} ${levelKey} ${serial}] True or False (${projectContext}): Practicing ${skill} reduces the chance of ${pitfall} in ${domainArtifact}.`
+        : `[${topicName} ${levelKey} ${serial}] True or False (${projectContext}): Ignoring ${skill} is usually safe for ${domainArtifact} in production work.`,
       options: ["True", "False"],
       answer: isTrue ? 0 : 1,
       explanation: isTrue
@@ -2769,7 +6103,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
   if (variant === 2) {
     return {
       type: "output",
-      prompt: `[${topicName} ${levelKey}] Scenario: A team skipped ${skill}. Which result is most likely after release?`,
+      prompt: `[${topicName} ${levelKey} ${serial}] Scenario (${projectContext}): A team skipped ${skill}. Which result is most likely for ${domainArtifact} after release?`,
       options: [
         `${pitfall}`,
         "Fewer bugs and easier maintenance",
@@ -2785,7 +6119,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
     if (isNonCodeTrack) {
       return {
         type: "vocab",
-        prompt: `[${topicName} ${levelKey}] Which workflow action best prevents ${pitfall}?`,
+        prompt: `[${topicName} ${levelKey} ${serial}] In ${projectContext}, which workflow action best prevents ${pitfall} around ${domainArtifact}?`,
         options: [
           `${skill}`,
           "Skipping review to save time",
@@ -2801,7 +6135,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
     if (template) {
       return {
         type: "code",
-        prompt: `[${topicName} ${levelKey}] ${template.prompt}`,
+        prompt: `[${topicName} ${levelKey} ${serial}] ${template.prompt}`,
         checks: template.checks,
         sample: template.sample
       };
@@ -2812,7 +6146,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
     if (isNonCodeTrack) {
       return {
         type: "output",
-        prompt: `[${topicName} ${levelKey}] Scenario: A team ignored ${skill}. Which outcome is most likely in this workflow?`,
+        prompt: `[${topicName} ${levelKey} ${serial}] Scenario (${projectContext}): A team ignored ${skill}. Which outcome is most likely for ${domainArtifact}?`,
         options: [
           `${pitfall}`,
           "Cleaner collaboration and faster reviews",
@@ -2828,7 +6162,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
     if (template) {
       return {
         type: "debug",
-        prompt: `[${topicName} ${levelKey}] ${template.prompt}`,
+        prompt: `[${topicName} ${levelKey} ${serial}] ${template.prompt}`,
         starterCode: template.starterCode,
         checks: template.checks,
         sample: template.sample
@@ -2841,10 +6175,10 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
     if (template) {
       return {
         type: "blank",
-        prompt: `[${topicName} ${levelKey}] ${template.prompt}`,
+        prompt: `[${topicName} ${levelKey} ${serial}] ${template.prompt} (Context: ${projectContext}).`,
         acceptableAnswers: template.acceptableAnswers,
         sample: template.sample,
-        explanation: `${template.sample} is the expected fill-in answer for this concept in ${topicName}.`
+        explanation: `${template.sample} is the expected fill-in answer for this concept in ${topicName}, especially for ${domainArtifact}.`
       };
     }
   }
@@ -2852,7 +6186,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
   if (variant === 6) {
     return {
       type: "output",
-      prompt: `[${topicName} ${levelKey}] Architecture scenario: You need maintainable growth and easier testing. Which decision best supports that goal?`,
+      prompt: `[${topicName} ${levelKey} ${serial}] Architecture scenario (${projectContext}): You need maintainable growth and easier testing for ${domainArtifact}. Which decision best supports that goal?`,
       options: [
         `Adopt ${skill} with clear module boundaries and tests`,
         "Keep all logic in one large file to reduce setup time",
@@ -2867,7 +6201,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
   if (variant === 7) {
     return {
       type: "vocab",
-      prompt: `[${topicName} ${levelKey}] Code review check: Which comment is the highest-value feedback before merge?`,
+      prompt: `[${topicName} ${levelKey} ${serial}] Review check (${projectContext}): Which comment is the highest-value feedback before merge to protect ${domainArtifact}?`,
       options: [
         `"Please add/expand tests around ${pitfall} risk and document expected behavior."`,
         "Looks fine, ship quickly and skip review notes.",
@@ -2882,7 +6216,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
   if (variant === 8) {
     return {
       type: "output",
-      prompt: `[${topicName} ${levelKey}] Refactor scenario: Which change most improves long-term team velocity?`,
+      prompt: `[${topicName} ${levelKey} ${serial}] Refactor scenario (${projectContext}): Which change most improves long-term team velocity while protecting ${domainArtifact}?`,
       options: [
         `Break logic into focused units around ${skill} and add edge-case tests`,
         "Keep one large function to avoid reorganizing files",
@@ -2897,7 +6231,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
   if (variant === 9) {
     return {
       type: "tf",
-      prompt: `[${topicName} ${levelKey}] True or False: A production-ready submission should include passing tests, clear structure, and defensive handling for edge cases.`,
+      prompt: `[${topicName} ${levelKey} ${serial}] True or False (${projectContext}): A production-ready submission should include passing tests, clear structure, and defensive handling for edge cases in ${domainArtifact}.`,
       options: ["True", "False"],
       answer: 0,
       explanation: `Production readiness means correctness, maintainability, and resilience under edge conditions.`
@@ -2906,7 +6240,7 @@ function buildSupplementalObjectiveQuestion(topicKey, serial, levelKey) {
 
   return {
     type: "output",
-    prompt: `[${topicName} ${levelKey}] Which learning focus should come next to improve real-world readiness?`,
+    prompt: `[${topicName} ${levelKey} ${serial}] In ${projectContext}, which learning focus should come next to improve real-world readiness for ${domainArtifact}?`,
     options: [
       `${skill}`,
       "Avoiding tests and reviews",
@@ -2942,64 +6276,194 @@ function ensureMinimumQuestionCount(topicKey, minimumCount) {
   }
 }
 
+function getModuleLevelKey(moduleUnit) {
+  const unitNumber = Number(moduleUnit);
+  if (!Number.isFinite(unitNumber)) {
+    return "medium";
+  }
+  if (unitNumber <= 4) {
+    return "beginner";
+  }
+  if (unitNumber <= 10) {
+    return "medium";
+  }
+  return "advanced";
+}
+
+function buildModuleSpecificSupplementalQuestion(topicKey, moduleUnit, moduleSerial) {
+  const moduleKey = String(moduleUnit);
+  const levelKey = getModuleLevelKey(moduleKey);
+  const stableSerial = (Number(moduleKey) * 1000) + Number(moduleSerial || 1);
+  const baseQuestion = buildSupplementalObjectiveQuestion(topicKey, stableSerial, levelKey);
+  const topicName = topicDisplayNames[topicKey] || formatLabel(topicKey || "Language");
+  const promptWithModule = `Module ${moduleKey} (${topicName}): ${baseQuestion.prompt}`;
+
+  return {
+    ...baseQuestion,
+    prompt: promptWithModule,
+    moduleUnit: moduleKey,
+    moduleUnits: [moduleKey]
+  };
+}
+
+function enforceUniformModuleQuestionPools(targetPerModule) {
+  const numericTarget = Number(targetPerModule);
+  if (!Number.isFinite(numericTarget) || numericTarget < 1) {
+    return;
+  }
+
+  const moduleKeys = Object.keys(unitNames).sort((left, right) => Number(left) - Number(right));
+  const levelKeys = ["beginner", "medium", "advanced"];
+
+  Object.keys(questionSets).forEach((topicKey) => {
+    const topicSet = questionSets[topicKey];
+    if (!topicSet || typeof topicSet !== "object") {
+      return;
+    }
+
+    const selectedByLevel = {
+      beginner: [],
+      medium: [],
+      advanced: []
+    };
+    const moduleCounts = {};
+    moduleKeys.forEach((moduleKey) => {
+      moduleCounts[moduleKey] = 0;
+    });
+    const seenPromptKeys = new Set();
+
+    const ordered = [];
+    levelKeys.forEach((levelKey) => {
+      const questions = Array.isArray(topicSet[levelKey]) ? topicSet[levelKey] : [];
+      questions.forEach((question) => ordered.push({ question, levelKey }));
+    });
+
+    ordered.forEach(({ question, levelKey }) => {
+      if (!question || typeof question !== "object") {
+        return;
+      }
+
+      const moduleUnit = String(
+        question.moduleUnit ||
+        (Array.isArray(question.moduleUnits) && question.moduleUnits.length ? question.moduleUnits[0] : "")
+      );
+
+      if (!Object.prototype.hasOwnProperty.call(moduleCounts, moduleUnit)) {
+        return;
+      }
+
+      if (moduleCounts[moduleUnit] >= numericTarget) {
+        return;
+      }
+
+      const promptKey = normalizePromptForUniqueness(question.prompt);
+      if (!promptKey || seenPromptKeys.has(promptKey)) {
+        return;
+      }
+
+      selectedByLevel[levelKey].push({
+        ...question,
+        moduleUnit,
+        moduleUnits: [moduleUnit]
+      });
+
+      seenPromptKeys.add(promptKey);
+      moduleCounts[moduleUnit] += 1;
+    });
+
+    moduleKeys.forEach((moduleKey) => {
+      const levelKey = getModuleLevelKey(moduleKey);
+      let safety = 0;
+
+      while (moduleCounts[moduleKey] < numericTarget && safety < numericTarget * 30) {
+        const moduleSerial = moduleCounts[moduleKey] + 1;
+        const generated = buildModuleSpecificSupplementalQuestion(topicKey, moduleKey, moduleSerial);
+        const promptKey = normalizePromptForUniqueness(generated.prompt);
+        safety += 1;
+
+        if (!promptKey || seenPromptKeys.has(promptKey)) {
+          continue;
+        }
+
+        selectedByLevel[levelKey].push(generated);
+        seenPromptKeys.add(promptKey);
+        moduleCounts[moduleKey] += 1;
+      }
+    });
+
+    levelKeys.forEach((levelKey) => {
+      topicSet[levelKey] = selectedByLevel[levelKey];
+    });
+  });
+}
+
+function auditUniformModuleQuestionPools(expectedPerModule) {
+  const expected = Number(expectedPerModule);
+  const moduleKeys = Object.keys(unitNames).sort((left, right) => Number(left) - Number(right));
+  const report = {};
+
+  Object.entries(questionSets).forEach(([topicKey, topicSet]) => {
+    const counts = {};
+    moduleKeys.forEach((moduleKey) => {
+      counts[moduleKey] = { total: 0, unique: 0, deficit: Math.max(0, expected), duplicateCount: 0 };
+    });
+
+    const uniqueByModule = {};
+    moduleKeys.forEach((moduleKey) => {
+      uniqueByModule[moduleKey] = new Set();
+    });
+
+    ["beginner", "medium", "advanced"].forEach((levelKey) => {
+      const questions = Array.isArray(topicSet[levelKey]) ? topicSet[levelKey] : [];
+      questions.forEach((question) => {
+        const moduleUnit = String(
+          question && question.moduleUnit
+            ? question.moduleUnit
+            : (Array.isArray(question && question.moduleUnits) && question.moduleUnits.length ? question.moduleUnits[0] : "")
+        );
+
+        if (!Object.prototype.hasOwnProperty.call(counts, moduleUnit)) {
+          return;
+        }
+
+        counts[moduleUnit].total += 1;
+        const promptKey = normalizePromptForUniqueness(question && question.prompt ? question.prompt : "");
+        if (!promptKey) {
+          return;
+        }
+
+        if (uniqueByModule[moduleUnit].has(promptKey)) {
+          counts[moduleUnit].duplicateCount += 1;
+          return;
+        }
+
+        uniqueByModule[moduleUnit].add(promptKey);
+      });
+    });
+
+    moduleKeys.forEach((moduleKey) => {
+      counts[moduleKey].unique = uniqueByModule[moduleKey].size;
+      counts[moduleKey].deficit = Math.max(0, expected - counts[moduleKey].unique);
+    });
+
+    report[topicKey] = counts;
+  });
+
+  return report;
+}
+
+function hasUniformPoolDeficits(report) {
+  return Object.values(report || {}).some((moduleMap) =>
+    Object.values(moduleMap || {}).some((entry) => entry && Number(entry.deficit) > 0)
+  );
+}
+
 coreLanguageTopics.forEach((topicKey) => {
   ensureMinimumQuestionCount(topicKey, minimumQuestionsPerLanguage);
 });
 
 structuredTrackTopics.forEach((topicKey) => {
   ensureMinimumQuestionCount(topicKey, minimumQuestionsPerStructuredTrack);
-});
-
-function ensureMinimumQuestionsPerLevel(topicKey, minimumPerLevel) {
-  const topicSet = questionSets[topicKey];
-  if (!topicSet) {
-    return;
-  }
-
-  const levels = ["beginner", "medium", "advanced"];
-
-  levels.forEach((levelKey) => {
-    const levelQuestions = Array.isArray(topicSet[levelKey]) ? topicSet[levelKey] : [];
-    while (levelQuestions.length < minimumPerLevel) {
-      const totalCount = levels.reduce((total, currentLevel) => {
-        const questions = Array.isArray(topicSet[currentLevel]) ? topicSet[currentLevel] : [];
-        return total + questions.length;
-      }, 0);
-      const serial = totalCount + 1;
-      levelQuestions.push(buildSupplementalObjectiveQuestion(topicKey, serial, levelKey));
-    }
-  });
-}
-
-function ensureMinimumQuestionsByLevelMap(topicKey, minimumByLevel) {
-  const topicSet = questionSets[topicKey];
-  if (!topicSet) {
-    return;
-  }
-
-  const levels = ["beginner", "medium", "advanced"];
-  levels.forEach((levelKey) => {
-    const required = Number(minimumByLevel[levelKey] || 0);
-    if (required <= 0) {
-      return;
-    }
-    const levelQuestions = Array.isArray(topicSet[levelKey]) ? topicSet[levelKey] : [];
-    while (levelQuestions.length < required) {
-      const totalCount = levels.reduce((total, currentLevel) => {
-        const questions = Array.isArray(topicSet[currentLevel]) ? topicSet[currentLevel] : [];
-        return total + questions.length;
-      }, 0);
-      const serial = totalCount + 1;
-      levelQuestions.push(buildSupplementalObjectiveQuestion(topicKey, serial, levelKey));
-    }
-  });
-}
-
-ensureMinimumQuestionsPerLevel("swift", 60);
-ensureMinimumQuestionsByLevelMap("swift", {
-  beginner: 180,
-  medium: 360,
-  advanced: 300
 });
 
 const topicMeta = {
@@ -3074,6 +6538,18 @@ const topicMeta = {
   sourcecontrol: {
     title: "Source Control Basics Trainer",
     subtitle: "Practice Git and collaboration fundamentals with vocab, true/false, output, debug, and command prompts."
+  },
+  cloudkit: {
+    title: "CloudKit Course Trainer",
+    subtitle: "Practice Apple-native iCloud data modeling, sync behavior, conflict handling, and production readiness."
+  },
+  firebase: {
+    title: "Firebase Course Trainer",
+    subtitle: "Practice auth, Firestore modeling, security rules, observability, and cost-aware production workflows."
+  },
+  aiassist: {
+    title: "AI Coding Assistants Course Trainer",
+    subtitle: "Practice prompt design, verification discipline, safe usage policies, and professional AI-assisted coding workflows."
   }
 };
 
@@ -3197,6 +6673,27 @@ const studyTips = {
     output: "Predict the best IDE/tool choice from language and platform constraints.",
     debug: "Fix one tooling issue at a time: SDK/interpreter path, extension, launch config, then rerun."
   },
+  cloudkit: {
+    vocab: "Map CloudKit terms to real iCloud sync behavior: containers, databases, records, and zones.",
+    tf: "Check ownership boundaries, sync assumptions, and conflict-handling statements carefully.",
+    code: "Prioritize safe sync flow and predictable merge behavior before implementation details.",
+    output: "Predict sync outcomes by tracing record ownership, network state, and conflict rules.",
+    debug: "Fix schema/account/setup issues first, then verify retries and merge behavior."
+  },
+  firebase: {
+    vocab: "Map Firebase terms to auth, Firestore, security rules, and production operations.",
+    tf: "Watch for claims about rules, indexing, costs, and auth edge cases.",
+    code: "Design data model and access rules first, then wire reads/writes safely.",
+    output: "Predict app behavior from auth state, rules decisions, and query constraints.",
+    debug: "Validate rules/index/auth setup first, then inspect data flow and retries."
+  },
+  aiassist: {
+    vocab: "Connect AI terms to workflow outcomes: prompt scope, acceptance checks, and safety boundaries.",
+    tf: "Watch for overconfident claims; verify whether guidance includes tests, evidence, and policy limits.",
+    code: "Write explicit prompt contracts first, then require verifiable output and ownership-safe changes.",
+    output: "Predict assistant output quality from prompt specificity, constraints, and validation steps.",
+    debug: "Fix workflow issues in order: prompt ambiguity, missing checks, unverified output, then rerun review."
+  },
   sourcecontrol: {
     vocab: "Tie each Git term to team workflow: branch, commit, pull request, merge, and release safety.",
     tf: "Look for statements about staging, rebasing, and history rewriting risk.",
@@ -3209,59 +6706,43 @@ const studyTips = {
 let activeQuestions = [];
 
 const unitNames = {
-  "1": "Foundations (Q1-20)",
-  "2": "Core Syntax (Q21-40)",
-  "3": "State Basics (Q41-60)",
-  "4": "Flow Practice (Q61-80)",
-  "5": "Debug Patterns I (Q81-100)",
-  "6": "Debug Patterns II (Q101-120)",
-  "7": "Debug Review (Q121-140)",
-  "8": "Output Reasoning I (Q141-160)",
-  "9": "Output Reasoning II (Q161-180)",
-  "10": "Language Mastery (Q181-200)",
-  "11": "Testing Fundamentals (Q201-220)",
-  "12": "Refactoring and Quality (Q221-240)",
-  "13": "Performance and Reliability (Q241-260)",
-  "14": "Real-World Scenarios (Q261-280)"
+  "1": "Foundations (Q1-60)",
+  "2": "Core Syntax (Q61-120)",
+  "3": "State Basics (Q121-180)",
+  "4": "Flow Practice (Q181-240)",
+  "5": "Debug Patterns I (Q241-300)",
+  "6": "Debug Patterns II (Q301-360)",
+  "7": "Debug Review (Q361-420)",
+  "8": "Output Reasoning I (Q421-480)",
+  "9": "Output Reasoning II (Q481-540)",
+  "10": "Language Mastery (Q541-600)",
+  "11": "Testing Fundamentals (Q601-660)",
+  "12": "Refactoring and Quality (Q661-720)",
+  "13": "Performance and Reliability (Q721-780)",
+  "14": "Real-World Scenarios (Q781-840)"
 };
 
-const defaultQuestionsPerQuiz = 20;
-const swiftQuestionsPerQuiz = 20;
-const swiftQuestionsPerModule = 60;
-const swiftQuizzesPerModule = 3;
-
-function getModuleQuizCount(topicKey, fullQuizMode = false) {
-  if (topicKey === "swift" && !fullQuizMode) {
-    return swiftQuizzesPerModule;
-  }
-  return 1;
-}
-
-function getQuestionTargetCount(topicKey, fullQuizMode = false) {
-  if (topicKey === "swift" && !fullQuizMode) {
-    return swiftQuestionsPerQuiz;
-  }
-  return defaultQuestionsPerQuiz;
-}
+const questionsPerQuiz = 20;
+const quizzesPerModule = 3;
 
 const modulePassingPercent = 70;
 
 const topicModuleNames = {
   swift: {
-    "1": "Swift Core Syntax (Q1-60)",
-    "2": "Optionals and Types (Q61-120)",
-    "3": "State and Data Flow (Q121-180)",
-    "4": "SwiftUI View Composition (Q181-240)",
-    "5": "Debugging Swift Basics (Q241-300)",
-    "6": "Debugging SwiftUI State (Q301-360)",
-    "7": "Debug Review and Fixes (Q361-420)",
-    "8": "Output Tracing in Swift (Q421-480)",
-    "9": "Output Tracing in SwiftUI (Q481-540)",
-    "10": "Swift + SwiftUI Mastery (Q541-600)",
-    "11": "Swift Testing Fundamentals (Q601-660)",
-    "12": "Swift Refactoring and Quality (Q661-720)",
-    "13": "Swift Performance and Reliability (Q721-780)",
-    "14": "Swift Real-World Scenarios (Q781-840)"
+    "1": "Swift Core Syntax",
+    "2": "Optionals and Types",
+    "3": "State and Data Flow",
+    "4": "SwiftUI View Composition",
+    "5": "Debugging Swift Basics",
+    "6": "Debugging SwiftUI State",
+    "7": "Debug Review and Fixes",
+    "8": "Output Tracing in Swift",
+    "9": "Output Tracing in SwiftUI",
+    "10": "Swift + SwiftUI Mastery",
+    "11": "Swift Testing Fundamentals",
+    "12": "Swift Refactoring and Quality",
+    "13": "Swift Performance and Reliability",
+    "14": "Swift Real-World Scenarios"
   },
   web: {
     "1": "HTML Foundations",
@@ -3534,6 +7015,54 @@ const topicModuleNames = {
     "12": "IDE Refactoring and Quality Tools",
     "13": "IDE Performance and Diagnostics",
     "14": "IDE Real-World Scenarios"
+  },
+  cloudkit: {
+    "1": "CloudKit Fundamentals",
+    "2": "Containers and Databases",
+    "3": "Records and Zones",
+    "4": "Query and Fetch Patterns",
+    "5": "Debugging CloudKit Setup",
+    "6": "Debugging Account and Auth Issues",
+    "7": "CloudKit Conflict Resolution",
+    "8": "Output Prediction Basics",
+    "9": "Output Prediction with Sync",
+    "10": "CloudKit Mastery",
+    "11": "CloudKit Testing Workflow",
+    "12": "CloudKit Refactoring and Quality",
+    "13": "CloudKit Reliability and Recovery",
+    "14": "CloudKit Real-World Scenarios"
+  },
+  firebase: {
+    "1": "Firebase Fundamentals",
+    "2": "Auth and Identity",
+    "3": "Firestore Data Modeling",
+    "4": "Rules and Access Patterns",
+    "5": "Debugging Firebase Setup",
+    "6": "Debugging Auth and Rules",
+    "7": "Firebase Debug Workflow",
+    "8": "Output Prediction Basics",
+    "9": "Output Prediction with Data Flow",
+    "10": "Firebase Mastery",
+    "11": "Firebase Testing Workflow",
+    "12": "Firebase Refactoring and Quality",
+    "13": "Firebase Performance and Cost",
+    "14": "Firebase Real-World Scenarios"
+  },
+  aiassist: {
+    "1": "AI Assistant Fundamentals",
+    "2": "Prompt Contracts and Scope",
+    "3": "Context and Source Grounding",
+    "4": "IDE Workflow Integration",
+    "5": "Debugging Weak Prompts",
+    "6": "Debugging Incorrect AI Output",
+    "7": "Verification Workflow",
+    "8": "Output Prediction Basics",
+    "9": "Output Risk and Confidence",
+    "10": "AI Workflow Mastery",
+    "11": "AI-Assisted Testing Workflow",
+    "12": "AI Refactoring and Quality",
+    "13": "AI Safety, Privacy, and Reliability",
+    "14": "AI Real-World Delivery Scenarios"
   }
 };
 
@@ -3596,6 +7125,7 @@ const state = {
   level: "",
   path: "guided",
   mode: "mixed",
+  source: "",
   unit: "all",
   moduleQuizPart: 1,
   moduleQuizTotal: 1,
@@ -3674,6 +7204,11 @@ const topicAliases = {
   "version control": "sourcecontrol",
   "git": "sourcecontrol",
   "github": "sourcecontrol",
+  "cloud kit": "cloudkit",
+  "icloud kit": "cloudkit",
+  "icloud": "cloudkit",
+  "firebase": "firebase",
+  "google firebase": "firebase",
   "ide": "ides",
   "ides": "ides",
   "integrated development environment": "ides",
@@ -3685,6 +7220,17 @@ const topicAliases = {
   "pycharm": "ides",
   "android studio": "ides",
   "visual studio": "ides",
+  "ai assistant": "aiassist",
+  "ai assistants": "aiassist",
+  "ai coding assistants": "aiassist",
+  "coding assistant": "aiassist",
+  "code assistant": "aiassist",
+  "copilot": "aiassist",
+  "github copilot": "aiassist",
+  "llm": "aiassist",
+  "llms": "aiassist",
+  "prompt engineering": "aiassist",
+  "ai tools": "aiassist",
   "go": "go",
   "golang": "go",
   "rust": "rust",
@@ -3743,9 +7289,16 @@ if (initialTopic) {
 const unitParamRaw = searchParams.get("unit");
 const unitParam = (unitParamRaw || "").trim();
 const initialUnit = Object.prototype.hasOwnProperty.call(unitNames, unitParam) ? unitParam : "";
+const modeParamRaw = (searchParams.get("mode") || "").trim().toLowerCase();
+const allowedInitialModes = new Set(["mixed", "debug", "output", "vocab", "tf", "blank", "code"]);
+const initialMode = allowedInitialModes.has(modeParamRaw) ? modeParamRaw : "";
+const sourceParamRaw = (searchParams.get("source") || "").trim().toLowerCase();
+const initialSource = sourceParamRaw || "";
 const progressStorageKey = "ltc-language-progress-v1";
 const rewardStorageKey = "ltc-rewards-v1";
+const learningActivityStorageKey = "ltc-learning-activity-v1";
 const moduleStudyGateStorageKey = "ltc-module-study-reviewed-v1";
+const moduleQuestionHistoryStorageKey = "ltc-module-question-history-v1";
 let pendingCourseGateMessage = "";
 let latestSessionRewards = [];
 
@@ -3757,7 +7310,7 @@ function createEmptyUnitProgress() {
     lastScore: 0,
     lastTotal: 0,
     lastPassed: false,
-    passedQuizParts: {},
+    passedQuizParts: [],
     completed: false
   };
 }
@@ -3824,6 +7377,73 @@ function loadRewardStore() {
 
 const rewardStore = loadRewardStore();
 
+function loadLearningActivityStore() {
+  try {
+    const raw = localStorage.getItem(learningActivityStorageKey);
+    if (!raw) {
+      return { streak: 0, lastDate: "", lastTopic: "", lastUnit: "", sessions: 0 };
+    }
+
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") {
+      return { streak: 0, lastDate: "", lastTopic: "", lastUnit: "", sessions: 0 };
+    }
+
+    return {
+      streak: Number.isFinite(Number(parsed.streak)) ? Number(parsed.streak) : 0,
+      lastDate: typeof parsed.lastDate === "string" ? parsed.lastDate : "",
+      lastTopic: typeof parsed.lastTopic === "string" ? parsed.lastTopic : "",
+      lastUnit: typeof parsed.lastUnit === "string" ? parsed.lastUnit : "",
+      sessions: Number.isFinite(Number(parsed.sessions)) ? Number(parsed.sessions) : 0
+    };
+  } catch (error) {
+    return { streak: 0, lastDate: "", lastTopic: "", lastUnit: "", sessions: 0 };
+  }
+}
+
+function saveLearningActivityStore() {
+  localStorage.setItem(learningActivityStorageKey, JSON.stringify(learningActivityStore));
+}
+
+function toDayKey(date) {
+  const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+  return localDate.toISOString().slice(0, 10);
+}
+
+function getYesterdayKey(dayKey) {
+  if (!dayKey) {
+    return "";
+  }
+  const date = new Date(`${dayKey}T00:00:00`);
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+  date.setDate(date.getDate() - 1);
+  return toDayKey(date);
+}
+
+const learningActivityStore = loadLearningActivityStore();
+
+function recordLearningActivity(topic, unitKey) {
+  const todayKey = toDayKey(new Date());
+  const lastDate = learningActivityStore.lastDate || "";
+
+  if (!lastDate) {
+    learningActivityStore.streak = 1;
+  } else if (lastDate !== todayKey) {
+    const yesterdayKey = getYesterdayKey(todayKey);
+    learningActivityStore.streak = lastDate === yesterdayKey
+      ? Math.max(1, Number(learningActivityStore.streak) + 1)
+      : 1;
+  }
+
+  learningActivityStore.lastDate = todayKey;
+  learningActivityStore.lastTopic = String(topic || "");
+  learningActivityStore.lastUnit = String(unitKey || "");
+  learningActivityStore.sessions = Number(learningActivityStore.sessions || 0) + 1;
+  saveLearningActivityStore();
+}
+
 function loadModuleStudyGateStore() {
   try {
     const raw = localStorage.getItem(moduleStudyGateStorageKey);
@@ -3838,6 +7458,62 @@ function loadModuleStudyGateStore() {
 }
 
 const moduleStudyGateStore = loadModuleStudyGateStore();
+
+function loadModuleQuestionHistoryStore() {
+  try {
+    const raw = localStorage.getItem(moduleQuestionHistoryStorageKey);
+    if (!raw) {
+      return {};
+    }
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+const moduleQuestionHistoryStore = loadModuleQuestionHistoryStore();
+
+function saveModuleQuestionHistoryStore() {
+  localStorage.setItem(moduleQuestionHistoryStorageKey, JSON.stringify(moduleQuestionHistoryStore));
+}
+
+function getModuleQuestionHistoryKey(topic, moduleUnit) {
+  if (!topic || !moduleUnit || moduleUnit === "all") {
+    return "";
+  }
+  return `${topic}:${moduleUnit}`;
+}
+
+function getServedPromptKeys(topic, moduleUnit) {
+  const key = getModuleQuestionHistoryKey(topic, moduleUnit);
+  if (!key) {
+    return [];
+  }
+  const values = moduleQuestionHistoryStore[key];
+  return Array.isArray(values) ? values : [];
+}
+
+function clearServedPromptKeys(topic, moduleUnit) {
+  const key = getModuleQuestionHistoryKey(topic, moduleUnit);
+  if (!key) {
+    return;
+  }
+  moduleQuestionHistoryStore[key] = [];
+  saveModuleQuestionHistoryStore();
+}
+
+function recordServedPromptKeys(topic, moduleUnit, prompts) {
+  const key = getModuleQuestionHistoryKey(topic, moduleUnit);
+  if (!key || !Array.isArray(prompts) || !prompts.length) {
+    return;
+  }
+
+  const existing = Array.isArray(moduleQuestionHistoryStore[key]) ? moduleQuestionHistoryStore[key] : [];
+  const merged = [...existing, ...prompts.filter(Boolean)];
+  moduleQuestionHistoryStore[key] = Array.from(new Set(merged)).slice(-600);
+  saveModuleQuestionHistoryStore();
+}
 
 function getModuleStudyGateKey(topic, unitKey) {
   if (!topic || !unitKey || unitKey === "all") {
@@ -3937,19 +7613,78 @@ function ensureTopicProgress(topic) {
   Object.keys(unitNames).forEach((unitKey) => {
     if (!topicProgress.units[unitKey]) {
       topicProgress.units[unitKey] = createEmptyUnitProgress();
-    } else if (!topicProgress.units[unitKey].passedQuizParts || typeof topicProgress.units[unitKey].passedQuizParts !== "object") {
-      topicProgress.units[unitKey].passedQuizParts = {};
+    } else if (!Array.isArray(topicProgress.units[unitKey].passedQuizParts)) {
+      topicProgress.units[unitKey].passedQuizParts = [];
     }
   });
 
   return topicProgress;
 }
 
+function getModuleQuizCount(topic, moduleUnit) {
+  if (topic && moduleUnit && moduleUnit !== "all") {
+    return quizzesPerModule;
+  }
+  return 1;
+}
+
+function getQuestionsPerCurrentQuiz(topic, moduleUnit, isFullQuizMode) {
+  if (isFullQuizMode) {
+    return questionsPerQuiz;
+  }
+
+  return questionsPerQuiz;
+}
+
+function getPassedQuizParts(topic, unitProgress) {
+  if (!unitProgress || !Array.isArray(unitProgress.passedQuizParts)) {
+    return [];
+  }
+  const maxParts = getModuleQuizCount(topic, "1");
+  return unitProgress.passedQuizParts
+    .map((value) => Number(value))
+    .filter((value) => Number.isFinite(value) && value >= 1 && value <= maxParts);
+}
+
+function isUnitCompletedForTopic(topic, unitProgress) {
+  if (!unitProgress) {
+    return false;
+  }
+  const totalParts = getModuleQuizCount(topic, "1");
+  if (totalParts > 1) {
+    return getPassedQuizParts(topic, unitProgress).length >= totalParts;
+  }
+  return Boolean(unitProgress.completed);
+}
+
+function getNextRequiredQuizPart(topic, unitKey) {
+  if (!topic || !unitKey || unitKey === "all") {
+    return 1;
+  }
+
+  const topicProgress = ensureTopicProgress(topic);
+  const unitProgress = topicProgress.units[unitKey] || createEmptyUnitProgress();
+  const totalParts = getModuleQuizCount(topic, unitKey);
+  const passedParts = new Set(getPassedQuizParts(topic, unitProgress));
+
+  for (let part = 1; part <= totalParts; part += 1) {
+    if (!passedParts.has(part)) {
+      return part;
+    }
+  }
+
+  return totalParts;
+}
+
 function calculateLanguageFinalScore(topicProgress) {
   const unitKeys = Object.keys(unitNames);
   const percentages = unitKeys
-    .map((unitKey) => topicProgress.units[unitKey])
-    .filter((unitProgress) => unitProgress.completed && unitProgress.bestTotal > 0)
+    .map((unitKey) => ({
+      unitKey,
+      unitProgress: topicProgress.units[unitKey]
+    }))
+    .filter(({ unitKey, unitProgress }) => isUnitCompletedForTopic(state.topic, unitProgress) && Number(unitKey) >= 1 && unitProgress.bestTotal > 0)
+    .map(({ unitProgress }) => unitProgress)
     .map((unitProgress) => (unitProgress.bestScore / unitProgress.bestTotal) * 100);
 
   if (!percentages.length) {
@@ -3972,15 +7707,11 @@ function renderLanguageProgress() {
 
   const topicProgress = ensureTopicProgress(state.topic);
   const totalUnits = Object.keys(unitNames).length;
-  const completedCount = Object.keys(unitNames).filter((unitKey) => topicProgress.units[unitKey].completed).length;
+  const completedCount = Object.keys(unitNames).filter((unitKey) => isUnitCompletedForTopic(state.topic, topicProgress.units[unitKey])).length;
   const finalScore = calculateLanguageFinalScore(topicProgress);
 
   languageProgressTitle.textContent = `${formatLabel(state.topic)} Progress`;
-  if (state.topic === "swift") {
-    unitProgressText.textContent = `Modules completed: ${completedCount}/${totalUnits} • Swift modules include ${swiftQuizzesPerModule} quizzes each (${swiftQuestionsPerQuiz} questions per quiz). Pass all module quizzes with ${modulePassingPercent}%+ to unlock the next module.`;
-  } else {
-    unitProgressText.textContent = `Modules completed: ${completedCount}/${totalUnits} • Pass each module with ${modulePassingPercent}%+ to unlock the next.`;
-  }
+  unitProgressText.textContent = `Modules completed: ${completedCount}/${totalUnits} • Every module requires ${quizzesPerModule} passed quizzes (${questionsPerQuiz} questions/quiz) at ${modulePassingPercent}%+.`;
   languageScoreText.textContent = finalScore === null
     ? "Final language score: --"
     : `Final language score: ${formatPercent(finalScore)}`;
@@ -4038,8 +7769,8 @@ function getPathRoadmapCopy(pathKey, topic, plannedModule, isFullQuizMode) {
 
   if (pathKey === "advanced") {
     return {
-      objective: `Objective (${pathLabel}): ${moduleLabel}. Complete high-complexity ${topicLabel} tasks with production-style decisions and tradeoffs.`,
-      outcome: `Expected outcome: Reach ${modulePassingPercent}%+ to pass this advanced checkpoint and continue toward full production readiness.`
+      objective: `Objective (${pathLabel}): ${moduleLabel}. Complete high-complexity ${topicLabel} tasks with production-style decisions, bug handling, and delivery tradeoffs.`,
+      outcome: `Expected outcome: Reach ${modulePassingPercent}%+ to pass this advanced checkpoint and finish the course with stronger project implementation readiness.`
     };
   }
 
@@ -4051,6 +7782,11 @@ function getPathRoadmapCopy(pathKey, topic, plannedModule, isFullQuizMode) {
 
 function renderCourseRoadmap() {
   if (!courseRoadmapCard || !courseRoadmapTitle || !courseRoadmapObjective || !courseRoadmapOutcome) {
+    return;
+  }
+
+  if (state.source === "workshop" && state.mode === "debug" && !state.fullQuiz) {
+    courseRoadmapCard.classList.add("hidden");
     return;
   }
 
@@ -4081,7 +7817,7 @@ function assignUnitForCurrentPath() {
 
   const range = pathUnitRanges[state.path] || pathUnitRanges.guided;
   const topicProgress = ensureTopicProgress(state.topic);
-  const nextUnit = range.find((unitKey) => !topicProgress.units[unitKey].completed);
+  const nextUnit = range.find((unitKey) => !isUnitCompletedForTopic(state.topic, topicProgress.units[unitKey]));
   state.unit = nextUnit || range[range.length - 1];
 }
 
@@ -4094,52 +7830,14 @@ function isModulePassed(score, total) {
 
 function isCourseFullyCompleted(topic) {
   const topicProgress = ensureTopicProgress(topic);
-  return Object.keys(unitNames).every((unitKey) => topicProgress.units[unitKey].completed);
+  return Object.keys(unitNames).every((unitKey) => isUnitCompletedForTopic(topic, topicProgress.units[unitKey]));
 }
 
 function getFirstIncompleteModule(topic) {
   const topicProgress = ensureTopicProgress(topic);
   const unitKeys = Object.keys(unitNames);
-  const nextUnit = unitKeys.find((unitKey) => !topicProgress.units[unitKey].completed);
+  const nextUnit = unitKeys.find((unitKey) => !isUnitCompletedForTopic(topic, topicProgress.units[unitKey]));
   return nextUnit || unitKeys[unitKeys.length - 1];
-}
-
-function getNextRequiredQuizPart(topic, unitKey) {
-  const totalQuizzes = getModuleQuizCount(topic, false);
-  if (totalQuizzes <= 1) {
-    return 1;
-  }
-
-  const topicProgress = ensureTopicProgress(topic);
-  const unitProgress = topicProgress.units[unitKey];
-  const passedQuizParts = unitProgress && unitProgress.passedQuizParts ? unitProgress.passedQuizParts : {};
-
-  for (let quizPart = 1; quizPart <= totalQuizzes; quizPart += 1) {
-    if (!passedQuizParts[String(quizPart)]) {
-      return quizPart;
-    }
-  }
-
-  return totalQuizzes;
-}
-
-function isModuleFullyCompleted(topic, unitKey) {
-  const topicProgress = ensureTopicProgress(topic);
-  const unitProgress = topicProgress.units[unitKey];
-  const totalQuizzes = getModuleQuizCount(topic, false);
-
-  if (totalQuizzes <= 1) {
-    return Boolean(unitProgress.completed);
-  }
-
-  const passedQuizParts = unitProgress && unitProgress.passedQuizParts ? unitProgress.passedQuizParts : {};
-  for (let quizPart = 1; quizPart <= totalQuizzes; quizPart += 1) {
-    if (!passedQuizParts[String(quizPart)]) {
-      return false;
-    }
-  }
-
-  return true;
 }
 
 function getAllowedModuleForCourse(topic, requestedModule) {
@@ -4201,31 +7899,35 @@ function buildCourseGateMessage(topic, requestedModule, allowedModule, pathKey) 
 function saveUnitProgress() {
   if (!state.topic || !state.unit || state.unit === "all") {
     latestSessionRewards = [];
-    return;
+    return { modulePassed: false, moduleCompletedThisAttempt: false };
   }
 
   const topicProgress = ensureTopicProgress(state.topic);
   const unitProgress = topicProgress.units[state.unit];
-  const wasCompletedBefore = Boolean(unitProgress.completed);
+  const wasCompletedBefore = isUnitCompletedForTopic(state.topic, unitProgress);
   const modulePassed = isModulePassed(state.score, activeQuestions.length);
-  const moduleQuizTotal = getModuleQuizCount(state.topic, false);
-  const moduleQuizPart = Math.min(Math.max(Number(state.moduleQuizPart) || 1, 1), moduleQuizTotal);
 
   unitProgress.attempts += 1;
   unitProgress.lastScore = state.score;
   unitProgress.lastTotal = activeQuestions.length;
   unitProgress.lastPassed = modulePassed;
-  if (moduleQuizTotal > 1) {
-    if (!unitProgress.passedQuizParts || typeof unitProgress.passedQuizParts !== "object") {
-      unitProgress.passedQuizParts = {};
-    }
-    if (modulePassed) {
-      unitProgress.passedQuizParts[String(moduleQuizPart)] = true;
-    }
-    unitProgress.completed = isModuleFullyCompleted(state.topic, state.unit);
-    state.moduleQuizTotal = moduleQuizTotal;
-    state.moduleQuizPart = getNextRequiredQuizPart(state.topic, state.unit);
-  } else if (modulePassed) {
+
+  const moduleParts = getModuleQuizCount(state.topic, state.unit);
+
+  if (modulePassed && moduleParts > 1) {
+    const currentPart = Number(state.moduleQuizPart) || 1;
+    const existingParts = new Set(getPassedQuizParts(state.topic, unitProgress));
+    existingParts.add(currentPart);
+    unitProgress.passedQuizParts = Array.from(existingParts).sort((left, right) => left - right);
+  } else if (moduleParts <= 1) {
+    unitProgress.passedQuizParts = [];
+  }
+
+  const nowCompleted = moduleParts > 1
+    ? getPassedQuizParts(state.topic, unitProgress).length >= moduleParts
+    : modulePassed;
+
+  if (nowCompleted) {
     unitProgress.completed = true;
   }
 
@@ -4238,8 +7940,11 @@ function saveUnitProgress() {
   }
 
   saveProgressStore();
-  latestSessionRewards = awardCompletionRewards(state.topic, state.unit, modulePassed, wasCompletedBefore);
+  const moduleCompletedThisAttempt = nowCompleted && !wasCompletedBefore;
+  latestSessionRewards = awardCompletionRewards(state.topic, state.unit, moduleCompletedThisAttempt, wasCompletedBefore);
+  recordLearningActivity(state.topic, state.unit);
   renderLanguageProgress();
+  return { modulePassed, moduleCompletedThisAttempt };
 }
 
 function resetCurrentLanguageProgress() {
@@ -4312,23 +8017,29 @@ function getModuleNameForTopic(topic, unitValue) {
 }
 
 function formatUnitLabel(unitValue) {
+  if (state.source === "workshop" && state.mode === "debug" && !state.fullQuiz) {
+    return "Workshop Debug Lab";
+  }
   if (unitValue === "all") {
     return "All Modules";
   }
-
-  const baseLabel = `Module ${unitValue}: ${getModuleNameForTopic(state.topic, unitValue)}`;
-  if (!state.fullQuiz && state.topic === "swift" && state.moduleQuizTotal > 1 && String(unitValue) === String(state.unit)) {
-    return `${baseLabel} • Quiz ${state.moduleQuizPart}/${state.moduleQuizTotal}`;
-  }
-
-  return baseLabel;
+  return `Module ${unitValue}: ${getModuleNameForTopic(state.topic, unitValue)}`;
 }
 
 function updateActiveUnitText() {
   if (!activeUnitText) {
     return;
   }
-  activeUnitText.textContent = formatUnitLabel(state.unit);
+  if (state.source === "workshop" && state.mode === "debug" && !state.fullQuiz) {
+    activeUnitText.textContent = "Workshop Debug Lab • 50 Unique Drills";
+    return;
+  }
+  const baseLabel = formatUnitLabel(state.unit);
+  if (!state.fullQuiz && state.moduleQuizTotal > 1) {
+    activeUnitText.textContent = `${baseLabel} • Quiz ${state.moduleQuizPart}/${state.moduleQuizTotal}`;
+    return;
+  }
+  activeUnitText.textContent = baseLabel;
 }
 
 function resolveLevelKey(levelValue) {
@@ -4439,11 +8150,11 @@ const swiftModuleFocusTerms = {
   "7": ["debug", "review", "bug", "fix"],
   "8": ["output", "print", "interpolation", "trace"],
   "9": ["output", "swiftui", "state", "render"],
-  "10": ["mastery", "scenario", "reasoning", "integration"],
+  "10": ["mastery", "scenario", "reasoning", "integration", "architecture", "api design"],
   "11": ["test", "xctest", "assert", "unit"],
-  "12": ["refactor", "clean", "readable", "quality"],
-  "13": ["performance", "memory", "async", "reliability"],
-  "14": ["real", "production", "architecture", "scenario"]
+  "12": ["refactor", "clean", "readable", "quality", "code review"],
+  "13": ["performance", "memory", "async", "reliability", "cloudkit", "sync", "conflict"],
+  "14": ["real", "production", "architecture", "scenario", "firebase", "auth", "firestore", "keychain"]
 };
 
 function buildModuleFocusTerms(topic, unitKey, pathKey) {
@@ -4492,31 +8203,17 @@ function scoreQuestionForModule(question, focusTerms) {
   return score;
 }
 
-function buildQuestionDedupeKey(question) {
-  if (!question || typeof question !== "object") {
-    return "";
-  }
-
-  const prompt = String(question.prompt || "")
-    .toLowerCase()
-    .replace(/\[[^\]]*\]/g, " ")
-    .replace(/\b\d+\b/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  const type = String(question.type || "").toLowerCase();
-  const options = Array.isArray(question.options)
-    ? question.options.map((option) => normalizeToken(option)).join("|")
-    : "";
-
-  return `${type}|${prompt}|${options}`;
-}
-
-function selectQuizQuestions(candidates, targetCount, seedKey, focusTerms = [], moduleUnitKey = "1", moduleQuizPart = 1) {
+function selectQuizQuestions(candidates, targetCount, seedKey, focusTerms = [], moduleUnitKey = "1", topicKey = "", quizPart = 1) {
   if (!Array.isArray(candidates) || !candidates.length) {
     return [];
   }
 
-  const ranked = candidates.map((question, index) => ({
+  const moduleScopedCandidates = candidates.filter((question) => questionMatchesModuleUnit(question, moduleUnitKey));
+  if (!moduleScopedCandidates.length) {
+    return [];
+  }
+
+  const ranked = moduleScopedCandidates.map((question, index) => ({
     question,
     index,
     score: focusTerms.length ? scoreQuestionForModule(question, focusTerms) : 0
@@ -4530,82 +8227,56 @@ function selectQuizQuestions(candidates, targetCount, seedKey, focusTerms = [], 
   const focusedShuffled = seededShuffle(focused, `${seedKey}-focused`);
   const fallbackShuffled = seededShuffle(fallback, `${seedKey}-fallback`);
 
-  const combined = [...focusedShuffled, ...fallbackShuffled].map((item) => item.question);
+  const combinedRaw = [...focusedShuffled, ...fallbackShuffled].map((item) => item.question);
+  const seenPromptKeys = new Set();
+  const combined = combinedRaw.filter((question) => {
+    const key = normalizePromptForUniqueness(question && question.prompt ? question.prompt : JSON.stringify(question));
+    if (seenPromptKeys.has(key)) {
+      return false;
+    }
+    seenPromptKeys.add(key);
+    return true;
+  });
+
   if (!combined.length) {
     return [];
   }
 
-  const uniqueCombined = [];
-  const seenQuestionKeys = new Set();
-  combined.forEach((question) => {
-    const dedupeKey = buildQuestionDedupeKey(question) || `${question.type}|${question.prompt}`;
-    if (seenQuestionKeys.has(dedupeKey)) {
-      return;
-    }
-    seenQuestionKeys.add(dedupeKey);
-    uniqueCombined.push(question);
-  });
+  const isSwiftModuleSession = topicKey === "swift" && moduleUnitKey && moduleUnitKey !== "all" && !String(seedKey || "").includes("|full|");
+  let workingPool = combined;
 
-  const sourceList = uniqueCombined.length ? uniqueCombined : combined;
+  if (isSwiftModuleSession) {
+    const servedSet = new Set(getServedPromptKeys(topicKey, moduleUnitKey));
+    const unseenPool = combined.filter((question) => {
+      const promptKey = normalizePromptForUniqueness(question && question.prompt ? question.prompt : JSON.stringify(question));
+      return !servedSet.has(promptKey);
+    });
+
+    if (unseenPool.length >= Math.min(targetCount, combined.length)) {
+      workingPool = unseenPool;
+    } else {
+      clearServedPromptKeys(topicKey, moduleUnitKey);
+      workingPool = combined;
+    }
+  }
 
   const unitNumber = Number(moduleUnitKey);
-  const quizPart = Number(moduleQuizPart);
-  const safeQuizPart = Number.isFinite(quizPart) && quizPart > 0 ? quizPart : 1;
-  const partOffset = (safeQuizPart - 1) * targetCount;
+  const partNumber = Number(quizPart);
+  const normalizedPart = Number.isFinite(partNumber) && partNumber > 0 ? partNumber : 1;
   const offset = Number.isFinite(unitNumber) && unitNumber > 0
-    ? ((unitNumber - 1) * targetCount) + partOffset
-    : partOffset;
-  const rotated = [...sourceList.slice(offset % sourceList.length), ...sourceList.slice(0, offset % sourceList.length)];
+    ? ((unitNumber - 1) * targetCount) + ((normalizedPart - 1) * targetCount)
+    : (normalizedPart - 1) * targetCount;
+  const rotated = [...workingPool.slice(offset % workingPool.length), ...workingPool.slice(0, offset % workingPool.length)];
+  const selected = rotated.slice(0, Math.min(targetCount, rotated.length));
 
-  const primarySelection = rotated.slice(0, Math.min(targetCount, rotated.length));
-  if (primarySelection.length >= targetCount || rotated.length >= targetCount) {
-    return primarySelection;
+  if (isSwiftModuleSession && selected.length) {
+    const selectedPromptKeys = selected.map((question) =>
+      normalizePromptForUniqueness(question && question.prompt ? question.prompt : JSON.stringify(question))
+    );
+    recordServedPromptKeys(topicKey, moduleUnitKey, selectedPromptKeys);
   }
 
-  const topUp = combined.filter((question) => !primarySelection.includes(question));
-  return [...primarySelection, ...topUp].slice(0, Math.min(targetCount, combined.length));
-}
-
-function escapeHtml(value) {
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-function looksLikeCodeSnippet(value) {
-  const text = String(value || "").trim();
-  if (!text) {
-    return false;
-  }
-  return /\b(let|var|const|func|struct|print|console\.log|if|for|while|return|await|async)\b|[{}();=]/i.test(text);
-}
-
-function formatOutputPrompt(prompt) {
-  const raw = String(prompt || "").trim();
-  if (!/output\s+prediction/i.test(raw)) {
-    return { text: raw, code: "" };
-  }
-
-  const splitMatch = raw.match(/^(.*?\?)\s*([\s\S]+)$/);
-  if (!splitMatch) {
-    return { text: raw, code: "" };
-  }
-
-  const text = splitMatch[1].trim();
-  const codeCandidate = splitMatch[2].trim();
-  if (!looksLikeCodeSnippet(codeCandidate)) {
-    return { text: raw, code: "" };
-  }
-
-  const code = codeCandidate
-    .replace(/;\s*/g, ";\n")
-    .replace(/\s*\n\s*/g, "\n")
-    .trim();
-
-  return { text, code };
+  return selected;
 }
 
 function buildBalancedSession(questions) {
@@ -4627,6 +8298,183 @@ function buildBalancedSession(questions) {
   const sessionQuestions = [selectedOutput, selectedDebug, ...selectedOthers];
 
   return shuffleArray(sessionQuestions);
+}
+
+const workshopDebugProfiles = {
+  swift: { bad: "let score = 0\nscore += 1", good: "var score = 0\nscore += 1", checks: ["var score", "score += 1"] },
+  web: { bad: "const btn = document.querySelector('#save')\nbtn.addEventListener('click', () => {\n  console.log('saved')\n}", good: "const btn = document.querySelector('#save')\nbtn.addEventListener('click', () => {\n  console.log('saved')\n});", checks: ["addeventlistener", ");"] },
+  react: { bad: "useEffect(() => {\n  fetchResults(query)\n}, [])", good: "useEffect(() => {\n  fetchResults(query)\n}, [query])", checks: ["useeffect", "[query]"] },
+  python: { bad: "def greet(name)\n    print(name)", good: "def greet(name):\n    print(name)", checks: ["def greet(name):", "print(name)"] },
+  typescript: { bad: "let age: string = 21", good: "let age: number = 21", checks: ["let age: number", "21"] },
+  java: { bad: "System.out.println('Hello');", good: "System.out.println(\"Hello\");", checks: ["system.out.println(\"hello\");"] },
+  kotlin: { bad: "val name: String? = null\nprintln(name.length)", good: "val name: String? = null\nprintln(name?.length ?: 0)", checks: ["?.", "?:"] },
+  go: { bad: "func main() {\n  var count int\n  count := 1\n}", good: "func main() {\n  count := 1\n  _ = count\n}", checks: [":=", "_ = count"] },
+  csharp: { bad: "public string Name { get set; }", good: "public string Name { get; set; }", checks: ["get; set;"] },
+  php: { bad: "$input = json_decode(file_get_contents('php://input'));\necho $input->name", good: "$input = json_decode(file_get_contents('php://input'), true);\necho $input['name'];", checks: ["true", "['name']"] },
+  dart: { bad: "onPressed: () {\n  count + 1;\n}", good: "onPressed: () {\n  setState(() {\n    count += 1;\n  });\n}", checks: ["setstate", "count += 1"] },
+  rust: { bad: "let nums = vec![1,2];\nnums.push(3);", good: "let mut nums = vec![1, 2];\nnums.push(3);", checks: ["let mut", "push(3)"] },
+  cpp: { bad: "cout << \"Hello\";", good: "std::cout << \"Hello\";", checks: ["std::cout"] },
+  sql: { bad: "FROM users SELECT name;", good: "SELECT name\nFROM users;", checks: ["select", "from users"] },
+  bash: { bad: "if[ -f app.js ]; then\n  echo \"found\"\nfi", good: "if [ -f app.js ]; then\n  echo \"found\"\nfi", checks: ["if [ -f", "fi"] },
+  firebase: { bad: "const user = getAuth.currentUser\nconst docs = await getDocs(collection(db, 'tasks'))", good: "const user = getAuth().currentUser\nconst docs = await getDocs(collection(db, 'tasks'))", checks: ["getauth()", "getdocs"] },
+  cloudkit: { bad: "let record = CKRecord(recordType: \"Note\")\nprivateDB.save(record)", good: "let record = CKRecord(recordType: \"Note\")\nprivateDB.save(record) { _, error in\n  if let error = error {\n    print(error)\n  }\n}", checks: ["save(record)", "if let error"] },
+  aiassist: { bad: "Prompt: write login flow\nUse it directly in production", good: "Prompt: Generate a login flow with validation and tests. Return assumptions and edge cases.\nVerification: run tests, review security checks, and confirm requirements before merge.", checks: ["verification", "tests", "requirements"] }
+};
+
+const workshopDebugCaseBank = [
+  { id: "W01", title: "Checkout Total Drift", scenario: "checkout totals mismatch", focus: "syntax and delimiter correctness", required: "closing delimiter" },
+  { id: "W02", title: "Profile Null Crash", scenario: "profile hydration failure", focus: "null/optional safety", required: "nil-safe branch" },
+  { id: "W03", title: "Counter Not Updating", scenario: "dashboard counters stale", focus: "state mutation correctness", required: "state mutation" },
+  { id: "W04", title: "Async Request Leak", scenario: "request chain breaks", focus: "async flow handling", required: "await flow" },
+  { id: "W05", title: "Missing Return Path", scenario: "service response missing", focus: "return/value safety", required: "explicit return" },
+  { id: "W06", title: "Type Guard Failure", scenario: "payload type mismatch", focus: "type consistency", required: "type-safe value" },
+  { id: "W07", title: "Wrong Function Shape", scenario: "integration contract mismatch", focus: "function signature correctness", required: "signature alignment" },
+  { id: "W08", title: "Scope Shadowing", scenario: "variable resolution bug", focus: "scope and variable access", required: "correct scope" },
+  { id: "W09", title: "Unhandled Failure", scenario: "network fallback missing", focus: "error handling and fallback", required: "failure branch" },
+  { id: "W10", title: "Unsafe Refactor", scenario: "quick fix created hidden bug", focus: "production-safe refactor", required: "stable refactor" },
+  { id: "W11", title: "Discount Rule Break", scenario: "discount computation regression", focus: "syntax and delimiter correctness", required: "balanced structure" },
+  { id: "W12", title: "Account Alias Panic", scenario: "optional alias missing", focus: "null/optional safety", required: "optional guard" },
+  { id: "W13", title: "Toggle State Drift", scenario: "ui toggle inconsistency", focus: "state mutation correctness", required: "deterministic update" },
+  { id: "W14", title: "Async Double Fire", scenario: "duplicate request issue", focus: "async flow handling", required: "single async path" },
+  { id: "W15", title: "Fallback Not Returned", scenario: "empty response handling", focus: "return/value safety", required: "fallback return" },
+  { id: "W16", title: "Conversion Mismatch", scenario: "numeric conversion bug", focus: "type consistency", required: "safe type conversion" },
+  { id: "W17", title: "Handler Contract Drift", scenario: "api callback mismatch", focus: "function signature correctness", required: "contract match" },
+  { id: "W18", title: "Nested Scope Loss", scenario: "inner block variable loss", focus: "scope and variable access", required: "scope-safe access" },
+  { id: "W19", title: "Retry Path Missing", scenario: "transient failure not retried", focus: "error handling and fallback", required: "retry branch" },
+  { id: "W20", title: "Risky Cleanup", scenario: "cleanup removed guard rails", focus: "production-safe refactor", required: "readable safety checks" },
+  { id: "W21", title: "Config Parser Break", scenario: "config parsing crash", focus: "syntax and delimiter correctness", required: "parser syntax fix" },
+  { id: "W22", title: "User Display Nil", scenario: "display name missing", focus: "null/optional safety", required: "default substitution" },
+  { id: "W23", title: "Store Drift", scenario: "store snapshot stale", focus: "state mutation correctness", required: "atomic update" },
+  { id: "W24", title: "Promise/Task Gap", scenario: "async step skipped", focus: "async flow handling", required: "awaited operation" },
+  { id: "W25", title: "Silent Output", scenario: "missing output path", focus: "return/value safety", required: "consistent return path" },
+  { id: "W26", title: "Schema Type Fault", scenario: "schema validation mismatch", focus: "type consistency", required: "schema-safe type" },
+  { id: "W27", title: "Args Order Bug", scenario: "parameter ordering issue", focus: "function signature correctness", required: "ordered arguments" },
+  { id: "W28", title: "Closure Capture Bug", scenario: "captured value stale", focus: "scope and variable access", required: "correct capture" },
+  { id: "W29", title: "No Degrade Path", scenario: "service degraded mode missing", focus: "error handling and fallback", required: "graceful fallback" },
+  { id: "W30", title: "Over-Compressed Refactor", scenario: "readability dropped", focus: "production-safe refactor", required: "maintainable structure" },
+  { id: "W31", title: "UI Action Syntax Fault", scenario: "button action malformed", focus: "syntax and delimiter correctness", required: "action syntax" },
+  { id: "W32", title: "Optional Chain Failure", scenario: "nested value absent", focus: "null/optional safety", required: "safe chain" },
+  { id: "W33", title: "Mutation Inconsistency", scenario: "cache update mismatch", focus: "state mutation correctness", required: "single source update" },
+  { id: "W34", title: "Background Race", scenario: "async race condition", focus: "async flow handling", required: "ordered async step" },
+  { id: "W35", title: "Void Path", scenario: "branch returns nothing", focus: "return/value safety", required: "all-branch return" },
+  { id: "W36", title: "Bool/String Confusion", scenario: "boolean parsed as text", focus: "type consistency", required: "typed boolean" },
+  { id: "W37", title: "Function Shape Drift", scenario: "consumer expects different params", focus: "function signature correctness", required: "consumer-compatible signature" },
+  { id: "W38", title: "Variable Escape Bug", scenario: "temporary leaks across scope", focus: "scope and variable access", required: "scoped variable" },
+  { id: "W39", title: "Error Bubble Loss", scenario: "failure not surfaced", focus: "error handling and fallback", required: "error propagation" },
+  { id: "W40", title: "Refactor Regression", scenario: "feature parity lost", focus: "production-safe refactor", required: "behavior-preserving refactor" },
+  { id: "W41", title: "Trace Syntax Drift", scenario: "log statement malformed", focus: "syntax and delimiter correctness", required: "valid statement form" },
+  { id: "W42", title: "Missing Data Guard", scenario: "missing record field", focus: "null/optional safety", required: "required field guard" },
+  { id: "W43", title: "State Rollback Bug", scenario: "failed write leaves dirty state", focus: "state mutation correctness", required: "rollback-safe update" },
+  { id: "W44", title: "Late Await Bug", scenario: "response used too early", focus: "async flow handling", required: "await before use" },
+  { id: "W45", title: "Implicit Nil/Null Return", scenario: "undefined return path", focus: "return/value safety", required: "explicit fallback value" },
+  { id: "W46", title: "Union Type Mismatch", scenario: "mixed payload typing", focus: "type consistency", required: "narrowed type path" },
+  { id: "W47", title: "Callable Signature Mismatch", scenario: "callback arity mismatch", focus: "function signature correctness", required: "arity match" },
+  { id: "W48", title: "Loop Scope Collision", scenario: "loop variable reused badly", focus: "scope and variable access", required: "isolated loop scope" },
+  { id: "W49", title: "Recovery Path Omitted", scenario: "retry exhausted without fallback", focus: "error handling and fallback", required: "terminal fallback" },
+  { id: "W50", title: "Project Hardening Fix", scenario: "final pre-release bug sweep", focus: "production-safe refactor", required: "hardening pass" }
+];
+
+function injectWorkshopDebugToken(code, token) {
+  const aliases = ["score", "count", "name", "age", "nums", "btn", "record", "input", "user", "docs", "query", "tasks"];
+  let transformed = String(code || "");
+  aliases.forEach((alias) => {
+    const pattern = new RegExp(`\\b${alias}\\b`, "g");
+    transformed = transformed.replace(pattern, `${alias}_${token}`);
+  });
+  transformed = transformed.replace(/#save/g, `#save-${token}`);
+  return transformed;
+}
+
+function buildWorkshopDebugChecks(profile, token) {
+  const baseChecks = Array.isArray(profile && profile.checks) ? profile.checks : [];
+  return baseChecks.map((check) => injectWorkshopDebugToken(check, token));
+}
+
+function buildWorkshopDebugSession(topic, count) {
+  const profile = workshopDebugProfiles[topic] || workshopDebugProfiles.web;
+  const topicLabel = formatLabel(topic);
+
+  return workshopDebugCaseBank.map((caseDef, index) => {
+    const token = `${topic}-${caseDef.id.toLowerCase()}`;
+    const starterBase = injectWorkshopDebugToken(profile.bad, token);
+    const sampleBase = injectWorkshopDebugToken(profile.good, token);
+    const starterCode = [
+      starterBase,
+      `// case: ${caseDef.id}`,
+      `// scenario: ${caseDef.scenario}`,
+      `// required fix: ${caseDef.required}`
+    ].join("\n");
+    const sample = [
+      sampleBase,
+      `// resolved case: ${caseDef.id}`,
+      `// applied fix: ${caseDef.required}`
+    ].join("\n");
+
+    return {
+      type: "debug",
+      prompt: `Workshop Debug Drill ${index + 1}/50 (${topicLabel}) — ${caseDef.title}. Scenario: ${caseDef.scenario}. Focus: ${caseDef.focus}.`,
+      starterCode,
+      checks: buildWorkshopDebugChecks(profile, token),
+      sample,
+      explanation: "Workshop-only curated debug bank. This drill is fully separate from course modules and targets project bug-fix readiness."
+    };
+  });
+}
+
+function buildProjectReadinessQuestion(topic, moduleUnit) {
+  const topicLabel = formatLabel(topic);
+  const moduleLabel = getModuleNameForTopic(topic, moduleUnit);
+  const basePrompt = `Project Readiness Check (${topicLabel}): Convert this feature snippet into production-safe logic with validation, failure handling, and a clear success path.`;
+  const projectReadinessByTopic = {
+    swift: {
+      starterCode: "func saveProfile(name: String?) -> String {\n  return name!\n}",
+      checks: ["guard", "return", "else"],
+      sample: "func saveProfile(name: String?) -> String {\n  guard let name = name, !name.isEmpty else {\n    return \"Invalid profile\"\n  }\n  return \"Saved: \\(name)\"\n}"
+    },
+    web: {
+      starterCode: "async function submitProfile(data) {\n  const res = await fetch('/api/profile', { method: 'POST', body: JSON.stringify(data) })\n  return res.json()\n}",
+      checks: ["if", "throw", "return"],
+      sample: "async function submitProfile(data) {\n  if (!data?.name) throw new Error('name required')\n  const res = await fetch('/api/profile', { method: 'POST', body: JSON.stringify(data) })\n  if (!res.ok) throw new Error('request failed')\n  return res.json()\n}"
+    },
+    default: {
+      starterCode: "function saveRecord(input) {\n  return input.value\n}",
+      checks: ["if", "error", "return"],
+      sample: "function saveRecord(input) {\n  if (!input || !input.value) {\n    return 'error: invalid input'\n  }\n  return `saved:${input.value}`\n}"
+    }
+  };
+
+  const template = projectReadinessByTopic[topic] || projectReadinessByTopic.default;
+
+  return {
+    type: "debug",
+    moduleUnit,
+    prompt: `${basePrompt} (${moduleLabel})`,
+    starterCode: template.starterCode,
+    checks: template.checks,
+    sample: template.sample,
+    explanation: "This advanced checkpoint mirrors real project delivery: validate inputs, guard failure paths, and return predictable outcomes.",
+    isProjectReadiness: true
+  };
+}
+
+function injectProjectReadinessQuestion(selectedQuestions, moduleUnit, targetCount) {
+  const unitNumber = Number(moduleUnit);
+  if (!Number.isFinite(unitNumber) || unitNumber < 11) {
+    return selectedQuestions;
+  }
+
+  const readinessQuestion = buildProjectReadinessQuestion(state.topic, moduleUnit);
+  const cleaned = (Array.isArray(selectedQuestions) ? selectedQuestions : []).filter((question) => !question.isProjectReadiness);
+
+  if (!cleaned.length) {
+    return [readinessQuestion];
+  }
+
+  if (cleaned.length >= targetCount) {
+    return [...cleaned.slice(0, Math.max(0, cleaned.length - 1)), readinessQuestion];
+  }
+
+  return [...cleaned, readinessQuestion];
 }
 
 function filterBySegment(questions, segmentKey) {
@@ -4653,7 +8501,9 @@ function buildSessionForSelections() {
     return [];
   }
 
-  const targetQuestionCount = getQuestionTargetCount(state.topic, state.fullQuiz);
+  if (!state.fullQuiz && state.mode === "debug" && state.source === "workshop") {
+    return buildWorkshopDebugSession(state.topic, getQuestionsPerCurrentQuiz(state.topic, state.unit, false));
+  }
 
   if (state.fullQuiz) {
     const allQuestions = [
@@ -4671,7 +8521,7 @@ function buildSessionForSelections() {
       : allQuestions.filter((question) => question.type === state.mode);
 
     const fullQuizSeed = `${state.topic}|full|${state.path}|${state.mode}`;
-    const selected = selectQuizQuestions(selectedAll, targetQuestionCount, fullQuizSeed, [], "1");
+    const selected = selectQuizQuestions(selectedAll, questionsPerQuiz, fullQuizSeed, [], "1", state.topic, 1);
     return state.mode === "mixed" ? buildBalancedSession(selected) : selected;
   }
 
@@ -4689,24 +8539,37 @@ function buildSessionForSelections() {
     return [];
   }
 
+  const moduleUnit = state.unit && state.unit !== "all" ? state.unit : getFirstIncompleteModule(state.topic);
+  const questionsThisQuiz = getQuestionsPerCurrentQuiz(state.topic, moduleUnit, state.fullQuiz);
   const byMode = state.mode === "mixed"
     ? [...baseQuestions]
     : baseQuestions.filter((question) => question.type === state.mode);
+  const strictModuleByMode = byMode.filter((question) => questionMatchesModuleUnit(question, moduleUnit));
 
-  const moduleUnit = state.unit && state.unit !== "all" ? state.unit : getFirstIncompleteModule(state.topic);
-  const moduleQuizTotal = getModuleQuizCount(state.topic, state.fullQuiz);
-  const moduleQuizPart = state.fullQuiz ? 1 : getNextRequiredQuizPart(state.topic, moduleUnit);
-  state.moduleQuizTotal = moduleQuizTotal;
-  state.moduleQuizPart = moduleQuizPart;
+  const allLevelQuestions = [
+    ...(Array.isArray(topicSet.beginner) ? topicSet.beginner : []),
+    ...(Array.isArray(topicSet.medium) ? topicSet.medium : []),
+    ...(Array.isArray(topicSet.advanced) ? topicSet.advanced : [])
+  ];
+  const allLevelByMode = state.mode === "mixed"
+    ? allLevelQuestions
+    : allLevelQuestions.filter((question) => question.type === state.mode);
+  const strictModuleAllLevels = allLevelByMode.filter((question) => questionMatchesModuleUnit(question, moduleUnit));
+
+  const strictModulePool = strictModuleByMode.length >= questionsThisQuiz
+    ? strictModuleByMode
+    : strictModuleAllLevels;
+
   const focusTerms = buildModuleFocusTerms(state.topic, moduleUnit, state.path);
-  const moduleSeed = `${state.topic}|${moduleUnit}|quiz-${moduleQuizPart}|${state.path}|${state.mode}|${levelKey}`;
-  const selected = selectQuizQuestions(byMode, targetQuestionCount, moduleSeed, focusTerms, moduleUnit, moduleQuizPart);
+  const moduleSeed = `${state.topic}|${moduleUnit}|${state.path}|${state.mode}|${levelKey}|part-${state.moduleQuizPart}`;
+  const selected = selectQuizQuestions(strictModulePool, questionsThisQuiz, moduleSeed, focusTerms, moduleUnit, state.topic, state.moduleQuizPart);
+  const withProjectReadiness = injectProjectReadinessQuestion(selected, moduleUnit, questionsThisQuiz);
 
   if (state.mode === "mixed") {
-    return buildBalancedSession(selected);
+    return buildBalancedSession(withProjectReadiness);
   }
 
-  return selected;
+  return withProjectReadiness;
 }
 
 function setTopicHeader(topic) {
@@ -4726,6 +8589,7 @@ function setTopicHeader(topic) {
     updatePathButtonLabels("");
     return;
   }
+
   appTitle.textContent = topicMeta[topic].title;
   appSubtitle.textContent = topicMeta[topic].subtitle;
   updatePathButtonLabels(topic);
@@ -4837,6 +8701,41 @@ function buildDetailedIncorrectFeedback(question, context = {}) {
     : "";
   const explanation = question.explanation || "Review the concept and try again.";
   return `Not quite. Correct answer: ${correctOption || "See explanation"}. ${explanation}`;
+}
+
+function buildDetailedIncorrectFeedbackHtml(question, context = {}) {
+  const rawSubmission = String(context.rawSubmission || "");
+  const normalizedSubmission = context.normalizedSubmission || "";
+  const compactSubmission = context.compactSubmission || normalizeCompact(normalizedSubmission);
+  const checks = Array.isArray(question.checks) ? question.checks : [];
+  const missingChecks = checks.filter((check) => !checkMatchesSubmission(normalizedSubmission, compactSubmission, check));
+  const uniqueMissing = [...new Set(missingChecks)];
+  const missingLabel = uniqueMissing.length
+    ? uniqueMissing.slice(0, 5).map((check) => `"${formatCheckForDisplay(check)}"`).join(", ")
+    : "None detected from token checks";
+  const missingList = uniqueMissing.length
+    ? uniqueMissing.slice(0, 8).map((check) => `- ${formatCheckForDisplay(check)}`).join("\n")
+    : "- None";
+  const heading = question.type === "debug" ? "One possible fix" : "Example solution";
+  const sampleCode = String(question.sample || "");
+  const submittedCode = rawSubmission || "(No code submitted)";
+
+  return `<span class="feedback-copy">Not quite. Missing required part(s): ${escapeHtml(missingLabel)}.</span>
+<span class="feedback-copy">This prompt checks required concepts and key tokens, including exact variable names when required.</span>
+<div class="feedback-code-grid">
+  <section class="feedback-code-panel" aria-label="Your submitted code">
+    <p class="feedback-code-title">Your Submission</p>
+    <pre class="feedback-code-block"><code>${escapeHtml(submittedCode)}</code></pre>
+  </section>
+  <section class="feedback-code-panel" aria-label="Example fix code">
+    <p class="feedback-code-title">${escapeHtml(heading)}</p>
+    <pre class="feedback-code-block"><code>${escapeHtml(sampleCode)}</code></pre>
+  </section>
+  <section class="feedback-code-panel" aria-label="Missing checks list">
+    <p class="feedback-code-title">Missing Checks</p>
+    <pre class="feedback-code-block"><code>${escapeHtml(missingList)}</code></pre>
+  </section>
+</div>`;
 }
 
 function getVisualChallengeMarkup(question) {
@@ -5090,7 +8989,8 @@ const editorBehaviorByTopic = {
   dart: { indentUnit: "    ", openBlockPattern: /\{\s*$|=>\s*$/i },
   bash: { indentUnit: "  ", openBlockPattern: /\b(do|then|case)\s*$|\{\s*$/i, dedentAfterLinePattern: /^\s*(fi|done|esac)\s*$/i },
   sourcecontrol: { indentUnit: "  ", openBlockPattern: /$^/ },
-  ides: { indentUnit: "  ", openBlockPattern: /$^/ }
+  ides: { indentUnit: "  ", openBlockPattern: /$^/ },
+  aiassist: { indentUnit: "  ", openBlockPattern: /$^/ }
 };
 
 function getEditorBehavior(topic) {
@@ -5380,12 +9280,7 @@ function renderQuestion() {
   scoreText.textContent = `Score: ${state.score}`;
   questionType.textContent = typeLabel;
   if (question.type === "output") {
-    const formattedPrompt = formatOutputPrompt(question.prompt);
-    if (formattedPrompt.code) {
-      questionPrompt.innerHTML = `<span class="output-prompt-text">${escapeHtml(formattedPrompt.text)}</span><pre class="output-code-block"><code>${escapeHtml(formattedPrompt.code)}</code></pre>`;
-    } else {
-      questionPrompt.textContent = question.prompt;
-    }
+    questionPrompt.innerHTML = formatOutputPrompt(question.prompt);
   } else {
     questionPrompt.textContent = question.prompt;
   }
@@ -5452,6 +9347,36 @@ function renderQuestion() {
     });
     optionsList.appendChild(button);
   });
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function formatOutputPrompt(promptText) {
+  const prompt = String(promptText || "");
+  const inlineCodeMatch = prompt.match(/`([^`\n]+)`/);
+  if (!inlineCodeMatch) {
+    return `<span class="output-prompt-text">${escapeHtml(prompt)}</span>`;
+  }
+
+  const code = inlineCodeMatch[1]
+    .split(";")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .join("\n");
+
+  const beforeCode = prompt.slice(0, inlineCodeMatch.index).trim();
+  const afterCode = prompt.slice((inlineCodeMatch.index || 0) + inlineCodeMatch[0].length).trim();
+  const beforeMarkup = beforeCode ? `<span class="output-prompt-text">${escapeHtml(beforeCode)}</span>` : "";
+  const afterMarkup = afterCode ? `<span class="output-prompt-text">${escapeHtml(afterCode)}</span>` : "";
+
+  return `${beforeMarkup}<pre class="output-code-block"><code>${escapeHtml(code)}</code></pre>${afterMarkup}`;
 }
 
 function insertSnippetAtCursor(textarea, snippet) {
@@ -5575,17 +9500,13 @@ function updateNextModuleButton(modulePassed) {
 
   nextModuleBtn.classList.add("hidden");
 
-  if (state.fullQuiz || !modulePassed) {
+  if (state.fullQuiz || !modulePassed || isCourseFullyCompleted(state.topic)) {
     return;
   }
 
-  if (state.topic === "swift" && state.unit && state.unit !== "all" && !isModuleFullyCompleted(state.topic, state.unit)) {
-    nextModuleBtn.textContent = `Continue ${formatUnitLabel(state.unit)}`;
+  if (state.moduleQuizTotal > 1 && state.moduleQuizPart < state.moduleQuizTotal) {
+    nextModuleBtn.textContent = `Continue ${formatUnitLabel(state.unit)} (Quiz ${state.moduleQuizPart + 1}/${state.moduleQuizTotal})`;
     nextModuleBtn.classList.remove("hidden");
-    return;
-  }
-
-  if (isCourseFullyCompleted(state.topic)) {
     return;
   }
 
@@ -5618,21 +9539,24 @@ function goToNextModule() {
     return;
   }
 
-  if (state.topic === "swift" && state.unit && state.unit !== "all" && !isModuleFullyCompleted(state.topic, state.unit)) {
-    state.fullQuiz = false;
+  if (!state.fullQuiz && state.moduleQuizTotal > 1 && state.moduleQuizPart < state.moduleQuizTotal) {
+    state.moduleQuizPart += 1;
     state.manualUnitOverride = true;
+    state.fullQuiz = false;
     startQuiz();
     return;
   }
 
   const nextModule = getFirstIncompleteModule(state.topic);
-  if (!nextModule || nextModule === state.unit) {
+  if (!nextModule) {
     return;
   }
 
   state.fullQuiz = false;
   state.manualUnitOverride = true;
   state.unit = nextModule;
+  state.moduleQuizPart = 1;
+  state.moduleQuizTotal = getModuleQuizCount(state.topic, nextModule);
   state.level = resolveProgressiveLevel(nextModule);
   startQuiz();
 }
@@ -5654,11 +9578,13 @@ function gradeCurrentQuestion() {
   const isBlank = question.type === "blank";
   let normalizedSubmission = "";
   let compactSubmission = "";
+  let rawSubmission = "";
 
   if (isCodeLike) {
     const codeInput = document.getElementById("codeInput");
-    normalizedSubmission = normalize(codeInput.value);
-    compactSubmission = normalizeCompact(codeInput.value);
+    rawSubmission = codeInput ? codeInput.value : "";
+    normalizedSubmission = normalize(rawSubmission);
+    compactSubmission = normalizeCompact(rawSubmission);
     correct = question.checks.every((check) => checkMatchesSubmission(normalizedSubmission, compactSubmission, check));
   } else if (isBlank) {
     const blankInput = document.getElementById("blankInput");
@@ -5694,14 +9620,22 @@ function gradeCurrentQuestion() {
     return;
   }
 
-  feedback.textContent = buildDetailedIncorrectFeedback(question, { normalizedSubmission, compactSubmission });
+  if (isCodeLike) {
+    feedback.innerHTML = buildDetailedIncorrectFeedbackHtml(question, {
+      rawSubmission,
+      normalizedSubmission,
+      compactSubmission
+    });
+  } else {
+    feedback.textContent = buildDetailedIncorrectFeedback(question, { normalizedSubmission, compactSubmission });
+  }
   feedback.className = "feedback incorrect";
 }
 
 function goNext() {
   if (state.currentIndex === activeQuestions.length - 1) {
     latestSessionRewards = [];
-    saveUnitProgress();
+    const completionSnapshot = saveUnitProgress();
     questionCard.classList.add("hidden");
     resultsCard.classList.remove("hidden");
     const activePath = learningPaths[state.path];
@@ -5712,16 +9646,24 @@ function goNext() {
     const finalLanguageText = finalLanguageScore === null ? "--" : formatPercent(finalLanguageScore);
     const pathInfo = getPathProgressCopy(state.path);
     const modulePercent = activeQuestions.length > 0 ? (state.score / activeQuestions.length) * 100 : 0;
-    const modulePassed = isModulePassed(state.score, activeQuestions.length);
+    const modulePassed = completionSnapshot.modulePassed;
+    const moduleCompletedThisAttempt = completionSnapshot.moduleCompletedThisAttempt;
+    const isModuleParted = !state.fullQuiz && state.moduleQuizTotal > 1;
     const completionLine = state.fullQuiz
       ? `Full assessment score: ${formatPercent(modulePercent)}.`
       : modulePassed
-        ? `Module passed (${formatPercent(modulePercent)}).`
+        ? isModuleParted
+          ? moduleCompletedThisAttempt
+            ? `Module completed (${formatPercent(modulePercent)}). All ${state.moduleQuizTotal} quizzes passed.`
+            : `Quiz ${state.moduleQuizPart}/${state.moduleQuizTotal} passed (${formatPercent(modulePercent)}).`
+          : `Module passed (${formatPercent(modulePercent)}).`
         : `Module not passed (${formatPercent(modulePercent)}). Score ${modulePassingPercent}%+ to pass this ${pathInfo.checkpointLabel} and unlock the ${pathInfo.unlockLabel}.`;
     const nextStepLine = state.fullQuiz
       ? `Continue by revisiting ${formatUnitLabel(getFirstIncompleteModule(state.topic))} for focused improvement.`
       : modulePassed
-        ? `Next recommended module: ${formatUnitLabel(getFirstIncompleteModule(state.topic))}.`
+        ? isModuleParted && !moduleCompletedThisAttempt
+          ? `Continue this module with Quiz ${Math.min(state.moduleQuizPart + 1, state.moduleQuizTotal)}/${state.moduleQuizTotal}.`
+          : `Next recommended module: ${formatUnitLabel(getFirstIncompleteModule(state.topic))}.`
         : `Retry ${unitLabel} to continue the ${pathInfo.sequenceLabel}.`;
 
     finalScore.textContent = `You got ${state.score} out of ${activeQuestions.length} on ${formatLabel(state.topic)} ${formatLabel(state.level)} (${pathLabel}, ${unitLabel}). ${completionLine} ${nextStepLine} Final ${formatLabel(state.topic)} course score: ${finalLanguageText}.`;
@@ -5756,26 +9698,21 @@ function startQuiz() {
   }
   if (state.fullQuiz) {
     state.unit = "all";
-    state.level = "medium";
-    state.mode = "mixed";
     state.moduleQuizPart = 1;
     state.moduleQuizTotal = 1;
+    state.level = "medium";
+    state.mode = "mixed";
     pendingCourseGateMessage = "";
   } else {
     const requestedModule = state.unit;
     const allowedModule = getAllowedModuleForCourse(state.topic, requestedModule);
     state.unit = allowedModule;
     pendingCourseGateMessage = buildCourseGateMessage(state.topic, requestedModule, allowedModule, state.path);
+    state.moduleQuizTotal = getModuleQuizCount(state.topic, state.unit);
+    state.moduleQuizPart = state.manualUnitOverride
+      ? Math.min(Math.max(Number(state.moduleQuizPart) || 1, 1), state.moduleQuizTotal)
+      : getNextRequiredQuizPart(state.topic, state.unit);
     state.level = resolveProgressiveLevel(state.unit);
-  }
-
-  if (!state.fullQuiz && state.topic && state.unit && state.unit !== "all" && !hasCompletedModuleStudyGuide(state.topic, state.unit)) {
-    const studyParams = new URLSearchParams();
-    studyParams.set("topic", state.topic);
-    studyParams.set("unit", state.unit);
-    studyParams.set("return", "trainer");
-    window.location.href = `study-guide.html?${studyParams.toString()}`;
-    return;
   }
 
   renderCourseRoadmap();
@@ -5961,8 +9898,20 @@ changeLevelBtn.addEventListener("click", showLevelSelection);
 changeTopicBtn.addEventListener("click", showTopicSelection);
 resetProgressBtn.addEventListener("click", resetCurrentLanguageProgress);
 
+ensureMinimumCourseCoverage();
+applyTopicQuestionUniqueness();
+enforceUniformModuleQuestionPools(questionsPerQuiz * quizzesPerModule);
+applyTopicQuestionUniqueness();
+let uniformPoolAudit = auditUniformModuleQuestionPools(questionsPerQuiz * quizzesPerModule);
+if (hasUniformPoolDeficits(uniformPoolAudit)) {
+  enforceUniformModuleQuestionPools(questionsPerQuiz * quizzesPerModule);
+  applyTopicQuestionUniqueness();
+  uniformPoolAudit = auditUniformModuleQuestionPools(questionsPerQuiz * quizzesPerModule);
+}
+
 if (initialTopic) {
   state.topic = initialTopic;
+  state.source = initialSource;
   setTopicHeader(initialTopic);
   renderLanguageProgress();
   renderCourseRoadmap();
@@ -5972,6 +9921,23 @@ if (initialTopic) {
     state.fullQuiz = true;
     state.unit = "all";
     state.manualUnitOverride = true;
+  } else if (initialMode) {
+    if (initialMode === "debug") {
+      applyPathPreset("debug");
+    } else if (initialMode === "output") {
+      applyPathPreset("output");
+    } else {
+      applyPathPreset("guided");
+    }
+    state.fullQuiz = false;
+    state.mode = initialMode;
+    if (initialUnit) {
+      state.unit = initialUnit;
+      state.manualUnitOverride = true;
+    } else if (initialMode === "debug") {
+      state.unit = initialSource === "workshop" ? "all" : "5";
+      state.manualUnitOverride = true;
+    }
   } else if (initialUnit) {
     const pathFromUnit = resolvePathFromUnit(initialUnit);
     applyPathPreset(pathFromUnit);

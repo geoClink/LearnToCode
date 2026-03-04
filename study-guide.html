@@ -7,20 +7,224 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app guide-layout">
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-brand" href="index.html">LearnToCode</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="site-nav-link" href="index.html">Home</a>
+          <a class="site-nav-link" href="workshop.html">Workshop</a>
+          <a class="site-nav-link" href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="guide-page-shell">
+      <aside class="card guide-sidebar" aria-label="Study guide navigation">
+        <h2>Study Guide Navigation</h2>
+        <p>Jump directly to any language or track.</p>
+        <nav class="guide-sidebar-links">
+          <a class="sidebar-topic-link" data-topic="bash" href="study-guide.html?topic=bash">Bash / Shell</a>
+          <a class="sidebar-topic-link" data-topic="csharp" href="study-guide.html?topic=csharp">C#</a>
+          <a class="sidebar-topic-link" data-topic="cpp" href="study-guide.html?topic=cpp">C++</a>
+          <a class="sidebar-topic-link" data-topic="aiassist" href="study-guide.html?topic=aiassist">AI Coding Assistants</a>
+          <a class="sidebar-topic-link" data-topic="cloudkit" href="study-guide.html?topic=cloudkit">CloudKit</a>
+          <a class="sidebar-topic-link" data-topic="dart" href="study-guide.html?topic=dart">Dart + Flutter</a>
+          <a class="sidebar-topic-link" data-topic="firebase" href="study-guide.html?topic=firebase">Firebase</a>
+          <a class="sidebar-topic-link" data-topic="go" href="study-guide.html?topic=go">Go</a>
+          <a class="sidebar-topic-link" data-topic="web" href="study-guide.html?topic=web">HTML + CSS + JavaScript</a>
+          <a class="sidebar-topic-link" data-topic="ides" href="study-guide.html?topic=ides">IDEs</a>
+          <a class="sidebar-topic-link" data-topic="java" href="study-guide.html?topic=java">Java</a>
+          <a class="sidebar-topic-link" data-topic="kotlin" href="study-guide.html?topic=kotlin">Kotlin</a>
+          <a class="sidebar-topic-link" data-topic="markdown" href="study-guide.html?topic=markdown">Markdown</a>
+          <a class="sidebar-topic-link" data-topic="php" href="study-guide.html?topic=php">PHP</a>
+          <a class="sidebar-topic-link" data-topic="python" href="study-guide.html?topic=python">Python</a>
+          <a class="sidebar-topic-link" data-topic="react" href="study-guide.html?topic=react">React</a>
+          <a class="sidebar-topic-link" data-topic="rust" href="study-guide.html?topic=rust">Rust</a>
+          <a class="sidebar-topic-link" data-topic="sql" href="study-guide.html?topic=sql">SQL</a>
+          <a class="sidebar-topic-link" data-topic="sourcecontrol" href="study-guide.html?topic=sourcecontrol">Source Control</a>
+          <a class="sidebar-topic-link" data-topic="swift" href="study-guide.html?topic=swift">Swift + SwiftUI</a>
+          <a class="sidebar-topic-link" data-topic="typescript" href="study-guide.html?topic=typescript">TypeScript</a>
+        </nav>
+      </aside>
+
+      <main class="app guide-layout">
       <header class="header card">
-        <h1>Original Study Guide</h1>
+        <h1>Study Guide</h1>
         <p>
           This guide was written specifically for this project to match the quiz topics.
           Read a section first, then return to the quiz.
         </p>
         <p class="study-link-wrap">
-          <a class="study-link" href="index.html">Back to Quiz</a>
+          <a id="backToQuizLink" class="study-link" href="index.html">Back to Language Options</a>
         </p>
+
+        <section class="guide-readability-controls" aria-label="Guide readability controls">
+          <div class="guide-controls-row">
+            <button type="button" id="guideExpandAllBtn" class="study-link secondary">Expand All Sections</button>
+            <button type="button" id="guideCollapseAllBtn" class="study-link secondary">Collapse All Sections</button>
+            <button type="button" id="guideFocusModeBtn" class="study-link secondary">Enable Focus Mode</button>
+          </div>
+          <div class="guide-controls-row">
+            <label for="guideJumpSelect">Jump to section</label>
+            <select id="guideJumpSelect" class="blank-input"></select>
+          </div>
+          <p id="guideReadabilityStatus" class="guide-readability-status">Readability mode ready.</p>
+        </section>
       </header>
 
+      <section class="card architecture-prep-card" id="learningSystemCard">
+        <h2>Zero-to-Proficient Learning System (Start Here)</h2>
+        <p>
+          If you have never coded before, use this exact framework first. If you already code,
+          use it as a skills-gap checklist to make sure your fundamentals are complete.
+        </p>
+
+        <h3>Learning Loop (Use Every Day)</h3>
+        <ul>
+          <li><strong>1) Read:</strong> Study one small topic at a time (about 20-30 minutes) from the selected language section.</li>
+          <li><strong>2) Reproduce:</strong> Type the concept yourself from memory, not copy/paste, and run it until it works.</li>
+          <li><strong>3) Explain:</strong> Write a 2-3 sentence plain-English explanation of what the code does and why.</li>
+          <li><strong>4) Modify:</strong> Change one variable, condition, or input and predict the output before running it.</li>
+          <li><strong>5) Reflect:</strong> Log one mistake you made and one pattern you learned so tomorrow starts stronger.</li>
+        </ul>
+
+        <h3>Beginner Roadmap (0-12 Weeks)</h3>
+        <ul>
+          <li><strong>Weeks 1-2:</strong> Learn syntax, variables, conditionals, loops, and functions; build tiny daily exercises and focus on understanding output.</li>
+          <li><strong>Weeks 3-4:</strong> Practice data structures and basic problem solving; create 2-3 small console or browser mini-projects.</li>
+          <li><strong>Weeks 5-6:</strong> Learn debugging workflow and error handling; fix broken snippets and document root cause + fix path.</li>
+          <li><strong>Weeks 7-8:</strong> Build one intermediate project with clear modules/components and reusable functions.</li>
+          <li><strong>Weeks 9-10:</strong> Add tests, logging, and input validation; make your code robust under bad inputs and edge cases.</li>
+          <li><strong>Weeks 11-12:</strong> Ship a portfolio-ready capstone with README, architecture notes, and a post-project lessons learned report.</li>
+        </ul>
+
+        <h3>Practice Types You Should Rotate</h3>
+        <ul>
+          <li><strong>Vocabulary drills:</strong> Build fluency with language terms, syntax forms, and common APIs.</li>
+          <li><strong>True/false checks:</strong> Validate conceptual understanding quickly before writing code.</li>
+          <li><strong>Code-writing reps:</strong> Write short snippets daily so syntax and patterns become automatic.</li>
+          <li><strong>Debug reps:</strong> Intentionally fix incorrect code to build confidence under real pressure.</li>
+          <li><strong>Output prediction:</strong> Predict first, run second, compare third to improve reasoning skill.</li>
+        </ul>
+
+        <h3>Beginner Rules That Accelerate Progress</h3>
+        <ul>
+          <li><strong>Small scope wins:</strong> Finish tiny projects end-to-end before starting bigger ones.</li>
+          <li><strong>Consistency over intensity:</strong> One focused hour daily beats occasional long sessions.</li>
+          <li><strong>No silent confusion:</strong> When stuck, write exactly what you expected vs what happened.</li>
+          <li><strong>Build while learning:</strong> Every concept should connect to a feature in a real mini-project.</li>
+          <li><strong>Track mastery:</strong> Revisit weak topics every week until you can teach them clearly.</li>
+        </ul>
+      </section>
+
+      <section class="card interview-prep-card hidden" id="moduleFocusCard">
+        <h2 id="moduleFocusTitle">Module Study Focus</h2>
+        <p id="moduleFocusIntro">Study these focus points before starting the module quiz.</p>
+        <ul id="moduleFocusList"></ul>
+        <p class="study-link-wrap">
+          <a id="startModuleQuizLink" class="study-link" href="trainer.html">Start Module Quiz</a>
+        </p>
+      </section>
+
+      <section class="card interview-prep-card" id="languageOverviewCard">
+        <h2 id="guideOverviewTitle">Language Snapshot</h2>
+        <p id="guideOverviewSubtitle">Choose a language to see its quick snapshot before you start quiz modules.</p>
+
+        <h3>Main Use</h3>
+        <p id="guideOverviewMainUse">Select a language to see what it is most commonly used for.</p>
+
+        <h3>Brief History</h3>
+        <p id="guideOverviewHistory">Select a language to see a short history timeline.</p>
+
+        <h3>Popular Industries</h3>
+        <ul id="guideOverviewIndustries">
+          <li>Select a language to see where it is commonly used in industry.</li>
+        </ul>
+      </section>
+
+      <section class="card interview-prep-card" id="interviewPrepCard">
+        <h2 id="interviewTitle">Interview Prep</h2>
+        <p id="interviewIntro">Choose a language to see focused interview tips and common test problems.</p>
+
+        <h3>Tips</h3>
+        <ul id="interviewTipsList"></ul>
+
+        <h3>Common Problems / Tests</h3>
+        <ul id="interviewTestsList"></ul>
+      </section>
+
+      <section class="card architecture-prep-card" id="architecturePrepCard">
+        <h2 id="architectureTitle">Architecture Styles</h2>
+        <p id="architectureIntro">Learn common architecture patterns and where they fit best.</p>
+
+        <h3>Common Patterns (General)</h3>
+        <ul id="architecturePatternsList"></ul>
+
+        <h3>Best Fit for This Language</h3>
+        <ul id="architectureLanguageList"></ul>
+      </section>
+
+      <section class="card architecture-prep-card" id="completionPrepCard">
+        <h2 id="completionTitle">Course Completion Pack</h2>
+        <p id="completionIntro">Use this section to finish each language like a real curriculum, not just a quiz track.</p>
+
+        <h3>Capstone Milestones</h3>
+        <ul id="completionMilestonesList"></ul>
+
+        <h3>Production Skills Checklist</h3>
+        <ul id="completionProductionList"></ul>
+
+        <h3>Portfolio Outcome</h3>
+        <ul id="completionPortfolioList"></ul>
+
+        <h3>Assessment Rubric</h3>
+        <ul id="completionRubricList"></ul>
+      </section>
+
+      <section class="card architecture-prep-card" id="proDepthCard">
+        <h2>Seasoned Coder Depth Track (Advanced Practice)</h2>
+        <p>
+          If you already code, use this track to level up architecture quality, performance,
+          reliability, and mentoring skills while still sharpening fundamentals.
+        </p>
+
+        <h3>Advanced Weekly Structure</h3>
+        <ul>
+          <li><strong>2 sessions:</strong> Deep implementation work (feature build or refactor with measurable outcomes).</li>
+          <li><strong>1 session:</strong> Performance and observability pass (profiling, logs, bottleneck review, optimization notes).</li>
+          <li><strong>1 session:</strong> Reliability pass (failure modes, retries, edge-case testing, error taxonomy cleanup).</li>
+          <li><strong>1 session:</strong> Architecture/documentation pass (design decisions, tradeoffs, and operational readiness).</li>
+        </ul>
+
+        <h3>Engineering Depth Checklist</h3>
+        <ul>
+          <li><strong>Architecture:</strong> Can you justify boundaries, interfaces, and dependency direction under change?</li>
+          <li><strong>Performance:</strong> Do you know top latency/memory hotspots and why they exist?</li>
+          <li><strong>Reliability:</strong> Are failures observable, recoverable, and user-safe by default?</li>
+          <li><strong>Security mindset:</strong> Are inputs validated, secrets protected, and dangerous operations constrained?</li>
+          <li><strong>Maintainability:</strong> Could a teammate ship a safe change in your code within one day?</li>
+        </ul>
+
+        <h3>Deliberate Practice for Senior Growth</h3>
+        <ul>
+          <li><strong>Refactor kata:</strong> Take one messy module each week and improve readability, testability, and boundaries.</li>
+          <li><strong>Failure drills:</strong> Simulate bad network/data/runtime conditions and verify graceful degradation behavior.</li>
+          <li><strong>Complexity audits:</strong> Identify high-branch or deeply nested logic and simplify with clearer models.</li>
+          <li><strong>Review writing:</strong> Practice concise code review feedback that explains risk, impact, and suggested fix.</li>
+          <li><strong>Teaching reps:</strong> Explain one advanced concept to beginners weekly to strengthen your own mental models.</li>
+        </ul>
+
+        <h3>Project Ladder (Beginner to Advanced)</h3>
+        <ul>
+          <li><strong>Level 1:</strong> Small utilities and focused exercises (single-file or single-feature projects).</li>
+          <li><strong>Level 2:</strong> Multi-feature apps with reusable components/modules and clear folder boundaries.</li>
+          <li><strong>Level 3:</strong> Data-backed apps with robust validation, error handling, and test coverage.</li>
+          <li><strong>Level 4:</strong> Production-style apps with monitoring, performance tuning, and architecture documentation.</li>
+        </ul>
+      </section>
+
       <section class="guide-grid">
-        <article class="card guide-section">
+        <article class="card guide-section" data-topic="swift">
           <h2>Swift + SwiftUI</h2>
 
           <h3>Core Mindset</h3>
@@ -85,6 +289,15 @@
             <li><strong>Async call:</strong> <em>let data = try await service.load()</em></li>
           </ul>
 
+          <h3>SwiftUI Previews (Important)</h3>
+          <ul>
+            <li><strong>What previews are:</strong> SwiftUI previews let you render your view in Xcode without running the full app on a simulator each time.</li>
+            <li><strong>Why they matter:</strong> They speed up UI iteration and make it easier to check spacing, text wrapping, and state-driven layout changes quickly.</li>
+            <li><strong>Typical shape:</strong> A preview provider (or preview macro in modern templates) creates one or more sample view states.</li>
+            <li><strong>Best practice:</strong> Preview multiple states (empty/loading/error/populated) so UI issues show up before integration.</li>
+            <li><strong>Workflow tip:</strong> Keep preview data lightweight and deterministic so design and debugging feedback stays fast.</li>
+          </ul>
+
           <h3>Deep-Dive Practice Ideas</h3>
           <ul>
             <li>Create a small task app with add/remove actions and local persistence.</li>
@@ -103,13 +316,71 @@
             <li><strong>Reproduce quickly:</strong> Create a minimal failing example in a tiny view before touching full screens.</li>
           </ul>
 
-          <h3>Swift Progression Path</h3>
+          <h3>SwiftUI TestFlight + App Store Release Flow</h3>
           <ul>
-            <li><strong>Phase 1:</strong> Learn variables, optionals, arrays, loops, and functions.</li>
-            <li><strong>Phase 2:</strong> Build SwiftUI layouts with stacks, modifiers, and reusable components.</li>
-            <li><strong>Phase 3:</strong> Add state management using @State, @Binding, and observable models.</li>
-            <li><strong>Phase 4:</strong> Introduce networking, decoding, loading states, and robust error handling.</li>
-            <li><strong>Phase 5:</strong> Improve architecture, accessibility, and performance with targeted profiling.</li>
+            <li><strong>Release config first:</strong> Confirm bundle identifier, version/build numbers, signing team, and capabilities are correct in Xcode before archive.</li>
+            <li><strong>Archive and validate:</strong> Build a Release archive in Xcode Organizer, then run validation checks to catch signing and metadata issues early.</li>
+            <li><strong>Upload to App Store Connect:</strong> Distribute the archive to App Store Connect and wait for processing before attaching it to a TestFlight build.</li>
+            <li><strong>Internal TestFlight:</strong> Start with internal testers for fast checks on crashes, onboarding, and critical user paths.</li>
+            <li><strong>External TestFlight:</strong> Add test notes, export compliance details, and submit the build for beta review before inviting external testers.</li>
+            <li><strong>Crash and analytics loop:</strong> Review crashes, hangs, and feedback every build cycle; ship fixes with clear release notes and incremented build numbers.</li>
+            <li><strong>App Store readiness:</strong> Prepare app privacy, screenshots, age rating, app description, and support URL before final submission.</li>
+            <li><strong>Submission + rollout:</strong> Submit for App Review, monitor rejection feedback quickly, then release manually or phased rollout after approval.</li>
+            <li><strong>Post-release discipline:</strong> Watch crash-free rate, login/payment success paths, and update cadence in the first 48 hours after launch.</li>
+          </ul>
+
+          <h3>Production Essentials (Swift Developer Checklist)</h3>
+          <ul>
+            <li><strong>Architecture choices:</strong> Keep feature boundaries clear with testable services, view models, and protocol-driven dependencies.</li>
+            <li><strong>Memory discipline:</strong> Understand ARC strongly/weakly captured references and avoid retain cycles in closures.</li>
+            <li><strong>Concurrency safety:</strong> Use <em>Task</em>, <em>TaskGroup</em>, and cancellation-aware workflows; keep UI updates on <em>@MainActor</em>.</li>
+            <li><strong>Networking quality:</strong> Build resilient URLSession clients with retries, timeout strategy, and typed <em>Codable</em> decoding.</li>
+            <li><strong>Error modeling:</strong> Normalize backend and local failures into user-safe states with meaningful recovery options.</li>
+            <li><strong>Dependency management:</strong> Prefer Swift Package Manager with pinned versions and modular package boundaries.</li>
+            <li><strong>Observability:</strong> Add structured logs, analytics events, and crash monitoring for real production diagnosis.</li>
+          </ul>
+
+          <h3>Data, Persistence, and Sync</h3>
+          <ul>
+            <li><strong>Local models first:</strong> Model app state with clear entities before wiring network sync.</li>
+            <li><strong>Persistence options:</strong> Use SwiftData/Core Data intentionally based on complexity, relationships, and query needs.</li>
+            <li><strong>Offline behavior:</strong> Design for no-network scenarios with cached reads and deterministic retry strategies.</li>
+            <li><strong>Conflict strategy:</strong> Define merge rules for simultaneous updates so users do not lose data unexpectedly.</li>
+            <li><strong>Cloud sync boundaries:</strong> Separate private user data from shared/public data and enforce ownership rules.</li>
+            <li><strong>CloudKit fit:</strong> Prefer CloudKit for Apple-first apps needing iCloud identity, private/shared databases, and platform-native sync.</li>
+            <li><strong>Firebase fit:</strong> Prefer Firebase when you need cross-platform auth/data services and faster multi-platform backend iteration.</li>
+            <li><strong>Backend decision skill:</strong> Be able to explain tradeoffs (cost, lock-in, offline behavior, security rules, and team expertise) in interviews.</li>
+            <li><strong>Migrations:</strong> Plan schema evolution and migration testing early to avoid data loss in app updates.</li>
+          </ul>
+
+          <h3>Job-Readiness Basics (Must-Have for Entry Roles)</h3>
+          <ul>
+            <li><strong>State modeling:</strong> Implement idle/loading/success/error states without ambiguous UI transitions.</li>
+            <li><strong>Networking fundamentals:</strong> Build one clean service layer with URLSession, Codable decoding, retries, and typed errors.</li>
+            <li><strong>Persistence fundamentals:</strong> Persist and restore user-critical data safely across app restarts.</li>
+            <li><strong>Testing fundamentals:</strong> Write unit tests for view-model/service logic and show you can prevent regressions.</li>
+            <li><strong>Debugging fundamentals:</strong> Reproduce bugs, isolate root cause, and explain fix verification steps clearly.</li>
+            <li><strong>Architecture fundamentals:</strong> Keep view code thin and isolate business logic behind protocol-driven boundaries.</li>
+            <li><strong>Security fundamentals:</strong> Store sensitive tokens in Keychain and validate untrusted inputs before state mutation.</li>
+            <li><strong>Delivery fundamentals:</strong> Ship a small app with README, setup steps, architecture notes, and known tradeoffs.</li>
+          </ul>
+
+          <h3>Quality, Security, and Accessibility</h3>
+          <ul>
+            <li><strong>Testing pyramid:</strong> Prioritize unit tests for business logic, integration tests for services, and targeted UI tests for critical flows.</li>
+            <li><strong>Secure storage:</strong> Keep secrets and tokens in Keychain, not plain UserDefaults.</li>
+            <li><strong>Input hardening:</strong> Validate inputs and server responses at trust boundaries before state mutation.</li>
+            <li><strong>Privacy readiness:</strong> Request minimal permissions and keep data collection transparent and intentional.</li>
+            <li><strong>Accessibility baseline:</strong> Ensure VoiceOver labels, Dynamic Type support, and sufficient contrast for key interactions.</li>
+            <li><strong>Localization mindset:</strong> Externalize strings and test layout behavior across longer translated text.</li>
+          </ul>
+
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn variables, optionals, arrays, loops, and SwiftUI layout basics.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Add state management and debug data flow with @State, @Binding, and observable models.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict and validate output for async work, computed views, and user interactions.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Improve architecture, accessibility, and performance with production-style patterns.</li>
           </ul>
 
           <h3>Swift Self-Check</h3>
@@ -121,8 +392,9 @@
           </ul>
         </article>
 
-        <article class="card guide-section">
+        <article class="card guide-section" data-topic="web">
           <h2>HTML + CSS + JavaScript</h2>
+          <p><strong>Full names:</strong> HTML = HyperText Markup Language, CSS = Cascading Style Sheets, and JS = JavaScript.</p>
 
           <h3>Core Mindset</h3>
           <ul>
@@ -204,13 +476,12 @@
             <li><strong>Validate data shape:</strong> Confirm API responses and guard against missing fields.</li>
           </ul>
 
-          <h3>Web Progression Path</h3>
+          <h3>Course Path Alignment</h3>
           <ul>
-            <li><strong>Phase 1:</strong> Build semantic HTML pages with clean heading structure and forms.</li>
-            <li><strong>Phase 2:</strong> Learn layout fundamentals: box model, spacing, Flexbox, and Grid.</li>
-            <li><strong>Phase 3:</strong> Add JavaScript interactivity with DOM selection and event handling.</li>
-            <li><strong>Phase 4:</strong> Handle asynchronous data with loading/error/empty states.</li>
-            <li><strong>Phase 5:</strong> Improve accessibility, performance, and maintainable code organization.</li>
+            <li><strong>Guided Start (Modules 1-4):</strong> Build semantic HTML pages and core CSS layout foundations.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug DOM interactions, event handlers, and styling conflicts.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict runtime behavior for scripts, async fetch flows, and UI state changes.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Improve accessibility, performance, and maintainable architecture patterns.</li>
           </ul>
 
           <h3>Web Self-Check</h3>
@@ -222,7 +493,7 @@
           </ul>
         </article>
 
-        <article class="card guide-section">
+        <article class="card guide-section" data-topic="react">
           <h2>React</h2>
 
           <h3>Core Mindset</h3>
@@ -305,13 +576,12 @@
             <li><strong>Reduce complexity:</strong> Reproduce bugs in smaller components to isolate state boundaries.</li>
           </ul>
 
-          <h3>React Progression Path</h3>
+          <h3>Course Path Alignment</h3>
           <ul>
-            <li><strong>Phase 1:</strong> Learn JSX, props, and component composition fundamentals.</li>
-            <li><strong>Phase 2:</strong> Build local interactivity with useState and controlled inputs.</li>
-            <li><strong>Phase 3:</strong> Manage side effects and data fetching with useEffect patterns.</li>
-            <li><strong>Phase 4:</strong> Extract custom hooks and structure shared state with Context where appropriate.</li>
-            <li><strong>Phase 5:</strong> Profile and optimize performance after correctness and readability are solid.</li>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn JSX, props, and component composition fundamentals.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug useState updates, controlled inputs, and effect dependency issues.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict re-render behavior and output changes from state transitions.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Extract custom hooks, scale shared state, and optimize performance intentionally.</li>
           </ul>
 
           <h3>React Self-Check</h3>
@@ -322,7 +592,1219 @@
             <li>Can you extract repeated stateful behavior into a clean custom hook?</li>
           </ul>
         </article>
+
+        <article class="card guide-section" data-topic="python">
+          <h2>Python</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Readability first:</strong> Python rewards clear naming, small functions, and straightforward control flow.</li>
+            <li><strong>Use built-ins well:</strong> Lists, dicts, sets, and comprehensions solve many problems without heavy abstractions.</li>
+            <li><strong>Fast feedback loops:</strong> Validate assumptions with small tests or quick REPL checks early.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Data basics:</strong> Variables, strings, numbers, lists/tuples, and conditional branching.</li>
+            <li><strong>Function shape:</strong> Define clear functions with <em>def</em>, predictable params, and explicit returns.</li>
+            <li><strong>Loop fluency:</strong> Use <em>for</em>, <em>while</em>, and <em>enumerate</em> intentionally.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Collections and transforms:</strong> Use dict/set operations and list comprehensions for concise logic.</li>
+            <li><strong>Module boundaries:</strong> Organize utilities into modules and import with clear ownership.</li>
+            <li><strong>Error strategy:</strong> Use exceptions intentionally, not as hidden control flow.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Generators/iterators:</strong> Stream large data efficiently with <em>yield</em>.</li>
+            <li><strong>Typing for clarity:</strong> Add type hints to improve readability and tooling support.</li>
+            <li><strong>Production readiness:</strong> Combine logging, tests, and validation for robust scripts/services.</li>
+          </ul>
+          <h3>Common Python Mistakes</h3>
+          <ul>
+            <li>Mutating shared lists/dicts unexpectedly across functions.</li>
+            <li>Broad <em>except</em> blocks that hide real errors.</li>
+            <li>Inconsistent indentation and unclear variable naming.</li>
+            <li>Skipping tests for edge cases like empty/None inputs.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Function:</strong> <em>def add(a, b): return a + b</em></li>
+            <li><strong>List comprehension:</strong> <em>[x * 2 for x in nums]</em></li>
+            <li><strong>Dict lookup safe:</strong> <em>value = data.get("key", default)</em></li>
+            <li><strong>Try/except:</strong> <em>try: ... except ValueError: ...</em></li>
+            <li><strong>Type hint:</strong> <em>def parse(items: list[str]) -&gt; int:</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a CLI to parse CSV data and summarize metrics.</li>
+            <li>Implement a small API client with retry and timeout handling.</li>
+            <li>Refactor procedural code into testable modules/functions.</li>
+            <li>Solve algorithm drills and annotate complexity choices.</li>
+          </ul>
+          <h3>Python Debugging Workflow</h3>
+          <ul>
+            <li><strong>Reproduce reliably:</strong> Isolate the smallest input that still fails.</li>
+            <li><strong>Inspect data shape:</strong> Print/log critical values before and after transformations.</li>
+            <li><strong>Check assumptions:</strong> Validate None/empty values at boundaries.</li>
+            <li><strong>Lock behavior:</strong> Add tests after fixing to prevent regression.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Master syntax, functions, and common collections.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Build scripts with modules and isolate logic/data bugs quickly.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Practice output prediction for loops, transforms, and conditional flows.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Add testing, logging, type hints, and production-style architecture.</li>
+          </ul>
+          <h3>Python Self-Check</h3>
+          <ul>
+            <li>Can you explain why a dict vs list is better for a task?</li>
+            <li>Can you handle bad input and still return useful errors?</li>
+            <li>Can you split a long script into reusable modules?</li>
+            <li>Can you write tests for both happy-path and edge cases?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="typescript">
+          <h2>TypeScript</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Types as design:</strong> Define data contracts first, then implement logic against them.</li>
+            <li><strong>Compiler as teammate:</strong> Let strict checks catch issues before runtime.</li>
+            <li><strong>Runtime still matters:</strong> TypeScript improves safety but does not replace input validation.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Type annotations:</strong> Primitives, arrays, and object basics with explicit types.</li>
+            <li><strong>Function contracts:</strong> Add typed params and return values consistently.</li>
+            <li><strong>Null awareness:</strong> Handle optional values safely from day one.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Interface/type aliases:</strong> Model shared domain objects clearly.</li>
+            <li><strong>Unions and narrowing:</strong> Use guards to safely branch by shape/type.</li>
+            <li><strong>Generics basics:</strong> Reuse logic with type-safe abstractions.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Utility patterns:</strong> Leverage <em>Partial</em>, <em>Pick</em>, <em>Omit</em>, and mapped types.</li>
+            <li><strong>Advanced narrowing:</strong> Build discriminated unions for state machines.</li>
+            <li><strong>API robustness:</strong> Validate runtime payloads despite compile-time typing.</li>
+          </ul>
+          <h3>Common TypeScript Mistakes</h3>
+          <ul>
+            <li>Overusing <em>any</em> and losing type safety where it matters most.</li>
+            <li>Assuming typed API responses are always valid at runtime.</li>
+            <li>Ignoring nullability warnings until they become runtime failures.</li>
+            <li>Creating deep generic complexity without readability benefits.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Interface:</strong> <em>interface User { id: number; name: string }</em></li>
+            <li><strong>Union:</strong> <em>type State = "idle" | "loading" | "done"</em></li>
+            <li><strong>Generic:</strong> <em>function first&lt;T&gt;(items: T[]): T</em></li>
+            <li><strong>Narrowing:</strong> <em>if (typeof x === "string") { ... }</em></li>
+            <li><strong>Optional chaining:</strong> <em>user?.profile?.name</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Type a full API client with request/response interfaces.</li>
+            <li>Build form validation using discriminated union states.</li>
+            <li>Refactor any-heavy codebase to strict mode.</li>
+            <li>Create reusable generic utilities with tests.</li>
+          </ul>
+          <h3>TypeScript Debugging Workflow</h3>
+          <ul>
+            <li><strong>Compiler first:</strong> Resolve top-most type errors before runtime checks.</li>
+            <li><strong>Runtime guard next:</strong> Validate external data shape at boundaries.</li>
+            <li><strong>Narrow aggressively:</strong> Remove ambiguity before property access.</li>
+            <li><strong>Lock fixes:</strong> Add tests to cover union/null edge cases.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn core annotations and function typing.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug unions, narrowing issues, and null/undefined edge cases.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict runtime outcomes from typed contracts and control-flow narrowing.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Add generics, utility types, and strict app-boundary validation.</li>
+          </ul>
+          <h3>TypeScript Self-Check</h3>
+          <ul>
+            <li>Can you model app state without falling back to <em>any</em>?</li>
+            <li>Can you explain compile-time vs runtime guarantees clearly?</li>
+            <li>Can you safely narrow unknown data before using it?</li>
+            <li>Can you build generic utilities that stay readable?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="java">
+          <h2>Java</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Object-oriented clarity:</strong> Design around classes, interfaces, and explicit responsibilities.</li>
+            <li><strong>Type discipline:</strong> Let the compiler enforce contract correctness early.</li>
+            <li><strong>Maintainable structure:</strong> Prefer clear package boundaries and small focused methods.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Syntax foundation:</strong> Main method, variables, loops, conditionals, and output.</li>
+            <li><strong>Strong typing:</strong> Match declarations and assignments carefully.</li>
+            <li><strong>Compilation cycle:</strong> Build often and fix first errors first.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Class modeling:</strong> Constructors, encapsulation, and behavior methods.</li>
+            <li><strong>Collections:</strong> Use List/Map/Set intentionally based on access patterns.</li>
+            <li><strong>Abstractions:</strong> Prefer interfaces and composition over deep inheritance.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Robust services:</strong> Exceptions, layering, and dependency injection basics.</li>
+            <li><strong>Modern APIs:</strong> Streams/lambdas for clear data transformations.</li>
+            <li><strong>Scalability mindset:</strong> Keep business logic testable and decoupled.</li>
+          </ul>
+          <h3>Common Java Mistakes</h3>
+          <ul>
+            <li>Overusing static/global state and increasing coupling.</li>
+            <li>Null handling gaps that cause runtime exceptions.</li>
+            <li>Huge classes that mix data, logic, and transport concerns.</li>
+            <li>Ignoring collection choice and causing avoidable performance issues.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Class:</strong> <em>class User { private String name; }</em></li>
+            <li><strong>Main:</strong> <em>public static void main(String[] args)</em></li>
+            <li><strong>List:</strong> <em>List&lt;String&gt; names = new ArrayList&lt;&gt;();</em></li>
+            <li><strong>Interface:</strong> <em>interface Repository { ... }</em></li>
+            <li><strong>Stream map:</strong> <em>items.stream().map(...).toList()</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a layered CRUD API with controller/service/repository separation.</li>
+            <li>Refactor inheritance-heavy code to interface composition.</li>
+            <li>Implement collection-based coding challenges with complexity notes.</li>
+            <li>Add unit tests around service logic and edge cases.</li>
+          </ul>
+          <h3>Java Debugging Workflow</h3>
+          <ul>
+            <li><strong>Compile first:</strong> Clear syntax/type issues before runtime investigation.</li>
+            <li><strong>Read stack traces:</strong> Start at the first relevant app frame.</li>
+            <li><strong>Inspect state:</strong> Use debugger/watch expressions for object values.</li>
+            <li><strong>Add tests:</strong> Reproduce and lock bug fixes in automated tests.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Master syntax and object-oriented fundamentals.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug null, loop, and collection issues in modular class design.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict outputs and side effects across methods, collections, and conditions.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Add interfaces, exceptions, layered architecture, and production profiling practices.</li>
+          </ul>
+          <h3>Java Self-Check</h3>
+          <ul>
+            <li>Can you justify when to use interface vs abstract class?</li>
+            <li>Can you diagnose null and collection bugs quickly?</li>
+            <li>Can you keep service logic independent from transport code?</li>
+            <li>Can you write tests for both success and failure paths?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="kotlin">
+          <h2>Kotlin</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Safety + readability:</strong> Kotlin favors concise code with explicit null handling.</li>
+            <li><strong>Expression-oriented style:</strong> Use <em>when</em>, data classes, and immutable values for clarity.</li>
+            <li><strong>Async with structure:</strong> Coroutines should be scoped intentionally to avoid lifecycle bugs.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Core syntax:</strong> <em>val</em>/<em>var</em>, strings, conditions, loops, and functions.</li>
+            <li><strong>Null safety:</strong> Practice nullable types, safe-call, and Elvis operator.</li>
+            <li><strong>Small clean functions:</strong> Prefer expression bodies where it improves readability.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Data modeling:</strong> Use data classes for domain objects and copy-based updates.</li>
+            <li><strong>Collection fluency:</strong> <em>map/filter/groupBy</em> pipelines for readable transforms.</li>
+            <li><strong>Extension functions:</strong> Add utility behavior without polluting core models.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Coroutines:</strong> Structured concurrency, cancellation handling, and dispatcher awareness.</li>
+            <li><strong>State modeling:</strong> Use sealed classes for exhaustive UI/business states.</li>
+            <li><strong>Android/backend quality:</strong> Keep coroutine and lifecycle boundaries explicit.</li>
+          </ul>
+          <h3>Common Kotlin Mistakes</h3>
+          <ul>
+            <li>Using <em>!!</em> too often and reintroducing null crashes.</li>
+            <li>Launching coroutines in the wrong scope and leaking work.</li>
+            <li>Mixing UI and business logic without clear layer boundaries.</li>
+            <li>Ignoring immutable data updates and causing state drift.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Read-only value:</strong> <em>val name = "Sam"</em></li>
+            <li><strong>Safe call + fallback:</strong> <em>val len = text?.length ?: 0</em></li>
+            <li><strong>Data class:</strong> <em>data class User(val id: Int, val name: String)</em></li>
+            <li><strong>When expression:</strong> <em>val color = when(state) { ... }</em></li>
+            <li><strong>Suspend function:</strong> <em>suspend fun load(): Result</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a small Android feature with MVVM + repository + coroutine flows.</li>
+            <li>Model screen state with sealed classes and exhaustive rendering.</li>
+            <li>Refactor Java-style code to idiomatic Kotlin expressions.</li>
+            <li>Add tests for coroutine cancellation and error pathways.</li>
+          </ul>
+          <h3>Kotlin Debugging Workflow</h3>
+          <ul>
+            <li><strong>Nullability first:</strong> Audit all nullable boundaries before runtime assumptions.</li>
+            <li><strong>Coroutine tracing:</strong> Verify scope, dispatcher, and cancellation behavior.</li>
+            <li><strong>State exhaustiveness:</strong> Confirm sealed states are fully handled in <em>when</em>.</li>
+            <li><strong>Regression guard:</strong> Add tests for fixed null/async edge cases.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn syntax, null safety, and function basics.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug nullability issues, coroutine scope problems, and state transitions.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict output for collection pipelines and coroutine-driven flows.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build production-ready architecture with tests and resilient async handling.</li>
+          </ul>
+          <h3>Kotlin Self-Check</h3>
+          <ul>
+            <li>Can you remove unsafe <em>!!</em> usage with safe alternatives?</li>
+            <li>Can you explain coroutine scope ownership clearly?</li>
+            <li>Can you model feature states with sealed classes?</li>
+            <li>Can you keep Android/business logic layered and testable?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="markdown">
+          <h2>Markdown</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Readable source first:</strong> Markdown should remain easy to read in plain text before rendering.</li>
+            <li><strong>Consistent structure:</strong> Use predictable heading levels and section flow for easy scanning.</li>
+            <li><strong>Docs as product:</strong> Treat documentation clarity and maintenance as part of software quality.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Basics:</strong> Headings, paragraphs, bold/italic text, and bullet lists.</li>
+            <li><strong>Links and images:</strong> Use correct syntax and meaningful alt text.</li>
+            <li><strong>Spacing:</strong> Keep blank lines where needed so renderers parse sections clearly.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Tables and code fences:</strong> Present structured data and code snippets readably.</li>
+            <li><strong>Nested lists and blockquotes:</strong> Organize procedural docs and callouts clearly.</li>
+            <li><strong>Cross-linking:</strong> Connect related docs to reduce duplicated explanations.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Front matter usage:</strong> Use metadata for static docs systems and publishing pipelines.</li>
+            <li><strong>Documentation IA:</strong> Build coherent section hierarchy across large doc sets.</li>
+            <li><strong>Maintenance discipline:</strong> Regularly fix stale links, outdated examples, and naming drift.</li>
+          </ul>
+          <h3>Common Markdown Mistakes</h3>
+          <ul>
+            <li>Skipping heading levels and creating inconsistent document hierarchy.</li>
+            <li>Broken links/images from moved files without updates.</li>
+            <li>Unclosed code fences that break rendering for entire sections.</li>
+            <li>Overly long blocks without subheadings, making docs hard to scan.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Heading:</strong> <em>## Section Title</em></li>
+            <li><strong>Bold:</strong> <em>**important**</em></li>
+            <li><strong>Link:</strong> <em>[Docs](https://example.com)</em></li>
+            <li><strong>Image:</strong> <em>![Diagram](diagram.png)</em></li>
+            <li><strong>Code fence:</strong> <em>```js ... ```</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Rewrite a long README into a cleaner information architecture with skimmable sections.</li>
+            <li>Create a docs template that includes overview, setup, usage, troubleshooting, and FAQ blocks.</li>
+            <li>Convert raw meeting notes into structured implementation docs with decisions and action items.</li>
+            <li>Build a documentation template for headings, code blocks, callouts, and link conventions across your docs repo.</li>
+          </ul>
+          <h3>Markdown Debugging Workflow</h3>
+          <ul>
+            <li><strong>Render check first:</strong> Preview output and compare against source to find formatting breaks fast.</li>
+            <li><strong>Isolate syntax errors:</strong> Validate heading levels, blank lines, list indentation, and fence boundaries.</li>
+            <li><strong>Verify links/assets:</strong> Test relative paths, anchors, and media references after file moves.</li>
+            <li><strong>Readability pass:</strong> Ensure sections are scannable and action-oriented for first-time readers.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Master headings, lists, links, emphasis, and clean basic structure.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Fix malformed lists, broken links, and code fence rendering issues.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict rendered output from complex nested Markdown structures.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build scalable documentation systems with strong IA and maintenance workflows.</li>
+          </ul>
+          <h3>Markdown Self-Check</h3>
+          <ul>
+            <li>Can a teammate skim your doc and find key actions in under 30 seconds?</li>
+            <li>Do all links and code examples still work after recent changes?</li>
+            <li>Are headings consistent and logically nested?</li>
+            <li>Does the source file stay readable in plain text form?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="go">
+          <h2>Go</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Simplicity scales:</strong> Prefer clear, explicit code over clever abstractions.</li>
+            <li><strong>Concurrency with discipline:</strong> Use goroutines/channels intentionally with ownership boundaries.</li>
+            <li><strong>Errors are values:</strong> Handle failures explicitly and close to where they occur.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Syntax basics:</strong> Learn packages, functions, variables, loops, and conditionals.</li>
+            <li><strong>Structs and methods:</strong> Model data clearly and keep methods focused.</li>
+            <li><strong>Standard library first:</strong> Build confidence with core packages before adding dependencies.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Interfaces:</strong> Depend on behavior contracts to improve flexibility and testing.</li>
+            <li><strong>Package boundaries:</strong> Organize code by responsibilities, not file size.</li>
+            <li><strong>HTTP fundamentals:</strong> Build handlers, validation, and consistent response patterns.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Concurrency control:</strong> Use context cancellation, worker pools, and bounded goroutines.</li>
+            <li><strong>Observability:</strong> Add structured logs, metrics, and trace context for production reliability.</li>
+            <li><strong>Performance:</strong> Profile CPU/memory hotspots before optimizing implementations.</li>
+          </ul>
+          <h3>Common Go Mistakes</h3>
+          <ul>
+            <li>Ignoring returned errors and losing critical failure information.</li>
+            <li>Leaking goroutines due to missing cancellation or blocked channels.</li>
+            <li>Overengineering abstractions instead of leveraging straightforward package design.</li>
+            <li>Mutating shared state without synchronization discipline.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Function:</strong> <em>func add(a int, b int) int { return a + b }</em></li>
+            <li><strong>Struct:</strong> <em>type User struct { ID int; Name string }</em></li>
+            <li><strong>Interface:</strong> <em>type Store interface { Save(User) error }</em></li>
+            <li><strong>Goroutine:</strong> <em>go process(item)</em></li>
+            <li><strong>Error check:</strong> <em>if err != nil { return err }</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a REST API with clean package boundaries, validation, and middleware.</li>
+            <li>Implement a concurrent job processor with retries and dead-letter handling.</li>
+            <li>Add context-driven timeouts/cancellation across service layers.</li>
+            <li>Profile and optimize a high-throughput endpoint under load.</li>
+          </ul>
+          <h3>Go Debugging Workflow</h3>
+          <ul>
+            <li><strong>Reproduce quickly:</strong> Capture deterministic input and isolate failing requests.</li>
+            <li><strong>Error-first tracing:</strong> Follow returned errors and wrap with contextual messages.</li>
+            <li><strong>Concurrency checks:</strong> Inspect goroutine lifecycles, channel closures, and context propagation.</li>
+            <li><strong>Regression safety:</strong> Add table-driven tests for fixed edge cases.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn syntax, structs, functions, and core standard library skills.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug error handling, package boundaries, and basic HTTP flows.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict outcomes for goroutines, channels, and interface-driven code.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build reliable concurrent services with observability and profiling.</li>
+          </ul>
+          <h3>Go Self-Check</h3>
+          <ul>
+            <li>Can you explain when to use channels vs mutexes?</li>
+            <li>Can you design package boundaries that stay maintainable as the app grows?</li>
+            <li>Can you debug goroutine leaks and blocked pipelines confidently?</li>
+            <li>Can you justify performance changes with profiler evidence?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="rust">
+          <h2>Rust</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Safety by design:</strong> Let ownership and borrowing rules prevent classes of runtime bugs.</li>
+            <li><strong>Explicit error handling:</strong> Model failures with <em>Result</em> and <em>Option</em> clearly.</li>
+            <li><strong>Performance with correctness:</strong> Optimize only after understanding data movement and allocation patterns.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Ownership basics:</strong> Learn moves, borrows, and lifetimes through small examples.</li>
+            <li><strong>Enums/structs:</strong> Model state and domain data explicitly.</li>
+            <li><strong>Pattern matching:</strong> Use <em>match</em> for safe branching and exhaustive handling.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Traits and generics:</strong> Build reusable behavior with clear bounds.</li>
+            <li><strong>Iterator fluency:</strong> Replace manual loops with composable transformations.</li>
+            <li><strong>Module design:</strong> Keep crates and modules organized for long-term maintainability.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Concurrency model:</strong> Use channels, shared state patterns, and <em>Send/Sync</em> awareness safely.</li>
+            <li><strong>Async architecture:</strong> Manage runtime selection, cancellation, and backpressure tradeoffs.</li>
+            <li><strong>Performance tuning:</strong> Analyze allocations, borrowing strategy, and critical-path data structures.</li>
+          </ul>
+          <h3>Common Rust Mistakes</h3>
+          <ul>
+            <li>Using <em>unwrap()</em> in recoverable paths and causing avoidable panics.</li>
+            <li>Fighting the borrow checker instead of redesigning ownership flow.</li>
+            <li>Over-cloning data and losing performance gains.</li>
+            <li>Writing large monolithic modules without clear boundaries.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Struct:</strong> <em>struct User { id: u32, name: String }</em></li>
+            <li><strong>Enum:</strong> <em>enum State { Idle, Loading, Done }</em></li>
+            <li><strong>Match:</strong> <em>match value { Some(v) =&gt; v, None =&gt; 0 }</em></li>
+            <li><strong>Result propagation:</strong> <em>let data = load()?;</em></li>
+            <li><strong>Iterator map:</strong> <em>items.iter().map(|x| x * 2).collect::&lt;Vec&lt;_&gt;&gt;()</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a CLI with robust argument parsing, subcommands, and error messages.</li>
+            <li>Implement a parser with enums and pattern matching for clear state transitions.</li>
+            <li>Create a multi-threaded pipeline and measure throughput changes.</li>
+            <li>Refactor unwrap-heavy code into resilient <em>Result</em>-based flows.</li>
+          </ul>
+          <h3>Rust Debugging Workflow</h3>
+          <ul>
+            <li><strong>Compiler first:</strong> Read borrow/type errors top-down and fix ownership assumptions.</li>
+            <li><strong>Model clarity:</strong> Simplify data/enum designs when branches become hard to reason about.</li>
+            <li><strong>Failure-path tests:</strong> Add tests for invalid input, parse failures, and boundary cases.</li>
+            <li><strong>Profile after correctness:</strong> Optimize only once behavior is stable and verified.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn ownership, borrowing, enums, and basic error handling.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug borrow checker issues and result/option flow mistakes.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict behavior for iterators, matching, and ownership transfer.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build concurrent and async Rust systems with performance discipline.</li>
+          </ul>
+          <h3>Rust Self-Check</h3>
+          <ul>
+            <li>Can you explain ownership choices for key types in your code?</li>
+            <li>Can you eliminate panic-driven control flow in production paths?</li>
+            <li>Can you use traits and generics without sacrificing readability?</li>
+            <li>Can you diagnose concurrency safety issues with confidence?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="cpp">
+          <h2>C++</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Control with responsibility:</strong> Use low-level power carefully with clear ownership patterns.</li>
+            <li><strong>RAII-first design:</strong> Tie resource lifecycle to object lifecycle for safer code.</li>
+            <li><strong>Performance literacy:</strong> Understand cost of allocations, copies, and data structure choices.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Syntax fundamentals:</strong> Types, loops, functions, and classes with consistent style.</li>
+            <li><strong>References and const:</strong> Use const-correctness to prevent accidental mutation.</li>
+            <li><strong>STL basics:</strong> Start with vector, string, map, and algorithm utilities.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Object design:</strong> Model classes with clear invariants and responsibilities.</li>
+            <li><strong>Smart pointers:</strong> Use <em>unique_ptr</em>/<em>shared_ptr</em> intentionally based on ownership.</li>
+            <li><strong>Template awareness:</strong> Use generic utilities where they improve reuse and clarity.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Performance profiling:</strong> Measure hotspots before deep optimization work.</li>
+            <li><strong>Concurrency:</strong> Use thread primitives with strict ownership and race-condition discipline.</li>
+            <li><strong>ABI and tooling:</strong> Understand build flags, sanitizers, and platform constraints.</li>
+          </ul>
+          <h3>Common C++ Mistakes</h3>
+          <ul>
+            <li>Manual memory management bugs that RAII could prevent.</li>
+            <li>Using raw pointers without clear lifetime ownership.</li>
+            <li>Ignoring const-correctness and creating mutation bugs.</li>
+            <li>Premature optimization without benchmark evidence.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Class:</strong> <em>class User { public: std::string name; };</em></li>
+            <li><strong>Const reference:</strong> <em>void print(const std::string&amp; value)</em></li>
+            <li><strong>Smart pointer:</strong> <em>auto p = std::make_unique&lt;Widget&gt;();</em></li>
+            <li><strong>Vector loop:</strong> <em>for (const auto&amp; item : items) { ... }</em></li>
+            <li><strong>Lambda:</strong> <em>std::sort(v.begin(), v.end(), [](auto a, auto b){ return a &lt; b; });</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Implement a cache or queue with clear ownership semantics.</li>
+            <li>Refactor raw-pointer code to RAII and smart pointers.</li>
+            <li>Use sanitizers to detect memory and undefined-behavior issues.</li>
+            <li>Benchmark two STL/data-structure approaches and justify tradeoffs.</li>
+          </ul>
+          <h3>C++ Debugging Workflow</h3>
+          <ul>
+            <li><strong>Compiler diagnostics first:</strong> Resolve type/template errors from first failure onward.</li>
+            <li><strong>Runtime safety tools:</strong> Run address/undefined-behavior sanitizers for crash classes.</li>
+            <li><strong>Ownership tracing:</strong> Validate object lifetime assumptions at boundaries.</li>
+            <li><strong>Regression tests:</strong> Lock fixes with targeted unit/integration checks.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn syntax, STL basics, and const-correctness habits.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug pointer/lifetime issues and compile-time type errors.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict behavior for references, containers, and algorithm usage.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build high-performance components with profiling and safety tooling.</li>
+          </ul>
+          <h3>C++ Self-Check</h3>
+          <ul>
+            <li>Can you explain ownership/lifetime for every pointer in a module?</li>
+            <li>Can you choose STL containers based on access and mutation patterns?</li>
+            <li>Can you use RAII to eliminate manual cleanup bugs?</li>
+            <li>Can you justify optimization decisions with measurements?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="php">
+          <h2>PHP</h2>
+          <p><strong>Full name:</strong> PHP stands for PHP: Hypertext Preprocessor.</p>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Request lifecycle clarity:</strong> Understand input, processing, data access, and response boundaries.</li>
+            <li><strong>Security-by-default:</strong> Validate, sanitize, and encode data at trust boundaries.</li>
+            <li><strong>Maintainable architecture:</strong> Keep controllers thin and business logic isolated.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Syntax basics:</strong> Variables, arrays, functions, conditions, loops, and includes.</li>
+            <li><strong>Forms and requests:</strong> Handle GET/POST input safely and predictably.</li>
+            <li><strong>Output control:</strong> Separate rendering concerns from backend logic.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Routing/controllers:</strong> Build clean entry points for endpoints/pages.</li>
+            <li><strong>Database interaction:</strong> Use prepared statements and structured query boundaries.</li>
+            <li><strong>Service layers:</strong> Move business rules to testable classes/functions.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Framework fluency:</strong> Apply architecture patterns from modern frameworks consistently.</li>
+            <li><strong>Security hardening:</strong> Protect auth/session flows and sensitive operations.</li>
+            <li><strong>Operational quality:</strong> Add logging, monitoring, and error handling standards.</li>
+          </ul>
+          <h3>Common PHP Mistakes</h3>
+          <ul>
+            <li>Embedding business logic directly in view templates.</li>
+            <li>Using string-concatenated SQL instead of parameterized queries.</li>
+            <li>Weak input validation and inconsistent response schemas.</li>
+            <li>Insufficient handling of failed external calls or DB errors.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Function:</strong> <em>function add(int $a, int $b): int { return $a + $b; }</em></li>
+            <li><strong>Array map:</strong> <em>$names = array_map(fn($u) =&gt; $u['name'], $users);</em></li>
+            <li><strong>Null coalescing:</strong> <em>$name = $input['name'] ?? 'Guest';</em></li>
+            <li><strong>Try/catch:</strong> <em>try { ... } catch (Exception $e) { ... }</em></li>
+            <li><strong>Prepared query:</strong> <em>$stmt = $pdo-&gt;prepare('SELECT * FROM users WHERE id = ?');</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build CRUD endpoints with validation and consistent JSON envelopes.</li>
+            <li>Refactor a procedural script into controller/service/repository layers.</li>
+            <li>Add authentication checks and role-based authorization guards.</li>
+            <li>Create integration tests for unhappy paths and malformed inputs.</li>
+          </ul>
+          <h3>PHP Debugging Workflow</h3>
+          <ul>
+            <li><strong>Input trace first:</strong> Confirm incoming request shape and boundary validation.</li>
+            <li><strong>Layer isolation:</strong> Verify controller, service, and data-layer outputs separately.</li>
+            <li><strong>Error context:</strong> Log meaningful details while avoiding sensitive-data leakage.</li>
+            <li><strong>Regression guards:</strong> Add tests for fixed auth, validation, and data edge cases.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn syntax, requests, arrays, and function design basics.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug validation, routing, and database interaction bugs.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict endpoint responses across success and failure conditions.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build production-safe PHP services with security and observability.</li>
+          </ul>
+          <h3>PHP Self-Check</h3>
+          <ul>
+            <li>Can you explain where validation belongs and why?</li>
+            <li>Can you prevent SQL injection and session-related vulnerabilities?</li>
+            <li>Can you keep business logic separate from rendering concerns?</li>
+            <li>Can you return consistent error formats for all failure paths?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="dart">
+          <h2>Dart + Flutter</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>UI from state:</strong> Keep rendering deterministic and state ownership explicit.</li>
+            <li><strong>Composition first:</strong> Build screens from small reusable widgets.</li>
+            <li><strong>Productive iteration:</strong> Use hot reload and tests to shorten feedback loops.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Dart basics:</strong> Learn variables, classes, null safety, functions, and collections.</li>
+            <li><strong>Flutter fundamentals:</strong> Build layouts with rows, columns, containers, and text widgets.</li>
+            <li><strong>Navigation basics:</strong> Move between screens and pass lightweight data safely.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>State management:</strong> Keep mutable state predictable and scoped to clear owners.</li>
+            <li><strong>Async UI handling:</strong> Build loading, empty, success, and error states intentionally.</li>
+            <li><strong>Widget design:</strong> Extract reusable components with clean constructor APIs.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Architecture:</strong> Use feature modules and dependency boundaries for maintainability.</li>
+            <li><strong>Performance:</strong> Reduce rebuild scope and optimize expensive widget trees.</li>
+            <li><strong>Release readiness:</strong> Add analytics, crash tracking, and platform-aware deployment checks.</li>
+          </ul>
+          <h3>Common Dart/Flutter Mistakes</h3>
+          <ul>
+            <li>Calling setState broadly and triggering unnecessary rebuilds.</li>
+            <li>Mixing networking/business logic directly into widget build methods.</li>
+            <li>Ignoring null-safety warnings and runtime assumptions.</li>
+            <li>Not modeling loading/error/empty states as first-class behavior.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Class:</strong> <em>class User { final int id; User(this.id); }</em></li>
+            <li><strong>Null-safe access:</strong> <em>final len = text?.length ?? 0;</em></li>
+            <li><strong>Future async:</strong> <em>final data = await service.load();</em></li>
+            <li><strong>Widget:</strong> <em>Widget build(BuildContext context) { return Text('Hi'); }</em></li>
+            <li><strong>List map:</strong> <em>items.map((item) =&gt; Text(item.name)).toList()</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a multi-screen app with data fetch, caching, and retry behavior.</li>
+            <li>Create reusable form components with validation and submission states.</li>
+            <li>Refactor a large screen into feature widgets with cleaner boundaries.</li>
+            <li>Add unit/widget tests covering interaction and error states.</li>
+          </ul>
+          <h3>Dart/Flutter Debugging Workflow</h3>
+          <ul>
+            <li><strong>Rebuild trace:</strong> Identify why widgets rebuild and reduce unnecessary updates.</li>
+            <li><strong>State path validation:</strong> Confirm where source-of-truth state lives and who mutates it.</li>
+            <li><strong>Async failure checks:</strong> Handle timeout, offline, and malformed-response paths clearly.</li>
+            <li><strong>Regression coverage:</strong> Add widget tests to preserve fixed interaction behavior.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn Dart syntax, widgets, and layout composition basics.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug state flow, setState misuse, and async UI issues.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict UI output from state transitions and user events.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build production-grade Flutter apps with architecture and tests.</li>
+          </ul>
+          <h3>Dart/Flutter Self-Check</h3>
+          <ul>
+            <li>Can you explain state ownership for each major screen?</li>
+            <li>Can you design reusable widgets with clean inputs and outputs?</li>
+            <li>Can you debug async UI issues without adding fragile workarounds?</li>
+            <li>Can you ship tested features with clear architecture boundaries?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="bash">
+          <h2>Bash / Shell</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Automation over repetition:</strong> Script repeatable tasks to reduce manual errors.</li>
+            <li><strong>Safety first:</strong> Validate inputs and guard destructive operations.</li>
+            <li><strong>Composability:</strong> Build small commands/functions that chain cleanly.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>CLI basics:</strong> Learn navigation, file operations, redirection, and pipes.</li>
+            <li><strong>Variables and quoting:</strong> Handle whitespace and special characters safely.</li>
+            <li><strong>Conditionals/loops:</strong> Build simple scripts that branch and iterate predictably.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Reusable functions:</strong> Break long scripts into testable helper functions.</li>
+            <li><strong>Argument parsing:</strong> Validate required flags and provide usage messages.</li>
+            <li><strong>Exit-code discipline:</strong> Fail clearly and propagate meaningful status codes.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>CI/CD automation:</strong> Build robust scripts for build, test, and deploy pipelines.</li>
+            <li><strong>Data processing:</strong> Compose grep/awk/sed/xargs pipelines carefully.</li>
+            <li><strong>Operational hardening:</strong> Add logging, dry-run modes, and rollback-aware safety checks.</li>
+          </ul>
+          <h3>Common Bash Mistakes</h3>
+          <ul>
+            <li>Unquoted variables causing broken paths and unsafe expansions.</li>
+            <li>Ignoring command failures and continuing in invalid state.</li>
+            <li>Overly long scripts without functions or clear responsibilities.</li>
+            <li>Running destructive commands without confirmation or dry-run mode.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Variable:</strong> <em>name="build"</em></li>
+            <li><strong>Conditional:</strong> <em>if [[ -f "$file" ]]; then ... fi</em></li>
+            <li><strong>Loop:</strong> <em>for item in "$@"; do ... done</em></li>
+            <li><strong>Function:</strong> <em>run_task() { echo "ok"; }</em></li>
+            <li><strong>Exit on error:</strong> <em>set -euo pipefail</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Write a script that validates input files and generates structured reports.</li>
+            <li>Create a deployment helper with dry-run, confirmation, and rollback checkpoints.</li>
+            <li>Refactor a long one-off script into reusable function modules.</li>
+            <li>Automate multi-step local setup for new developers.</li>
+          </ul>
+          <h3>Bash Debugging Workflow</h3>
+          <ul>
+            <li><strong>Trace execution:</strong> Use shell tracing and targeted echo logs to inspect flow.</li>
+            <li><strong>Validate inputs early:</strong> Fail fast when required arguments/files are missing.</li>
+            <li><strong>Check exit codes:</strong> Confirm each critical command succeeded before continuing.</li>
+            <li><strong>Test safely:</strong> Use temp directories and non-destructive dry-run defaults.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn CLI operations, quoting, and simple script control flow.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug pipes, globbing, argument parsing, and failure handling.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict script outcomes for edge-case inputs and command failures.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build production-safe automation scripts for CI/CD and operations.</li>
+          </ul>
+          <h3>Bash Self-Check</h3>
+          <ul>
+            <li>Can you write scripts that are safe against whitespace and special characters?</li>
+            <li>Can you design scripts that fail early with clear user messages?</li>
+            <li>Can you build reusable shell functions instead of copy-pasted pipelines?</li>
+            <li>Can you automate workflows without risking destructive mistakes?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="csharp">
+          <h2>C#</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Structured clarity:</strong> Design with classes/interfaces and explicit contracts.</li>
+            <li><strong>Safety by default:</strong> Embrace nullable reference checks and defensive boundaries.</li>
+            <li><strong>Ecosystem mindset:</strong> Use .NET tooling, DI, and testing patterns consistently.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Syntax basics:</strong> Variables, conditionals, loops, interpolation, and output.</li>
+            <li><strong>Class fundamentals:</strong> Properties, constructors, and method signatures.</li>
+            <li><strong>Project discipline:</strong> Keep naming and formatting consistent.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Collections + LINQ:</strong> Expressive filtering/projection with readable queries.</li>
+            <li><strong>Null-safe coding:</strong> Use nullable annotations and guards intentionally.</li>
+            <li><strong>Service design:</strong> Separate controller, service, and data responsibilities.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Async correctness:</strong> Use <em>async/await</em> with proper exception/cancellation handling.</li>
+            <li><strong>Architecture depth:</strong> DI, repository/service patterns, and testable boundaries.</li>
+            <li><strong>Production diagnostics:</strong> Logging and tracing for runtime incident analysis.</li>
+          </ul>
+          <h3>Common C# Mistakes</h3>
+          <ul>
+            <li>Ignoring nullable warnings and shipping avoidable null crashes.</li>
+            <li>Blocking async flows with sync calls and causing deadlocks.</li>
+            <li>Putting business logic directly in controllers/UI handlers.</li>
+            <li>Skipping tests for async/error paths.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Property:</strong> <em>public string Name { get; set; }</em></li>
+            <li><strong>Interpolation:</strong> <em>$"Hello, {name}"</em></li>
+            <li><strong>LINQ filter:</strong> <em>items.Where(x =&gt; x.IsActive)</em></li>
+            <li><strong>Async method:</strong> <em>public async Task&lt;Result&gt; LoadAsync()</em></li>
+            <li><strong>Null coalescing:</strong> <em>name ?? "Guest"</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Build a minimal ASP.NET API with clean layered architecture.</li>
+            <li>Implement LINQ-heavy reporting endpoint with tests.</li>
+            <li>Refactor synchronous service code to async-safe patterns.</li>
+            <li>Add structured logging and correlation IDs to requests.</li>
+          </ul>
+          <h3>C# Debugging Workflow</h3>
+          <ul>
+            <li><strong>Warnings first:</strong> Resolve nullable/type warnings before deeper runtime analysis.</li>
+            <li><strong>Trace async flow:</strong> Inspect task boundaries and exception propagation.</li>
+            <li><strong>Check DI graph:</strong> Validate registrations and lifetime scopes.</li>
+            <li><strong>Add regression tests:</strong> Capture the fix in unit/integration tests.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Master syntax, classes, and collections.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug nullability warnings, DI setup issues, and async control flow.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict LINQ and async method outcomes before execution.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build robust async APIs with testing, logging, and architecture discipline.</li>
+          </ul>
+          <h3>C# Self-Check</h3>
+          <ul>
+            <li>Can you explain async pitfalls and avoid sync-over-async bugs?</li>
+            <li>Can you model clear interfaces between service layers?</li>
+            <li>Can you use LINQ while keeping performance in mind?</li>
+            <li>Can you diagnose nullability issues before runtime failures?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="sql">
+          <h2>SQL</h2>
+          <p><strong>Full name:</strong> SQL stands for Structured Query Language.</p>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Intent-first queries:</strong> Select, filter, join, group, and sort with explicit goals.</li>
+            <li><strong>Execution awareness:</strong> Clause order and cardinality shape both correctness and performance.</li>
+            <li><strong>Data safety:</strong> Always protect data integrity before optimizing speed.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Foundation:</strong> <em>SELECT</em>, <em>FROM</em>, <em>WHERE</em>, <em>ORDER BY</em> basics.</li>
+            <li><strong>Verification:</strong> Use <em>COUNT(*)</em> and sample checks for sanity.</li>
+            <li><strong>Readable SQL:</strong> Use aliases and clear formatting conventions.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Aggregation:</strong> <em>GROUP BY</em>, aggregate functions, and <em>HAVING</em> filters.</li>
+            <li><strong>Join fluency:</strong> Choose INNER/LEFT joins based on business intent.</li>
+            <li><strong>Result reasoning:</strong> Predict row counts before running complex joins.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Advanced SQL:</strong> Window functions, CTEs, and multi-step analytical queries.</li>
+            <li><strong>Performance tuning:</strong> Index-aware filtering and execution-plan interpretation.</li>
+            <li><strong>Write safety:</strong> Transaction handling and guarded update/delete operations.</li>
+          </ul>
+          <h3>Common SQL Mistakes</h3>
+          <ul>
+            <li>Wrong join keys creating duplicate or missing rows.</li>
+            <li>Using <em>WHERE</em> vs <em>HAVING</em> incorrectly in aggregate queries.</li>
+            <li>Ambiguous column references without aliases.</li>
+            <li>Unsafe UPDATE/DELETE statements without targeted filters.</li>
+          </ul>
+          <h3>Mini Syntax Reference</h3>
+          <ul>
+            <li><strong>Basic query:</strong> <em>SELECT col FROM table WHERE cond</em></li>
+            <li><strong>Join:</strong> <em>... FROM a JOIN b ON a.id = b.a_id</em></li>
+            <li><strong>Aggregate:</strong> <em>SELECT city, COUNT(*) FROM users GROUP BY city</em></li>
+            <li><strong>Window:</strong> <em>ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...)</em></li>
+            <li><strong>CTE:</strong> <em>WITH base AS (...) SELECT ... FROM base</em></li>
+          </ul>
+          <h3>Deep-Dive Practice Ideas</h3>
+          <ul>
+            <li>Write analytics queries for cohort, funnel, or retention style datasets.</li>
+            <li>Refactor nested subqueries into readable CTE-based pipelines.</li>
+            <li>Tune slow queries using indexes and execution plans.</li>
+            <li>Practice safe migration/update scripts with rollback strategy.</li>
+          </ul>
+          <h3>SQL Debugging Workflow</h3>
+          <ul>
+            <li><strong>Start small:</strong> Validate each table subset before full joins.</li>
+            <li><strong>Track cardinality:</strong> Check row counts after every join/filter step.</li>
+            <li><strong>Verify keys:</strong> Confirm join key uniqueness and null behavior.</li>
+            <li><strong>Inspect plan:</strong> Use execution plans to find expensive scans/sorts.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Master select/filter/sort fundamentals.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug joins, key mismatches, and row-count anomalies.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict query output and aggregation results before running statements.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Apply window functions, CTE structuring, and performance/data-safety practices.</li>
+          </ul>
+          <h3>SQL Self-Check</h3>
+          <ul>
+            <li>Can you predict join output size before executing?</li>
+            <li>Can you choose the correct join type for business intent?</li>
+            <li>Can you debug wrong aggregates with step-by-step validation?</li>
+            <li>Can you write safe update/delete queries with confidence?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="cloudkit">
+          <h2>CloudKit</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Apple-native backend:</strong> CloudKit is built for iCloud-backed data, identity, and sync in Apple platform apps.</li>
+            <li><strong>User-centric data model:</strong> Separate private user data from shared/public data zones intentionally.</li>
+            <li><strong>Offline-first design:</strong> Treat local persistence and sync reconciliation as first-class concerns.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Container basics:</strong> Understand CloudKit containers, databases, record types, and fields.</li>
+            <li><strong>Identity flow:</strong> Learn how iCloud account state affects app behavior and permissions.</li>
+            <li><strong>CRUD basics:</strong> Create, fetch, update, and delete records safely with clear error handling.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Query strategy:</strong> Use predicates, sort descriptors, and pagination for scalable reads.</li>
+            <li><strong>Sharing model:</strong> Implement record sharing and access control intentionally.</li>
+            <li><strong>Sync awareness:</strong> Track record change tokens and handle incremental updates.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Conflict handling:</strong> Resolve server/client write conflicts with deterministic merge rules.</li>
+            <li><strong>Operational readiness:</strong> Plan retries, backoff, and quota-aware request patterns.</li>
+            <li><strong>Production quality:</strong> Combine CloudKit with robust local models, background fetch, and observability.</li>
+          </ul>
+          <h3>Common CloudKit Mistakes</h3>
+          <ul>
+            <li>Assuming every user is signed into iCloud and skipping fallback UI states.</li>
+            <li>Mixing private/shared/public data without clear ownership boundaries.</li>
+            <li>Ignoring partial failures in batch operations.</li>
+            <li>Not designing for offline sync and conflict resolution.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn container/database/record basics and account-state handling.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug permission, query, and partial-failure sync issues.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict data state across local edits, server sync, and retries.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Build production-grade sync and sharing workflows with conflict strategy.</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="firebase">
+          <h2>Firebase</h2>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Backend-as-a-service:</strong> Firebase accelerates auth, data, storage, and analytics for app teams.</li>
+            <li><strong>Rules-first security:</strong> Security rules are part of your backend architecture, not optional cleanup.</li>
+            <li><strong>Event-driven thinking:</strong> Design around real-time updates, async operations, and client/server boundaries.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li><strong>Project setup:</strong> Configure Firebase project, app registration, and SDK integration.</li>
+            <li><strong>Auth basics:</strong> Implement email/password or provider sign-in and sign-out flows.</li>
+            <li><strong>Data basics:</strong> Read/write documents in Firestore with simple validation paths.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li><strong>Query modeling:</strong> Structure collections/documents for your access patterns.</li>
+            <li><strong>Security rules:</strong> Enforce per-user access and validate payload structure in rules.</li>
+            <li><strong>Storage usage:</strong> Upload/download files with metadata and permission-aware access.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li><strong>Cloud Functions:</strong> Move sensitive or complex server logic out of clients.</li>
+            <li><strong>Performance strategy:</strong> Optimize reads/writes, indexes, and listener scopes.</li>
+            <li><strong>Release readiness:</strong> Add analytics, crash reporting, and environment separation (dev/stage/prod).</li>
+          </ul>
+          <h3>Common Firebase Mistakes</h3>
+          <ul>
+            <li>Over-permissive security rules that expose sensitive data.</li>
+            <li>Data models that force expensive, repetitive queries.</li>
+            <li>Trusting client input without server-side validation logic.</li>
+            <li>Ignoring cost/performance impact of broad listeners.</li>
+          </ul>
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Set up auth and basic Firestore reads/writes safely.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Debug rules, query mismatches, and permission failures.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict real-time data flow and client state updates.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Add Functions, observability, and production security hardening.</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="sourcecontrol">
+          <h2>Source Control (Git + GitHub)</h2>
+          <p>Source control helps you save snapshots of your code over time, collaborate without overwriting each other, and safely roll back when something breaks. It gives your team a shared timeline of what changed, why it changed, and who changed it.</p>
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Safe iteration discipline:</strong> Think in stable steps: branch, commit, review, and merge.</li>
+            <li><strong>History clarity:</strong> Preserve clear commit history so teammates can understand decisions quickly.</li>
+            <li><strong>Review quality gate:</strong> Treat pull requests as quality checkpoints, not just merge buttons.</li>
+          </ul>
+          <h3>Essential Vocabulary</h3>
+          <ul>
+            <li><strong>Repository (repo):</strong> The project folder tracked by Git.</li>
+            <li><strong>Commit:</strong> A saved snapshot of your staged changes with a message.</li>
+            <li><strong>Push:</strong> Send local commits to a remote repo (for example GitHub).</li>
+            <li><strong>Pull:</strong> Bring remote changes into your local branch.</li>
+            <li><strong>Fetch:</strong> Download remote updates without merging them yet.</li>
+            <li><strong>Branch:</strong> An isolated line of work for a feature or fix.</li>
+            <li><strong>Merge:</strong> Combine one branch into another.</li>
+            <li><strong>Merge conflict:</strong> A conflict Git cannot auto-resolve because the same lines changed.</li>
+            <li><strong>Pull request (PR):</strong> A request to review and merge your branch.</li>
+            <li><strong>Rebase:</strong> Reapply commits onto a new base to keep history cleaner.</li>
+            <li><strong>Staging area:</strong> Where you choose exactly what goes into the next commit.</li>
+          </ul>
+          <h3>Beginner Workflow (Process)</h3>
+          <ul>
+            <li><strong>1) Pull latest main:</strong> Start by syncing so you build on current team code.</li>
+            <li><strong>2) Create a branch:</strong> Keep your feature/fix isolated from main.</li>
+            <li><strong>3) Edit + test:</strong> Make small logical changes and verify they work.</li>
+            <li><strong>4) Stage + commit:</strong> Save progress in clear, focused commits.</li>
+            <li><strong>5) Push branch:</strong> Publish your work to the remote repository.</li>
+            <li><strong>6) Open PR:</strong> Ask for review and explain what changed and why.</li>
+            <li><strong>7) Address feedback:</strong> Add follow-up commits until approved.</li>
+            <li><strong>8) Merge and clean up:</strong> Merge PR, then delete merged branch.</li>
+          </ul>
+          <h3>Beginner</h3>
+          <ul>
+            <li>Initialize/clone repos, stage changes, commit with clear messages.</li>
+            <li>Use <em>git status</em>, <em>git log</em>, and <em>git diff</em> confidently.</li>
+          </ul>
+          <h3>Medium</h3>
+          <ul>
+            <li>Create and manage feature branches for isolated work.</li>
+            <li>Open PRs, request reviews, and incorporate feedback safely.</li>
+          </ul>
+          <h3>Advanced</h3>
+          <ul>
+            <li>Resolve merge conflicts cleanly without losing intended changes.</li>
+            <li>Use rebase/cherry-pick intentionally and avoid unsafe history rewrites.</li>
+          </ul>
+
+          <h3>Common Source Control Mistakes</h3>
+          <ul>
+            <li>Committing unrelated changes in one large commit instead of focused units.</li>
+            <li>Working directly on main instead of using feature branches and reviews.</li>
+            <li>Force-pushing shared branches without team coordination.</li>
+            <li>Resolving conflicts quickly without verifying functional behavior afterward.</li>
+          </ul>
+
+          <h3>Mini Command Reference</h3>
+          <ul>
+            <li><strong>Status:</strong> <em>git status</em></li>
+            <li><strong>Create branch:</strong> <em>git checkout -b feature/name</em></li>
+            <li><strong>Stage + commit:</strong> <em>git add . &amp;&amp; git commit -m "message"</em></li>
+            <li><strong>Update branch:</strong> <em>git fetch origin &amp;&amp; git rebase origin/main</em></li>
+            <li><strong>View history:</strong> <em>git log --oneline --graph --decorate</em></li>
+          </ul>
+
+          <h3>Source Control Debugging Workflow</h3>
+          <ul>
+            <li><strong>State check first:</strong> Inspect current branch and working-tree status before any merge/rebase action.</li>
+            <li><strong>Diff intentionally:</strong> Compare staged, unstaged, and branch diffs to isolate unexpected changes.</li>
+            <li><strong>Conflict resolution with verification:</strong> Resolve, run tests, and re-open key files to confirm correctness.</li>
+            <li><strong>History sanity:</strong> Review final commit graph before pushing to shared remotes.</li>
+          </ul>
+
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Learn core Git vocabulary, status/log/diff basics, and safe commit habits.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Diagnose branch drift, merge conflicts, and broken collaboration workflows.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict command outcomes before running pull, merge, rebase, and push operations.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Apply PR strategy, history cleanup, and team-scale branching discipline.</li>
+          </ul>
+
+          <h3>Source Control Self-Check</h3>
+          <ul>
+            <li>Can you recover safely from a bad merge or rebase without panic?</li>
+            <li>Can you keep commit history clean and reviewable for teammates?</li>
+            <li>Can you explain when merge is better than rebase for your team?</li>
+            <li>Can you isolate and ship one logical change per pull request?</li>
+          </ul>
+        </article>
+
+        <article class="card guide-section" data-topic="ides">
+          <h2>IDEs (Integrated Development Environments)</h2>
+          <p>An IDE is the main workspace where you write, run, test, and debug code. Good IDE setup speeds up development, catches mistakes early, and improves team consistency.</p>
+
+          <h3>Core Mindset</h3>
+          <ul>
+            <li><strong>Tooling as leverage:</strong> A well-configured IDE can prevent entire categories of mistakes.</li>
+            <li><strong>Fast feedback loop:</strong> Keep lint/test/run/debug steps close to your editing flow.</li>
+            <li><strong>Team consistency:</strong> Shared editor standards reduce review noise and onboarding time.</li>
+          </ul>
+
+          <h3>What IDEs Do</h3>
+          <ul>
+            <li><strong>Code intelligence:</strong> Autocomplete, go-to-definition, refactoring, and inline errors.</li>
+            <li><strong>Run and debug:</strong> Start apps, set breakpoints, inspect variables, and step through execution.</li>
+            <li><strong>Project tooling:</strong> Terminal, package management, build/test integration, and task running.</li>
+            <li><strong>Team workflows:</strong> Git/source-control integration, code review helpers, and extensions/plugins.</li>
+          </ul>
+
+          <h3>Popular IDEs and Languages</h3>
+          <ul>
+            <li><strong>VS Code:</strong> JavaScript, TypeScript, Python, C#, Java, C/C++, Go, Rust, and more via extensions.</li>
+            <li><strong>Xcode:</strong> Swift and Objective-C (also C/C++) for Apple platforms (iOS, macOS, watchOS, tvOS).</li>
+            <li><strong>IntelliJ IDEA:</strong> Java, Kotlin, Scala, and Groovy; also supports web languages with plugins.</li>
+            <li><strong>PyCharm:</strong> Python-focused IDE for scripting, data science, and backend development.</li>
+            <li><strong>Visual Studio:</strong> C#, F#, C++, and .NET workflows; also supports Python and web stacks with workloads.</li>
+            <li><strong>Android Studio:</strong> Kotlin and Java for Android development, with optional C++ support via NDK.</li>
+          </ul>
+
+          <h3>How to Choose an IDE</h3>
+          <ul>
+            <li><strong>Match language + platform:</strong> Use platform-native tools when they provide better SDK/device integration.</li>
+            <li><strong>Check debugging quality:</strong> Strong debugger support saves major troubleshooting time.</li>
+            <li><strong>Consider ecosystem:</strong> Extensions, templates, and community plugins can speed up your workflow.</li>
+            <li><strong>Prioritize team consistency:</strong> Shared formatter/linter/test setup reduces merge friction.</li>
+          </ul>
+
+          <h3>Beginner Workflow</h3>
+          <ul>
+            <li>Create/open a project in your IDE.</li>
+            <li>Install recommended language extensions/plugins.</li>
+            <li>Run the app and at least one test to verify environment setup.</li>
+            <li>Set at least one breakpoint and practice stepping through code.</li>
+            <li>Use built-in source control panel for commit and push basics.</li>
+          </ul>
+
+          <h3>Medium</h3>
+          <ul>
+            <li>Create reusable run/debug configurations for common tasks.</li>
+            <li>Use refactor tools (rename/extract/move) instead of manual text edits for safer changes.</li>
+            <li>Set up formatters, linters, and test runners for automatic quality checks.</li>
+          </ul>
+
+          <h3>Advanced</h3>
+          <ul>
+            <li>Standardize team workspace settings and extension recommendations.</li>
+            <li>Integrate profiling, container/cloud workflows, and remote debugging when relevant.</li>
+            <li>Build productivity automation with tasks, snippets, and templates.</li>
+          </ul>
+
+          <h3>Quality Habits (Important)</h3>
+          <ul>
+            <li><strong>Write tests early:</strong> Small tests help catch bugs fast, make debugging easier, and prevent old features from breaking when you change code.</li>
+            <li><strong>Use meaningful comments:</strong> Add comments for tricky logic, assumptions, or business rules so future-you and teammates can understand intent quickly.</li>
+            <li><strong>Comment with purpose:</strong> Prefer explaining <em>why</em> a decision exists instead of repeating <em>what</em> the code already says.</li>
+            <li><strong>Team handoff readiness:</strong> Clean tests plus clear comments make it easier for someone else to continue your work with confidence.</li>
+          </ul>
+
+          <h3>Common IDE Mistakes</h3>
+          <ul>
+            <li>Ignoring warnings/diagnostics until they become larger runtime bugs.</li>
+            <li>Using inconsistent local settings that conflict with team formatting rules.</li>
+            <li>Running code without debugger workflows and missing root-cause signals.</li>
+            <li>Installing many extensions without understanding overlap or side effects.</li>
+          </ul>
+
+          <h3>Mini Workflow Reference</h3>
+          <ul>
+            <li><strong>Open command palette:</strong> Quickly run editor actions and automation commands.</li>
+            <li><strong>Go to definition:</strong> Jump to source and understand call flow faster.</li>
+            <li><strong>Find references:</strong> Audit impact before refactoring shared symbols.</li>
+            <li><strong>Set breakpoint + step:</strong> Inspect runtime state where behavior diverges.</li>
+            <li><strong>Run tests in-editor:</strong> Validate changes without leaving your workflow.</li>
+          </ul>
+
+          <h3>Course Path Alignment</h3>
+          <ul>
+            <li><strong>Guided Start (Modules 1-4):</strong> Set up projects, install extensions/plugins, and run/debug basic workflows.</li>
+            <li><strong>Debug Lab (Modules 5-7):</strong> Troubleshoot breakpoints, run configurations, interpreter/SDK issues, and build failures.</li>
+            <li><strong>Output Mastery (Modules 8-10):</strong> Predict debugger traces, terminal output, and tooling behavior across common tasks.</li>
+            <li><strong>Advanced Lab (Modules 11-14):</strong> Standardize team tooling, automation tasks, and quality integrations at production scale.</li>
+          </ul>
+
+          <h3>IDEs Self-Check</h3>
+          <ul>
+            <li>Can you set up a complete environment on a new machine quickly?</li>
+            <li>Can you debug runtime issues with breakpoints instead of guesswork?</li>
+            <li>Can you enforce team-wide formatting/linting consistency in your editor?</li>
+            <li>Can you automate repetitive tasks to speed up delivery safely?</li>
+          </ul>
+        </article>
       </section>
-    </main>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <p>Review deeply, then apply what you learned in targeted quiz sessions.</p>
+    </footer>
+
+    <script src="js/app/header-progress.js"></script>
+    <script src="js/pages/study-guide.js?v=20260303i"></script>
+
   </body>
 </html>

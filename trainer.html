@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Language Quiz</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-brand" href="index.html">LearnToCode</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="site-nav-link" href="index.html">Home</a>
+          <a class="site-nav-link" href="workshop.html">Workshop</a>
+          <a class="site-nav-link" href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app">
+      <header class="header">
+        <h1 id="appTitle">Language Quiz</h1>
+        <p id="appSubtitle">Practice language-specific vocabulary, true/false, output prediction, debug, and code prompts.</p>
+        <p class="study-link-wrap link-row">
+          <a id="homeLink" class="study-link secondary" href="index.html">Home</a>
+          <a id="studyGuideLink" class="study-link" href="study-guide.html">Open Study Guide</a>
+        </p>
+      </header>
+
+      <section class="card hidden" id="topicCard">
+        <h2>Select Language</h2>
+        <div class="topic-grid">
+          <button class="topic-btn" data-topic="csharp">C#</button>
+          <button class="topic-btn" data-topic="web">HTML + CSS + JavaScript</button>
+          <button class="topic-btn" data-topic="java">Java</button>
+          <button class="topic-btn" data-topic="kotlin">Kotlin</button>
+          <button class="topic-btn" data-topic="markdown">Markdown</button>
+          <button class="topic-btn" data-topic="go">Go</button>
+          <button class="topic-btn" data-topic="rust">Rust</button>
+          <button class="topic-btn" data-topic="cpp">C++</button>
+          <button class="topic-btn" data-topic="php">PHP</button>
+          <button class="topic-btn" data-topic="dart">Dart + Flutter</button>
+          <button class="topic-btn" data-topic="bash">Bash / Shell</button>
+          <button class="topic-btn" data-topic="python">Python</button>
+          <button class="topic-btn" data-topic="react">React</button>
+          <button class="topic-btn" data-topic="sql">SQL</button>
+          <button class="topic-btn" data-topic="swift">Swift + SwiftUI</button>
+          <button class="topic-btn" data-topic="typescript">TypeScript</button>
+          <button class="topic-btn" data-topic="aiassist">AI Coding Assistants</button>
+          <button class="topic-btn" data-topic="cloudkit">CloudKit</button>
+          <button class="topic-btn" data-topic="firebase">Firebase</button>
+          <button class="topic-btn" data-topic="ides">IDEs</button>
+          <button class="topic-btn" data-topic="sourcecontrol">Source Control</button>
+        </div>
+      </section>
+
+      <section class="card hidden" id="levelCard">
+        <h2>Select Difficulty</h2>
+        <div class="level-grid">
+          <button class="level-btn" data-level="easy">Easy</button>
+          <button class="level-btn" data-level="medium">Medium</button>
+          <button class="level-btn" data-level="hard">Hard</button>
+        </div>
+      </section>
+
+      <section class="card hidden" id="pathCard">
+        <h2>Select Course Module Path</h2>
+        <div class="path-grid">
+          <button class="path-btn" data-path="guided">Guided Start (Modules 1-4)</button>
+          <button class="path-btn" data-path="debug">Debug Lab (Modules 5-7)</button>
+          <button class="path-btn" data-path="output">Output Mastery (Modules 8-10)</button>
+          <button class="path-btn" data-path="advanced">Advanced Lab (Modules 11-14)</button>
+        </div>
+      </section>
+
+      <section class="card hidden" id="languageProgressCard">
+        <h2 id="languageProgressTitle">Language Progress</h2>
+        <p id="unitProgressText">Modules completed: 0/14</p>
+        <p id="languageScoreText">Final language score: --</p>
+        <p id="badgeProgressText">Rewards: 0 module badges • Language mastery: Not earned yet</p>
+        <button id="resetProgressBtn" type="button">Reset Progress</button>
+      </section>
+
+      <section class="card hidden" id="courseRoadmapCard">
+        <h2 id="courseRoadmapTitle">Course Roadmap</h2>
+        <p id="courseRoadmapObjective">Objective: Start Module 1 and build foundational skills with clear checkpoints.</p>
+        <p id="courseRoadmapOutcome">Expected outcome: Pass each module with 70%+ to unlock the next module and complete the full course path.</p>
+      </section>
+
+      <section class="status-bar hidden" id="statusBar">
+        <div id="progressText">Question 1</div>
+        <div id="activeUnitText">Module 1: Foundations</div>
+        <div id="scoreText">Score: 0</div>
+      </section>
+
+      <section class="card hidden" id="questionCard">
+        <div class="study-tip" id="studyTip">Hint: Read the question carefully and identify what outcome it asks you to prove.</div>
+        <div class="tag" id="questionType">Vocabulary</div>
+        <h2 id="questionPrompt"></h2>
+        <div id="answerArea"></div>
+        <div class="actions">
+          <button id="hintBtn" type="button">Show Hint</button>
+          <button id="submitBtn">Submit</button>
+          <button id="nextBtn" disabled>Next</button>
+        </div>
+        <p id="feedback" class="feedback"></p>
+      </section>
+
+      <section class="card hidden" id="resultsCard">
+        <h2>Session Complete</h2>
+        <p id="finalScore"></p>
+        <p id="rewardSummary" class="reward-summary hidden"></p>
+        <button id="nextModuleBtn" class="hidden">Go to Next Module</button>
+        <button id="retryModuleBtn" class="hidden">Retry This Module</button>
+        <button id="restartBtn">Restart</button>
+        <button id="changeSetupBtn">Change Module Path</button>
+        <button id="changeLevelBtn">Change Level</button>
+        <button id="changeTopicBtn">Change Language</button>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Practice consistently: study first, then take focused quiz sessions.</p>
+    </footer>
+
+    <script src="js/app/header-progress.js"></script>
+    <script src="js/app/trainer-app.js?v=20260303e"></script>
+  </body>
+</html>
